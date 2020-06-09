@@ -27,8 +27,6 @@ public class BrugerService {
         return brugerDAO.getBrugerList();
     }
 
-
-
     @GET
     @Path("{id}")
     public BrugerDTO getUser(@PathParam("id") int id) throws DALException {
