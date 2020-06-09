@@ -1,4 +1,8 @@
 package data;
 
-public class DALException {
+public class DALException extends Exception {
+    public DALException(String message) {
+        super(message);
+    }
 }
+
