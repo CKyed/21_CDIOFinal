@@ -5,7 +5,6 @@ import java.sql.*;
 import java.util.List;
 
 public class BrugerDAO implements iBrugerDAO{
-    static int columnCount = 5; //antallet af attributter for en bruger
     @Override
     public BrugerDTO getBruger(int oprId) throws DALException {
         DBconnector dBconnector = new DBconnector();
