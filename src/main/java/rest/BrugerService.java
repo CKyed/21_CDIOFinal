@@ -22,8 +22,8 @@ public class BrugerService {
     BrugerDAO brugerDAO = new BrugerDAO();
 
     @GET
-    public List<BrugerDTO> getUserList() {
-        return new ArrayList<BrugerDTO>();
+    public List<BrugerDTO> getUserList() throws DALException {
+        return brugerDAO.getBrugerList();
     }
 
 

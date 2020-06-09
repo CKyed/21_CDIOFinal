@@ -2,6 +2,7 @@ package data;
 
 import dto.BrugerDTO;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BrugerDAO implements iBrugerDAO{
@@ -23,13 +24,35 @@ public class BrugerDAO implements iBrugerDAO{
              throw new DALException("Kunne ikke finde bruger med det ID");
          }
 
-
-        return null;
+        dBconnector.closeConnection();
+        return bruger;
     }
 
     @Override
     public List<BrugerDTO> getBrugerList() throws DALException {
-        return null;
+        DBconnector dBconnector = new DBconnector();
+        List<BrugerDTO> brugerList =new ArrayList<BrugerDTO>();
+        BrugerDTO bruger = new BrugerDTO();
+
+        try {
+            Statement statement = dBconnector.connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM Brugere;");
+            while (resultSet.next()){
+                bruger.setBrugerID(resultSet.getInt(1));
+                bruger.setBrugerNavn(resultSet.getString(2));
+                bruger.setInitialer(resultSet.getString(3));
+                bruger.setCPR(resultSet.getString(4));
+                bruger.setRolle(resultSet.getString(5));
+                brugerList.add(bruger);
+                bruger=new BrugerDTO();
+            }
+
+        }catch (Exception e){
+            throw new DALException("Kunne ikke hente brugerlisten");
+        }
+
+        dBconnector.closeConnection();
+        return brugerList;
     }
 
     @Override
