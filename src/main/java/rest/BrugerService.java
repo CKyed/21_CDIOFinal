@@ -2,6 +2,7 @@ package rest;
 
 import data.BrugerDAO;
 import data.DALException;
+import data.iBrugerDAO;
 import dto.BrugerDTO;
 
 import javax.ws.rs.*;
@@ -19,14 +20,12 @@ import java.util.Map;
 @Produces(MediaType.APPLICATION_JSON)
 
 public class BrugerService {
-    BrugerDAO brugerDAO = new BrugerDAO();
+    iBrugerDAO brugerDAO = new BrugerDAO();
 
     @GET
     public List<BrugerDTO> getUserList() throws DALException {
         return brugerDAO.getBrugerList();
     }
-
-
 
     @GET
     @Path("{id}")
