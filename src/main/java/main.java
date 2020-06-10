@@ -1,8 +1,10 @@
 import data.BrugerDAO;
 import data.DALException;
 import data.RaavareBatchDAO;
+import data.ReceptKompDAO;
 import dto.BrugerDTO;
 import dto.RaavareBatchDTO;
+import dto.RaavareDTO;
 
 public class main {
 
@@ -11,9 +13,7 @@ public class main {
        // brugerDAO.getBruger(001);
         brugerDAO.getBruger(003);
 
-        BrugerDTO test = new BrugerDTO(10,"Laborant","Peter","PR","1234567890");
-        brugerDAO.createBruger(test);
     }
-    //Oprettet for at mappestrukturen kommer på git
+
 
 }

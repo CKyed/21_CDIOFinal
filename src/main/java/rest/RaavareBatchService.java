@@ -28,12 +28,12 @@ public class RaavareBatchService {
         return raavareBatchDAO.getRaavareBatch(id);
     }
 
-    @POST //TODO virker ikke pt
+    @POST
     @Produces(MediaType.TEXT_PLAIN)
     public Response addRaavareBatchJson(RaavareBatchDTO raavareBatchDTO) throws DALException {
-        //TODO overvej om der skal være fejlfinding her - altså om man skal tjekke om brugeren allerede eksisterer
         raavareBatchDAO.createRaavareBatch(raavareBatchDTO);
         return Response.ok("Tilføjet").build();
     }
+
 
 }
