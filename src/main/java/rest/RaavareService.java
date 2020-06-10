@@ -17,7 +17,7 @@ public class RaavareService {
 
     @GET
     @Path("{id}")
-    public RaavareDTO getUser(@PathParam("id") int id) throws DALException {
+    public RaavareDTO getRaavare(@PathParam("id") int id) throws DALException {
         return raavareDAO.getRaavare(id);
     }
 
