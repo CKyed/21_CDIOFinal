@@ -11,28 +11,42 @@
 </head>
 <body>
 
-<div class="container">
+
+<div class="login">
+    <h1>Login</h1>
+    <form id="login">
+        <div>
+            <label for="loginBrugerID"> Bruger ID</label>
+            <input type="number" id="loginBrugerID" name="brugerID">
+        </div>
+        <button onclick="checkLogin(brugerID)">Login</button>
+    </form>
+
+
+</div>
+
+<div class="createBruger", id="createBruger">
     <h1>Opret bruger</h1>
     <form id="brugerform">
         <div>
-            <label for="brugerID"> ID:</label>
-            <input type="number" id="brugerID" name="brugerID">
+            <label for="opretBrugerID"> ID:</label>
+            <input type="number" id="opretBrugerID" name="brugerID">
         </div>
         <div>
-            <label for="brugerNavn">Navn: </label>
-            <input type="text" id="brugerNavn" name="brugerNavn">
+            <label for="opretBrugerNavn">Navn: </label>
+            <input type="text" id="opretBrugerNavn" name="brugerNavn">
         </div>
         <div>
-            <label for="initialer">Initialer: </label>
-            <input type="text" id="initialer" name="initialer">
+            <label for="opretInitialer">Initialer: </label>
+            <input type="text" id="opretInitialer" name="initialer">
         </div>
         <div>
-            <label for="rolle">Rolle: </label>
-            <input type="text" id="rolle" name="rolle">
+            <label for="opretRolle">Rolle: </label>
+            <input type="text" id="opretRolle" name="rolle">
         </div>
         <div>
-            <label for="cpr">CPR: </label>
-            <input type="text" id="cpr" name="cpr">
+            <label for="opretCPR">CPR: </label>
+            <input type="text" id="opretCPR" name="cpr">
         </div>
         <button onclick="createBruger();">Gem bruger</button>
     </form>
