@@ -33,4 +33,7 @@ public class BrugerService {
         return brugerDAO.getBruger(id);
     }
 
+
+
+
 }

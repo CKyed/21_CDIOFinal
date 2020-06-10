@@ -1,14 +1,16 @@
 package data;
 
+import dto.BrugerDTO;
 import dto.RaavareBatchDTO;
 import dto.RaavareDTO;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RaavareBatchDAO implements iRaavareBatchDAO{
-    private RaavareDAO raavareDAO = new RaavareDAO();
+    private iRaavareDAO raavareDAO = new RaavareDAO();
 
 
     @Override
@@ -18,11 +20,11 @@ public class RaavareBatchDAO implements iRaavareBatchDAO{
 
         try{
             Statement statement = dBconnector.connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM Raavarer WHERE rbId = "+rbId+";");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM RaavareBatches WHERE rbId = "+rbId+";");
             resultSet.next();
             raavareBatchDTO.setRbId(resultSet.getInt(1));
-            raavareBatchDTO.setMaengde(resultSet.getDouble(3));
-            int raavareId = resultSet.getInt(2);
+            raavareBatchDTO.setMaengde(resultSet.getDouble(2));
+            int raavareId = resultSet.getInt(3);
             raavareBatchDTO.setRaavare(raavareDAO.getRaavare(raavareId));
 
         }catch (Exception e){
@@ -35,7 +37,28 @@ public class RaavareBatchDAO implements iRaavareBatchDAO{
 
     @Override
     public List<RaavareBatchDTO> getRaavareBatchList() throws DALException {
-        return null;
+        DBconnector dBconnector = new DBconnector();
+        RaavareBatchDTO raavareBatchDTO = new RaavareBatchDTO();
+        List<RaavareBatchDTO> raavareBatchDTOList = new ArrayList<RaavareBatchDTO>();
+
+        try{
+            Statement statement = dBconnector.connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM RaavareBatches;");
+            while (resultSet.next()){
+                raavareBatchDTO.setRbId(resultSet.getInt(1));
+                raavareBatchDTO.setMaengde(resultSet.getDouble(2));
+                int raavareId = resultSet.getInt(3);
+                raavareBatchDTO.setRaavare(raavareDAO.getRaavare(raavareId));
+                raavareBatchDTOList.add(raavareBatchDTO);
+                raavareBatchDTO=new RaavareBatchDTO();
+            }
+
+        }catch (Exception e){
+            throw new DALException("kunne ikke finde råvareBatch");
+        }
+
+        dBconnector.closeConnection();
+        return raavareBatchDTOList;
     }
 
     @Override
