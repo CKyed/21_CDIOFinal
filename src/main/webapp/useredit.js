@@ -1,23 +1,23 @@
 $(document).ready(function () {
-    loadUsers();
+    loadBruger();
 });
 
 
-function loadUsers() {
+function loadBruger() {
     $.get('rest/user', function (data, textStatus, req) {
-        $("#usertable").empty();
+        $("#burgerTable").empty();
         $.each(data, function (i, elt) {
-            $('#usertable').append(generateUserTable(elt));
+            $('#burgerTable').append(generateBrugerTable(elt));
         });
     });
 }
 
-function generateUserTable(user) {
-    return '<tr><td>' + user.brugerID + '</td>' +
-        '<td>' + user.rolle + '</td>' +
-        '<td>' + user.brugerNavn + '</td>' +
-        '<td>' + user.initialer + '</td>' +
-        '<td>' + user.cpr + '</td>'
+function generateBrugerTable(bruger) {
+    return '<tr><td>' + bruger.brugerID + '</td>' +
+        '<td>' + bruger.rolle + '</td>' +
+        '<td>' + bruger.brugerNavn + '</td>' +
+        '<td>' + bruger.initialer + '</td>' +
+        '<td>' + bruger.cpr + '</td>'
 }
 
 
