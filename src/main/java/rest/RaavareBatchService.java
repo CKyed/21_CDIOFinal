@@ -1,9 +1,7 @@
 package rest;
 
 import data.*;
-import dto.BrugerDTO;
 import dto.RaavareBatchDTO;
-import dto.RaavareDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
