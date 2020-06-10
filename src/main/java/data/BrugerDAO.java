@@ -57,7 +57,21 @@ public class BrugerDAO implements iBrugerDAO{
 
     @Override
     public void createBruger(BrugerDTO opr) throws DALException {
+        DBconnector dBconnector = new DBconnector();
 
+        try {
+            Statement statement = dBconnector.connection.createStatement();
+            //Create String for the SQL Insert Statement
+            String SQLstatement = "insert into Brugere values('%d', '%s', '%s','%s', '%s');";
+            //Format the string
+            SQLstatement =String.format(SQLstatement, opr.getBrugerID(),opr.getBrugerNavn(),opr.getInitialer(),opr.getCPR(),opr.getRolle());
+            //Execute the insert statement
+            statement.executeUpdate(SQLstatement);
+        }catch (Exception e){
+            throw new DALException("Kunne ikke oprette bruger med det ID");
+        }
+
+        dBconnector.closeConnection();
     }
 
     @Override

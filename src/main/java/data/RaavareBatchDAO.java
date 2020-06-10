@@ -28,7 +28,7 @@ public class RaavareBatchDAO implements iRaavareBatchDAO{
             raavareBatchDTO.setRaavare(raavareDAO.getRaavare(raavareId));
 
         }catch (Exception e){
-            throw new DALException("kunne ikke finde råvareBatch");
+            throw new DALException("Kunne ikke finde råvareBatch med det ID");
         }
 
         dBconnector.closeConnection();
@@ -54,7 +54,7 @@ public class RaavareBatchDAO implements iRaavareBatchDAO{
             }
 
         }catch (Exception e){
-            throw new DALException("kunne ikke finde råvareBatch");
+            throw new DALException("kunne ikke finde råvareBatches");
         }
 
         dBconnector.closeConnection();
@@ -63,12 +63,55 @@ public class RaavareBatchDAO implements iRaavareBatchDAO{
 
     @Override
     public List<RaavareBatchDTO> getRaavareBatchList(int raavareId) throws DALException {
-        return null;
+        DBconnector dBconnector = new DBconnector();
+        RaavareBatchDTO raavareBatchDTO = new RaavareBatchDTO();
+        List<RaavareBatchDTO> raavareBatchDTOList = new ArrayList<RaavareBatchDTO>();
+
+        try{
+            Statement statement = dBconnector.connection.createStatement();
+            //Select all where RaavareID matches
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM RaavareBatches WHERE RaavareID = " + raavareId +";");
+            //Get the RaavareDTO once, since it will be the same for all RaavareBacthes here
+            RaavareDTO raavareDTO = raavareDAO.getRaavare(raavareId);
+
+            //Loop through the resultset, adding the results to the list.
+            while (resultSet.next()){
+                raavareBatchDTO.setRbId(resultSet.getInt(1));
+                raavareBatchDTO.setMaengde(resultSet.getDouble(2));
+                //raavareDTO is the one, that is common for all the RaavareBatches in this search
+                raavareBatchDTO.setRaavare(raavareDTO);
+                raavareBatchDTOList.add(raavareBatchDTO);
+                raavareBatchDTO=new RaavareBatchDTO();
+            }
+
+        }catch (Exception e){
+            throw new DALException("kunne ikke finde råvareBatches");
+        }
+
+        dBconnector.closeConnection();
+        return raavareBatchDTOList;
     }
 
     @Override
-    public void createRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException {
+    public void createRaavareBatch(RaavareBatchDTO raavareBatch) throws DALException {
+        DBconnector dBconnector = new DBconnector();
 
+        try {
+            Statement statement = dBconnector.connection.createStatement();
+            //Create String for the SQL Insert Statement
+            String SQLstatement = "insert into RaavareBatches values('%d', '%f', '%d');";
+            //Format the string
+            SQLstatement =String.format(SQLstatement,
+                    raavareBatch.getRbId(), //RaavareBatchID
+                    raavareBatch.getMaengde(), // Mængde
+                    raavareBatch.getRaavare().getRaavareID()); //RaavareID
+            //Execute the insert statement
+            statement.executeUpdate(SQLstatement);
+        }catch (Exception e){
+            throw new DALException("Kunne ikke oprette den ønskede RaavareBatch");
+        }
+
+        dBconnector.closeConnection();
     }
 
     @Override
