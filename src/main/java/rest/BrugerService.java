@@ -33,6 +33,14 @@ public class BrugerService {
         return brugerDAO.getBruger(id);
     }
 
+    @POST
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response addUserJson(BrugerDTO brugerDTO) throws DALException {
+        //TODO overvej om der skal være fejlfinding her - altså om man skal tjekke om brugeren allerede eksisterer
+        brugerDAO.createBruger(brugerDTO);
+        return Response.ok("Tilføjet").build();
+    }
+
 
 
 

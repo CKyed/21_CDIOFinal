@@ -28,7 +28,7 @@ public class RaavareBatchDAO implements iRaavareBatchDAO{
             raavareBatchDTO.setRaavare(raavareDAO.getRaavare(raavareId));
 
         }catch (Exception e){
-            throw new DALException("kunne ikke finde råvareBatch");
+            throw new DALException("Kunne ikke finde råvareBatch med det ID");
         }
 
         dBconnector.closeConnection();
@@ -54,7 +54,7 @@ public class RaavareBatchDAO implements iRaavareBatchDAO{
             }
 
         }catch (Exception e){
-            throw new DALException("kunne ikke finde råvareBatch");
+            throw new DALException("kunne ikke finde råvareBatches");
         }
 
         dBconnector.closeConnection();
