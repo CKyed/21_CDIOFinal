@@ -1,6 +1,5 @@
 package dto;
 
-// Anthony
 public class ProduktBatchKompDTO {
 private RaavareBatchDTO raavareBatchDTO;
 private double tara;

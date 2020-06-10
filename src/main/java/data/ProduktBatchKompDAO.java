@@ -13,7 +13,6 @@ public class ProduktBatchKompDAO implements iProduktBatchKompDAO{
     private iRaavareBatchDAO raavareBatchDAO = new RaavareBatchDAO();
     private iBrugerDAO brugerDAO = new BrugerDAO();
 
-
     @Override
     public ProduktBatchKompDTO getProduktBatchKomp(int pbId, int rbId) throws DALException {
         DBconnector dBconnector = new DBconnector();
@@ -22,7 +21,8 @@ public class ProduktBatchKompDAO implements iProduktBatchKompDAO{
         try{
             Statement statement = dBconnector.connection.createStatement();
             // retrieving column values
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM ProduktbatchKomp WHERE pbId = " + pbId + "AND rbId = " + rbId + ";");
+            String query = "SELECT * FROM ProduktBatchKomp WHERE pbId = " + pbId + " AND rbId = " + rbId + ";";
+            ResultSet resultSet = statement.executeQuery(query);
             resultSet.next();
 
             produktBatchKompDTO.setRaavareBatchDTO(raavareBatchDAO.getRaavareBatch(rbId));
@@ -30,9 +30,6 @@ public class ProduktBatchKompDAO implements iProduktBatchKompDAO{
             produktBatchKompDTO.setNetto(resultSet.getDouble(2));
             int brugerId = resultSet.getInt(3);
             produktBatchKompDTO.setLaborant(brugerDAO.getBruger(brugerId));
-
-
-
 
         }catch (Exception e){
             throw new DALException("Kunne ikke finde produktbatchkomp med de angivne ID");
