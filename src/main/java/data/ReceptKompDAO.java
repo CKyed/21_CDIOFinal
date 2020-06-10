@@ -1,6 +1,5 @@
 package data;
 
-import dto.RaavareBatchDTO;
 import dto.ReceptKompDTO;
 
 import java.sql.ResultSet;

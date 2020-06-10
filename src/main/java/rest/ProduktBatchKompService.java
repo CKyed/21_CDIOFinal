@@ -16,10 +16,18 @@ import java.util.List;
 
 public class ProduktBatchKompService {
 
-        iProduktBatchKompDAO produktBatchKopmDAO = new ProduktBatchKompDAO();
+        iProduktBatchKompDAO produktBatchKompDAO = new ProduktBatchKompDAO();
 
+        // simply, gets all the produktbatchkomp.
         @GET
-        public List<ProduktBatchKompDTO> getRaavareBatchList() throws DALException {
-            return null;
+        public List<ProduktBatchKompDTO> getProduktBatchKompList() throws DALException {
+            return produktBatchKompDAO.getProduktBatchKompList();
+        }
+
+        // Gets all produktbatchkomp with a specific pbId
+        @GET
+        @Path("{pbId}")
+        public List<ProduktBatchKompDTO> getProduktBatchKompList(@PathParam("pbId") int pbId) throws DALException {
+            return produktBatchKompDAO.getProduktBatchKompList(pbId);
         }
 }
