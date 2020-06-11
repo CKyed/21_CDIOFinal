@@ -80,7 +80,7 @@ public class ProduktBatchDAO implements iProduktBatchDAO {
             //Execute the insert statement
             statement.executeUpdate(SQLstatement);
 
-            //Insert the components of the recept in the database
+            //Insert the components of the produktBatch in the database
             //Add each element from the list to the database
             for (ProduktBatchKompDTO pbkDTO: produktbatch.getProduktBatchKomponenter()) {
                 produktBatchKompDAO.createProduktBatchKomp(pbkDTO);
@@ -101,7 +101,7 @@ public class ProduktBatchDAO implements iProduktBatchDAO {
         try {
             Statement statement = dBconnector.connection.createStatement();
             //Create String for the SQL Insert Statement
-            String SQLstatement = "UPDATE ProduktBatches SET receptId = %d , statuss = %d;";
+            String SQLstatement = "UPDATE ProduktBatches SET receptId = '%d' , statuss = '%d';";
             //Format the string
             SQLstatement =String.format(SQLstatement,
                     produktbatch.getReceptId(), //Assume that the recept has already been created
