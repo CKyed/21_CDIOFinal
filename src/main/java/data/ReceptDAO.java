@@ -60,7 +60,7 @@ public class ReceptDAO implements iReceptDAO{
                 receptDTO = new ReceptDTO();
             }
 
-        }catch (Exception e){
+        } catch (Exception e){
             throw new DALException("Kunne ikke finde listen af recepter");
         }
 
