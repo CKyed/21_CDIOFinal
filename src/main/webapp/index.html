@@ -12,46 +12,14 @@
 <body>
 
 
-<div class="createBruger", id="createBruger">
-    <h1>Opret bruger</h1>
-    <form id="brugerform">
-        <div>
-            <label for="opretBrugerID"> ID:</label>
-            <input type="number" id="opretBrugerID" name="brugerID">
-        </div>
-        <div>
-            <label for="opretBrugerNavn">Navn: </label>
-            <input type="text" id="opretBrugerNavn" name="brugerNavn">
-        </div>
-        <div>
-            <label for="opretInitialer">Initialer: </label>
-            <input type="text" id="opretInitialer" name="initialer">
-        </div>
-        <div>
-            <label for="opretRolle">Rolle: </label>
-            <input type="text" id="opretRolle" name="rolle">
-        </div>
-        <div>
-            <label for="opretCPR">CPR: </label>
-            <input type="text" id="opretCPR" name="cpr">
-        </div>
-        <button onclick="createBruger();">Gem bruger</button>
-    </form>
+<div class="topnav">
+    <a href="javascript:switchPage('frontpage.html')">back to frontpage</a>
 </div>
 
-<table>
-        <thead>
-            <tr>
-                <th>BrugerID</th>
-                <th>Rolle</th>
-                <th>BrugerNavn</th>
-                <th>Initialer</th>
-                <th>CPR</th>
-            </tr>
-        </thead>
-    <tbody id="brugertable">
-    </tbody>
-</table>
+
+
+ <div id="container"></div>
+<script>switchPage("frontpage.html");</script>
 
 
 </body>
