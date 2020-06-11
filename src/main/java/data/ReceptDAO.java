@@ -1,5 +1,6 @@
 package data;
 
+import dto.ProduktBatchKompDTO;
 import dto.RaavareBatchDTO;
 import dto.ReceptDTO;
 import dto.ReceptKompDTO;
@@ -59,7 +60,7 @@ public class ReceptDAO implements iReceptDAO{
                 receptDTO = new ReceptDTO();
             }
 
-        }catch (Exception e){
+        } catch (Exception e){
             throw new DALException("Kunne ikke finde listen af recepter");
         }
 
@@ -69,11 +70,52 @@ public class ReceptDAO implements iReceptDAO{
 
     @Override
     public void createRecept(ReceptDTO recept) throws DALException {
+        DBconnector dBconnector = new DBconnector();
+        try {
+            Statement statement = dBconnector.connection.createStatement();
+            //Create String for the SQL Insert Statement
+            String SQLstatement = "insert into Recepter values('%d', '%s');";
+            //Format the string
+            SQLstatement =String.format(SQLstatement,
+                recept.getReceptId(),
+                recept.getReceptNavn());
 
+            //Execute the insert statement
+            statement.executeUpdate(SQLstatement);
+        }catch (Exception e){
+            throw new DALException("Kunne ikke oprette den ønskede Recept");
+        }
+
+        for (ReceptKompDTO rkDTO: recept.getReceptKompomenter()) {
+            receptKompDAO.createReceptKomp(rkDTO);
+        }
+
+        dBconnector.closeConnection();
     }
 
     @Override
     public void updateRecept(ReceptDTO recept) throws DALException {
+        DBconnector dBconnector = new DBconnector();
+        try {
+            Statement statement = dBconnector.connection.createStatement();
+            //Create String for the SQL Insert Statement
+            String SQLstatement = "update Recepter set receptNavn = '%s' where receptId = '%d');";
+            //Format the string
+            SQLstatement =String.format(SQLstatement,
+                    recept.getReceptNavn(), // Ja, det  skal stå i omvendt rækkefølge, grundet sql statementen
+                    recept.getReceptId());
 
+
+            //Execute the insert statement
+            statement.executeUpdate(SQLstatement);
+        }catch (Exception e){
+            throw new DALException("Kunne ikke opdatere den ønskede Recept");
+        }
+
+        for (ReceptKompDTO rkDTO: recept.getReceptKompomenter()) {
+            receptKompDAO.updateReceptKomp(rkDTO);
+        }
+
+        dBconnector.closeConnection();
     }
 }

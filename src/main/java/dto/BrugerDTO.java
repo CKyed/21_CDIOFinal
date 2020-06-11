@@ -6,16 +6,18 @@ public class BrugerDTO {
     private String brugerNavn;
     private String initialer;
     private String CPR;
+    private int aktiv; //0 means false, 1 means true
 
     public BrugerDTO() {
     }
 
-    public BrugerDTO(int brugerID, String rolle, String brugerNavn, String initialer, String CPR) {
+    public BrugerDTO(int brugerID, String rolle, String brugerNavn, String initialer, String CPR, int aktiv) {
         this.brugerID = brugerID;
         this.rolle = rolle;
         this.brugerNavn = brugerNavn;
         this.initialer = initialer;
         this.CPR = CPR;
+        this.aktiv = aktiv;
     }
 
     public int getBrugerID() {
@@ -56,5 +58,13 @@ public class BrugerDTO {
 
     public void setCPR(String CPR) {
         this.CPR = CPR;
+    }
+
+    public int getAktiv() {
+        return aktiv;
+    }
+
+    public void setAktiv(int aktiv) {
+        this.aktiv = aktiv;
     }
 }

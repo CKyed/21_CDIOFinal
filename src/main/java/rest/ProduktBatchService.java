@@ -3,7 +3,6 @@ package rest;
 import data.DALException;
 import data.ProduktBatchDAO;
 import data.iProduktBatchDAO;
-import dto.BrugerDTO;
 import dto.ProduktBatchDTO;
 
 import javax.ws.rs.*;
