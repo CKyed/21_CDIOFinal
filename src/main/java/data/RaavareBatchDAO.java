@@ -110,7 +110,6 @@ public class RaavareBatchDAO implements iRaavareBatchDAO{
         }catch (Exception e){
             throw new DALException("Kunne ikke oprette den ønskede RaavareBatch");
         }
-
         dBconnector.closeConnection();
     }
 
