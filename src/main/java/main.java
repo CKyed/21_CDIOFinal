@@ -1,5 +1,6 @@
 import data.*;
 import dto.BrugerDTO;
+import dto.ProduktBatchDTO;
 import dto.RaavareBatchDTO;
 import dto.ReceptDTO;
 
@@ -9,6 +10,10 @@ import java.util.List;
 public class main {
 
     public static void main(String[] args) throws DALException {
+        ProduktBatchDAO pbd = new ProduktBatchDAO();
+        ProduktBatchDTO pro = pbd.getProduktBatch(51268945);
+
+
 
     }
 }

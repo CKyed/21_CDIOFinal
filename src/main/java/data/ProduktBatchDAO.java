@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.List;
 
 public class ProduktBatchDAO implements iProduktBatchDAO {
-    //private iProduktBatchDAO produktBatchDAO = new ProduktBatchDAO();
+    private iProduktBatchKompDAO produktBatchKompDAO = new ProduktBatchKompDAO();
 
     @Override
     public ProduktBatchDTO getProduktBatch(int pbId) throws DALException {
@@ -17,14 +17,14 @@ public class ProduktBatchDAO implements iProduktBatchDAO {
 
         try{
             Statement statement = dBconnector.connection.createStatement();
-            String SQLquery = "SELECT * FROM Produktbatches WHERE pbId ="+pbId+";";
+            String SQLquery = "SELECT * FROM ProduktBatches WHERE pbId ="+pbId+";";
             ResultSet resultSet = statement.executeQuery(SQLquery);
             resultSet.next();
 
             produktBatchDTO.setPbId(resultSet.getInt(1));
             produktBatchDTO.setStatus(resultSet.getInt(2));
             produktBatchDTO.setReceptId(resultSet.getInt(3));
-            produktBatchDTO.setProduktBatchKomponenter(produktBatchDTO.getProduktBatchKomponenter());
+            produktBatchDTO.setProduktBatchKomponenter(produktBatchKompDAO.getProduktBatchKompList(pbId));
 
         }catch (Exception e){
             throw new DALException("Kunne ikke finde produktbatch med det ID");

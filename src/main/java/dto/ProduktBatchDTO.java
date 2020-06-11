@@ -1,12 +1,13 @@
 package dto;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProduktBatchDTO {
 int pbId;
 int receptId;
 int status;
-ArrayList<ProduktBatchKompDTO> produktBatchKomponenter;
+List<ProduktBatchKompDTO> produktBatchKomponenter;
 
     public ProduktBatchDTO() {
     }
@@ -42,11 +43,11 @@ ArrayList<ProduktBatchKompDTO> produktBatchKomponenter;
         this.status = status;
     }
 
-    public ArrayList<ProduktBatchKompDTO> getProduktBatchKomponenter() {
+    public List<ProduktBatchKompDTO> getProduktBatchKomponenter() {
         return produktBatchKomponenter;
     }
 
-    public void setProduktBatchKomponenter(ArrayList<ProduktBatchKompDTO> produktBatchKomponenter) {
+    public void setProduktBatchKomponenter(List<ProduktBatchKompDTO> produktBatchKomponenter) {
         this.produktBatchKomponenter = produktBatchKomponenter;
     }
 }
