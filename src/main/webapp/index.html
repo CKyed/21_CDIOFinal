@@ -10,7 +10,34 @@
     <link href="main.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-Hello World
+
+
+<div class="createBruger", id="createBruger">
+    <h1>Opret bruger</h1>
+    <form id="brugerform">
+        <div>
+            <label for="opretBrugerID"> ID:</label>
+            <input type="number" id="opretBrugerID" name="brugerID">
+        </div>
+        <div>
+            <label for="opretBrugerNavn">Navn: </label>
+            <input type="text" id="opretBrugerNavn" name="brugerNavn">
+        </div>
+        <div>
+            <label for="opretInitialer">Initialer: </label>
+            <input type="text" id="opretInitialer" name="initialer">
+        </div>
+        <div>
+            <label for="opretRolle">Rolle: </label>
+            <input type="text" id="opretRolle" name="rolle">
+        </div>
+        <div>
+            <label for="opretCPR">CPR: </label>
+            <input type="text" id="opretCPR" name="cpr">
+        </div>
+        <button onclick="createBruger();">Gem bruger</button>
+    </form>
+</div>
 
 <table>
         <thead>
