@@ -7,6 +7,7 @@ import dto.ReceptDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 
@@ -28,5 +29,20 @@ public class ReceptService {
         return receptDAO.getRecept(id);
     }
 
+    @POST
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response createReceptJson(ReceptDTO receptDTO)throws DALException {
+        receptDAO.createRecept(receptDTO);
+        return Response.ok("Tilføjet").build();
+    }
+
+    @PUT
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateReceptJson(ReceptDTO receptDTO)throws DALException {
+        receptDAO.updateRecept(receptDTO);
+        return Response.ok("Opdateret").build();
+    }
 
 }
