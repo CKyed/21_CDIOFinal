@@ -1,12 +1,14 @@
-table, th, td {
+.createBruger table, th, td {
     border: 1px solid black;
     text-align: left;
+    background-color: hotpink;
 }
 
-div {
-    background-color: lightgrey;
+.createBruger {
+    background-color: deeppink;
     width: 800px;
     border: 2px solid black;
     padding: 5px;
     margin:auto;
+
 }
