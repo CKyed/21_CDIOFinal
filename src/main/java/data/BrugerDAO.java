@@ -32,19 +32,19 @@ public class BrugerDAO implements iBrugerDAO{
     public List<BrugerDTO> getBrugerList() throws DALException {
         DBconnector dBconnector = new DBconnector();
         List<BrugerDTO> brugerList =new ArrayList<BrugerDTO>();
-        BrugerDTO bruger = new BrugerDTO();
 
         try {
             Statement statement = dBconnector.connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM Brugere;");
+
             while (resultSet.next()){
+                BrugerDTO bruger = new BrugerDTO();
                 bruger.setBrugerID(resultSet.getInt(1));
                 bruger.setBrugerNavn(resultSet.getString(2));
                 bruger.setInitialer(resultSet.getString(3));
                 bruger.setCPR(resultSet.getString(4));
                 bruger.setRolle(resultSet.getString(5));
                 brugerList.add(bruger);
-                bruger=new BrugerDTO();
             }
 
         }catch (Exception e){
