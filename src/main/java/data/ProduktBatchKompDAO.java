@@ -6,7 +6,6 @@ import dto.ProduktBatchKompDTO;
 import dto.RaavareBatchDTO;
 import dto.ReceptKompDTO;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
