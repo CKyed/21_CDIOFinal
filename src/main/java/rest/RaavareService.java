@@ -7,6 +7,7 @@ import dto.RaavareDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("raavare")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -21,5 +22,20 @@ public class RaavareService {
         return raavareDAO.getRaavare(id);
     }
 
+    @POST
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response createRaavareJson(RaavareDTO raavareDTO) throws DALException {
+        raavareDAO.createRaavare(raavareDTO);
+        return Response.ok("Tilføjet").build();
+    }
 
+    @PUT
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateRaavareJson(RaavareDTO raavareDTO) throws DALException {
+        raavareDAO.updateRaavare(raavareDTO);
+        return Response.ok("Opdateret").build();
+
+    }
 }
