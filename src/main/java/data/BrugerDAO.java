@@ -90,9 +90,15 @@ public class BrugerDAO implements iBrugerDAO{
         try {
             Statement statement = dBconnector.connection.createStatement();
             //Create String for the SQL Insert Statement
-            String SQLstatement = "UPDATE Brugere SET BrugerNavn = '%s', Ini ='%s', Cpr ='%s', Rolle = '%s' WHERE BrugerID = %d;";
+            String SQLstatement = "UPDATE Brugere SET BrugerNavn = '%s', Ini ='%s', Cpr ='%s', Rolle = '%s', aktiv ='%d' WHERE BrugerID = %d;";
             //Format the string
-            SQLstatement =String.format(SQLstatement,opr.getBrugerNavn(),opr.getInitialer(),opr.getCPR(),opr.getRolle(),opr.getBrugerID());
+            SQLstatement =String.format(SQLstatement,
+                    opr.getBrugerNavn(),
+                    opr.getInitialer(),
+                    opr.getCPR(),
+                    opr.getRolle(),
+                    opr.getAktiv(),
+                    opr.getBrugerID());
             //Execute the insert statement
             statement.executeUpdate(SQLstatement);
         }catch (Exception e){
