@@ -1,6 +1,6 @@
 $(document).ready(function () {
     loadBruger();
-    hideElements()
+
 });
 
 function loadBruger() {
@@ -40,27 +40,4 @@ function createBruger() {
         }
     })
     
-}
-
-function checkLogin(brugerID) {
-    event.preventDefault();
-    $.ajax({
-        url:'rest/bruger/'+brugerID,
-        method: 'GET',
-        data: data
-
-    })
-}
-//Hides the create user menu, so far. More can be added.
-function hideElements() {
-    var x = document.getElementById("createBruger");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
-    }
-}
-
-function showCreateBruger() {
-
 }
