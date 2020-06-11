@@ -4,7 +4,7 @@ public class ReceptKompDTO {
     private double nonNetto;
     private double tolerance;
     private RaavareDTO raavare;
-    //todo receptDTO skal også med?
+    private ReceptDTO recept;
 
     public ReceptKompDTO(double nonNetto, double tolerance, RaavareDTO raavare) {
         this.nonNetto = nonNetto;
@@ -39,4 +39,11 @@ public class ReceptKompDTO {
         this.raavare = raavare;
     }
 
+    public ReceptDTO getRecept() {
+        return recept;
+    }
+
+    public void setRecept(ReceptDTO recept) {
+        this.recept = recept;
+    }
 }

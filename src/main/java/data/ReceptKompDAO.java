@@ -89,11 +89,49 @@ public class ReceptKompDAO implements iReceptKompDAO {
 
     @Override
     public void createReceptKomp(ReceptKompDTO receptkomponent) throws DALException {
+        DBconnector dBconnector = new DBconnector();
+
+        try {
+            Statement statement = dBconnector.connection.createStatement();
+            //Create String for the SQL Insert Statement
+            String SQLstatement = "insert into ReceptKomp values('%f', '%f', '%d', '%d');";
+            //Format the string
+            SQLstatement =String.format(SQLstatement,
+                    receptkomponent.getNonNetto(), //NonNetto
+                    receptkomponent.getTolerance(), //Tolerance
+                    receptkomponent.getRaavare().getRaavareID(), //RaavareID
+                    receptkomponent.getRecept().getReceptId()); //ReceptID
+            //Execute the insert statement
+            statement.executeUpdate(SQLstatement);
+        }catch (Exception e){
+            throw new DALException("Kunne ikke oprette den ønskede Receptkompnent");
+        }
+
+        dBconnector.closeConnection();
 
     }
 
     @Override
     public void updateReceptKomp(ReceptKompDTO receptkomponent) throws DALException {
+        DBconnector dBconnector = new DBconnector();
 
+
+        try {
+            Statement statement = dBconnector.connection.createStatement();
+            //Create String for the SQL Insert Statement
+            String SQLstatement = "update ReceptKomp set nonNetto = '%f', tolerance= '%f' where receptId = '%d' and raavareId = '%d';";
+            //Format the string
+            SQLstatement =String.format(SQLstatement,
+                receptkomponent.getNonNetto(), //NonNetto
+                receptkomponent.getTolerance(), //Tolerance
+                receptkomponent.getRecept().getReceptId(),
+                receptkomponent.getRaavare().getRaavareID());
+            //Execute the insert statement
+            statement.executeUpdate(SQLstatement);
+        }catch (Exception e){
+            throw new DALException("Kunne ikke oprette den ønskede Receptkompnent");
+        }
+
+        dBconnector.closeConnection();
     }
 }
