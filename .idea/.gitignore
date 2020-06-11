@@ -94,6 +94,6 @@ fabric.properties
 .idea/misc.xml
 .idea/vcs.xml
 CDIOFinal.iml
-target/
+.target/
 target/generated-sources
 /workspace.xml
