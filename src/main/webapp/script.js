@@ -1,32 +1,33 @@
+
+
 function switchPage(page){
     $("#container").load(page);
 }
 
 function checkLogin() {
-    var id =;
+    var id =document.getElementById("loginBrugerID").value;
     console.log(id);
-    event.preventDefault();
     $.ajax({
-        url:'rest/bruger/'+id,
         method: 'GET',
+        url:'rest/bruger/'+id,
         success: function (data) {
-            console.log(data.rolle);
+            console.log(data);
             switch (data.rolle) {
                 case "Administrator":
                     switchPage('brugeradministrator.html');
                     break;
                 case "Farmaceut":
-                    switchPage('farmcaeu.html');
+                    switchPage('farmaceut.html');
                     break;
                 case "Produktionsleder":
-                    switchPage('produktionsledelse.html');
+                    switchPage('produktionsleder.html');
                     break;
                 case "Laborant":
                     switchPage('laborant.html');
                     break;
             }
         }
-    })
+  })
 }
 
 
