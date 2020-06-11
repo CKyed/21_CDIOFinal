@@ -14,7 +14,7 @@ public class DBconnector {
     String password = "HurraForMig";
     String driver = "com.mysql.cj.jdbc.Driver";
     String url = "jdbc:mysql://"
-            + host + ":" + port + "/MedicinalDB" + "?characterEncoding=latin1"
+            + host + ":" + port + "/MedicinalDb" + "?characterEncoding=latin1"
             //+ "?useUnicode=true"
             + "&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
