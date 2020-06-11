@@ -28,6 +28,7 @@ public class ProduktBatchKompDAO implements iProduktBatchKompDAO {
             ResultSet resultSet = statement.executeQuery(query);
             resultSet.next();
 
+            produktBatchKompDTO.setPbId(4);
             produktBatchKompDTO.setTara(resultSet.getDouble(1));
             produktBatchKompDTO.setNetto(resultSet.getDouble(2));
             int brugerId = resultSet.getInt(3);
@@ -54,6 +55,7 @@ public class ProduktBatchKompDAO implements iProduktBatchKompDAO {
 
                 produktBatchKompDTO.setTara(resultSet.getDouble(1));
                 produktBatchKompDTO.setNetto(resultSet.getDouble(2));
+                produktBatchKompDTO.setPbId(4);
                 int brugerId = resultSet.getInt(3);
                 produktBatchKompDTO.setLaborant(brugerDAO.getBruger(brugerId));
                 int rbId = resultSet.getInt(5);
@@ -83,6 +85,7 @@ public class ProduktBatchKompDAO implements iProduktBatchKompDAO {
                 produktBatchKompDTO.setTara(resultSet.getDouble(1));
                 produktBatchKompDTO.setNetto(resultSet.getDouble(2));
                 int brugerId = resultSet.getInt(3);
+                produktBatchKompDTO.setPbId(4);
                 produktBatchKompDTO.setLaborant(brugerDAO.getBruger(brugerId));
                 int rbId = resultSet.getInt(5);
                 produktBatchKompDTO.setRaavareBatchDTO(raavareBatchDAO.getRaavareBatch(rbId));
@@ -102,11 +105,12 @@ public class ProduktBatchKompDAO implements iProduktBatchKompDAO {
         DBconnector dBconnector = new DBconnector();
         try {
             Statement statement = dBconnector.connection.createStatement();
-            String sqlStatement = "insert into ProduktbatchKomp values('%f', '%f', '%f', '%f', '%f');";
+            String sqlStatement = "insert into ProduktbatchKomp values('%f', '%f', '%d', '%d', '%d');";
             sqlStatement = String.format(sqlStatement,
                     produktbatchkomponent.getTara(),
                     produktbatchkomponent.getNetto(),
-                    produktbatchkomponent.getLaborant(),
+                    produktbatchkomponent.getLaborant().getBrugerID(),
+                    produktbatchkomponent.getPbId(),
                     produktbatchkomponent.getRaavareBatchDTO().getRbId());
             //Execute the insert statement
             statement.executeUpdate(sqlStatement);
@@ -119,7 +123,23 @@ public class ProduktBatchKompDAO implements iProduktBatchKompDAO {
     @Override
     public void updateProduktBatchKomp(ProduktBatchKompDTO produktbatchkomponent) throws DALException {
         DBconnector dBconnector = new DBconnector();
-
+        try {
+            Statement statement = dBconnector.connection.createStatement();
+            String sqlStatement = "UPDATE ProduktbatchKomp " +
+                    "SET Tara = '%f' , Netto = '%f' ,BrugerID = '%d' " +
+                    "WHERE pbId = '%d' AND rbId = '%d';";
+            sqlStatement = String.format(sqlStatement,
+                    produktbatchkomponent.getTara(),
+                    produktbatchkomponent.getNetto(),
+                    produktbatchkomponent.getLaborant().getBrugerID(),
+                    produktbatchkomponent.getPbId(),
+                    produktbatchkomponent.getRaavareBatchDTO().getRbId());
+            //Execute the insert statement
+            statement.executeUpdate(sqlStatement);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        dBconnector.closeConnection();
 
     }
 }

@@ -101,11 +101,13 @@ public class ProduktBatchDAO implements iProduktBatchDAO {
         try {
             Statement statement = dBconnector.connection.createStatement();
             //Create String for the SQL Insert Statement
-            String SQLstatement = "UPDATE ProduktBatches SET receptId = '%d' , statuss = '%d';";
+            String SQLstatement = "UPDATE ProduktBatches SET receptId = '%d' , statuss = '%d' WHERE pbId = '%d';";
             //Format the string
             SQLstatement =String.format(SQLstatement,
                     produktbatch.getReceptId(), //Assume that the recept has already been created
-                    produktbatch.getStatus());
+                    produktbatch.getStatus(),
+                    produktbatch.getPbId());
+
             //Execute the insert statement
             statement.executeUpdate(SQLstatement);
 
