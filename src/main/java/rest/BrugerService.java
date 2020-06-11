@@ -4,6 +4,7 @@ import data.BrugerDAO;
 import data.DALException;
 import data.iBrugerDAO;
 import dto.BrugerDTO;
+import dto.ProduktBatchDTO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -39,6 +40,14 @@ public class BrugerService {
     public Response createBrugerJson(BrugerDTO brugerDTO) throws DALException {
         brugerDAO.createBruger(brugerDTO);
         return Response.ok("Tilføjet").build();
+    }
+
+    @PUT
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateBrugerJSON(BrugerDTO brugerDTO) throws DALException {
+        brugerDAO.updateBruger(brugerDTO);
+        return Response.ok("Opdateret").build();
     }
 
 

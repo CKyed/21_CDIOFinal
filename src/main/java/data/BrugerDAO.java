@@ -68,7 +68,7 @@ public class BrugerDAO implements iBrugerDAO{
             //Execute the insert statement
             statement.executeUpdate(SQLstatement);
         }catch (Exception e){
-            throw new DALException("Kunne ikke oprette bruger med det ID");
+            throw new DALException("Kunne ikke oprette bruger");
         }
 
         dBconnector.closeConnection();
@@ -76,6 +76,20 @@ public class BrugerDAO implements iBrugerDAO{
 
     @Override
     public void updateBruger(BrugerDTO opr) throws DALException {
+        DBconnector dBconnector = new DBconnector();
 
+        try {
+            Statement statement = dBconnector.connection.createStatement();
+            //Create String for the SQL Insert Statement
+            String SQLstatement = "UPDATE Brugere SET BrugerNavn = '%s', Ini ='%s', Cpr ='%s', Rolle = '%s' WHERE BrugerID = %d;";
+            //Format the string
+            SQLstatement =String.format(SQLstatement,opr.getBrugerNavn(),opr.getInitialer(),opr.getCPR(),opr.getRolle(),opr.getBrugerID());
+            //Execute the insert statement
+            statement.executeUpdate(SQLstatement);
+        }catch (Exception e){
+            throw new DALException("Kunne ikke opdatere brugeren");
+        }
+
+        dBconnector.closeConnection();
     }
 }

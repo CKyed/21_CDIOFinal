@@ -18,11 +18,10 @@ public class ReceptKompDAO implements iReceptKompDAO {
         try{
             Statement statement = dBconnector.connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM ReceptKomp WHERE raavareId = "+raavareId+"and receptId = "+receptId+";");
-            //select * from ReceptKomp where raavareId = '53698247' and receptId = '23695842';
             resultSet.next();
             receptKompDTO.setNonNetto(resultSet.getInt(1));
             receptKompDTO.setTolerance(resultSet.getInt(2));
-            //todo? receptId = resultSet.getInt(3);
+            receptKompDTO.setReceptId(resultSet.getInt(3));
             raavareId = resultSet.getInt(4);
             receptKompDTO.setRaavare(raavareDAO.getRaavare(raavareId));
         }catch (Exception e){
@@ -44,7 +43,7 @@ public class ReceptKompDAO implements iReceptKompDAO {
             while (resultSet.next()){
                 receptKompDTO.setNonNetto(resultSet.getInt(1));
                 receptKompDTO.setTolerance(resultSet.getInt(2));
-                //todo? receptId = resultSet.getInt(3);
+                receptKompDTO.setReceptId(resultSet.getInt(3));
                 int raavareId = resultSet.getInt(4);
                 receptKompDTO.setRaavare(raavareDAO.getRaavare(raavareId));
                 receptKompDTOList.add(receptKompDTO);
@@ -72,7 +71,7 @@ public class ReceptKompDAO implements iReceptKompDAO {
             while (resultSet.next()){
                 receptKompDTO.setNonNetto(resultSet.getInt(1));
                 receptKompDTO.setTolerance(resultSet.getInt(2));
-                //todo? receptId = resultSet.getInt(3);
+                receptKompDTO.setReceptId(resultSet.getInt(3));
                 int raavareId = resultSet.getInt(4);
                 receptKompDTO.setRaavare(raavareDAO.getRaavare(raavareId));
                 receptKompDTOList.add(receptKompDTO);
@@ -89,11 +88,49 @@ public class ReceptKompDAO implements iReceptKompDAO {
 
     @Override
     public void createReceptKomp(ReceptKompDTO receptkomponent) throws DALException {
+        DBconnector dBconnector = new DBconnector();
+
+        try {
+            Statement statement = dBconnector.connection.createStatement();
+            //Create String for the SQL Insert Statement
+            String SQLstatement = "insert into ReceptKomp values('%f', '%f', '%d', '%d');";
+            //Format the string
+            SQLstatement =String.format(SQLstatement,
+                    receptkomponent.getNonNetto(), //NonNetto
+                    receptkomponent.getTolerance(), //Tolerance
+                    receptkomponent.getRaavare().getRaavareID(), //RaavareID
+                    receptkomponent.getReceptId()); //ReceptID
+            //Execute the insert statement
+            statement.executeUpdate(SQLstatement);
+        }catch (Exception e){
+            throw new DALException("Kunne ikke oprette den ønskede Receptkompnent");
+        }
+
+        dBconnector.closeConnection();
 
     }
 
     @Override
     public void updateReceptKomp(ReceptKompDTO receptkomponent) throws DALException {
+        DBconnector dBconnector = new DBconnector();
 
+
+        try {
+            Statement statement = dBconnector.connection.createStatement();
+            //Create String for the SQL Insert Statement
+            String SQLstatement = "update ReceptKomp set nonNetto = '%f', tolerance= '%f' where receptId = '%d' and raavareId = '%d';";
+            //Format the string
+            SQLstatement =String.format(SQLstatement,
+                receptkomponent.getNonNetto(), //NonNetto
+                receptkomponent.getTolerance(), //Tolerance
+                receptkomponent.getReceptId(), //ReceptID
+                receptkomponent.getRaavare().getRaavareID());
+            //Execute the insert statement
+            statement.executeUpdate(SQLstatement);
+        }catch (Exception e){
+            throw new DALException("Kunne ikke oprette den ønskede Receptkompnent");
+        }
+
+        dBconnector.closeConnection();
     }
 }

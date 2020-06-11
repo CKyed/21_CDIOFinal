@@ -4,12 +4,13 @@ public class ReceptKompDTO {
     private double nonNetto;
     private double tolerance;
     private RaavareDTO raavare;
-    //todo receptDTO skal også med?
+    private int receptId;
 
-    public ReceptKompDTO(double nonNetto, double tolerance, RaavareDTO raavare) {
+    public ReceptKompDTO(double nonNetto, double tolerance, RaavareDTO raavare, int receptId) {
         this.nonNetto = nonNetto;
         this.tolerance = tolerance;
         this.raavare = raavare;
+        this.receptId = receptId;
     }
 
     public ReceptKompDTO() {
@@ -39,4 +40,11 @@ public class ReceptKompDTO {
         this.raavare = raavare;
     }
 
+    public int getReceptId() {
+        return receptId;
+    }
+
+    public void setReceptId(int receptId) {
+        this.receptId = receptId;
+    }
 }
