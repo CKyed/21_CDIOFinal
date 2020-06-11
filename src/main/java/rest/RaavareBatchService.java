@@ -1,6 +1,7 @@
 package rest;
 
 import data.*;
+import dto.ProduktBatchDTO;
 import dto.RaavareBatchDTO;
 
 import javax.ws.rs.*;
@@ -33,5 +34,12 @@ public class RaavareBatchService {
         return Response.ok("Tilføjet").build();
     }
 
+    @PUT
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateRaavareBatchJson(RaavareBatchDTO raavareBatchDTO) throws DALException {
+        raavareBatchDAO.updateRaavareBatch(raavareBatchDTO);
+        return Response.ok("Opdateret").build();
+    }
 
 }

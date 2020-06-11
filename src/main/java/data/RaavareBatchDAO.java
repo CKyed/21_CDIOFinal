@@ -114,7 +114,23 @@ public class RaavareBatchDAO implements iRaavareBatchDAO{
     }
 
     @Override
-    public void updateRaavareBatch(RaavareBatchDTO raavarebatch) throws DALException {
+    public void updateRaavareBatch(RaavareBatchDTO raavareBatch) throws DALException {
+        DBconnector dBconnector = new DBconnector();
 
+        try {
+            Statement statement = dBconnector.connection.createStatement();
+            //Create String for the SQL Insert Statement
+            String SQLstatement = "UPDATE RaavareBatches SET Maengde = '%f', RaavareID = '%d' WHERE rbID= '%d';";
+            //Format the string
+            SQLstatement =String.format(SQLstatement,
+                    raavareBatch.getMaengde(), // Mængde
+                    raavareBatch.getRaavare().getRaavareID(), //RaavareID
+                    raavareBatch.getRbId()); //RaavareBatchID
+            //Execute the insert statement
+            statement.executeUpdate(SQLstatement);
+        }catch (Exception e){
+            throw new DALException("Kunne ikke opdatere den ønskede RaavareBatch");
+        }
+        dBconnector.closeConnection();
     }
 }
