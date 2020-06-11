@@ -3,11 +3,12 @@ package data;
 import dto.ProduktBatchDTO;
 import dto.ProduktBatchKompDTO;
 import dto.RaavareBatchDTO;
+import dto.ReceptKompDTO;
+
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
-
-// Anthony laver denne klasse
 
 public class ProduktBatchKompDAO implements iProduktBatchKompDAO{
     private iRaavareBatchDAO raavareBatchDAO = new RaavareBatchDAO();
@@ -25,11 +26,11 @@ public class ProduktBatchKompDAO implements iProduktBatchKompDAO{
             ResultSet resultSet = statement.executeQuery(query);
             resultSet.next();
 
-            produktBatchKompDTO.setRaavareBatchDTO(raavareBatchDAO.getRaavareBatch(rbId));
             produktBatchKompDTO.setTara(resultSet.getDouble(1));
             produktBatchKompDTO.setNetto(resultSet.getDouble(2));
             int brugerId = resultSet.getInt(3);
             produktBatchKompDTO.setLaborant(brugerDAO.getBruger(brugerId));
+            produktBatchKompDTO.setRaavareBatchDTO(raavareBatchDAO.getRaavareBatch(rbId));
 
         }catch (Exception e){
             throw new DALException("Kunne ikke finde produktbatchkomp med de angivne ID");
@@ -40,13 +41,58 @@ public class ProduktBatchKompDAO implements iProduktBatchKompDAO{
 
     @Override
     public List<ProduktBatchKompDTO> getProduktBatchKompList(int pbId) throws DALException {
+        DBconnector dBconnector = new DBconnector();
+        ProduktBatchKompDTO produktBatchKompDTO = new ProduktBatchKompDTO();
+        List<ProduktBatchKompDTO> produktBatchKompDAOList = new ArrayList<>();
 
-        return null;
+        try{
+            Statement statement = dBconnector.connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM ProduktBatchKomp WHERE pbId = "+pbId+";");
+            while (resultSet.next()){
+
+                produktBatchKompDTO.setTara(resultSet.getDouble(1));
+                produktBatchKompDTO.setNetto(resultSet.getDouble(2));
+                int brugerId = resultSet.getInt(3);
+                produktBatchKompDTO.setLaborant(brugerDAO.getBruger(brugerId));
+                int rbId = resultSet.getInt(5);
+                produktBatchKompDTO.setRaavareBatchDTO(raavareBatchDAO.getRaavareBatch(rbId));
+                produktBatchKompDAOList.add(produktBatchKompDTO);
+                produktBatchKompDTO = new ProduktBatchKompDTO();
+            }
+
+        }catch (Exception e){
+            throw new DALException("Produktbacthkomp med det angivne pbId findes ikke");
+        }
+        dBconnector.closeConnection();
+        return produktBatchKompDAOList;
     }
 
     @Override
     public List<ProduktBatchKompDTO> getProduktBatchKompList() throws DALException {
-        return null;
+        DBconnector dBconnector = new DBconnector();
+        ProduktBatchKompDTO produktBatchKompDTO = new ProduktBatchKompDTO();
+        List<ProduktBatchKompDTO> produktBatchKompDAOList = new ArrayList<>();
+
+        try{
+            Statement statement = dBconnector.connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM ProduktBatchKomp;");
+            while (resultSet.next()){
+
+                produktBatchKompDTO.setTara(resultSet.getDouble(1));
+                produktBatchKompDTO.setNetto(resultSet.getDouble(2));
+                int brugerId = resultSet.getInt(3);
+                produktBatchKompDTO.setLaborant(brugerDAO.getBruger(brugerId));
+                int rbId = resultSet.getInt(5);
+                produktBatchKompDTO.setRaavareBatchDTO(raavareBatchDAO.getRaavareBatch(rbId));
+                produktBatchKompDAOList.add(produktBatchKompDTO);
+                produktBatchKompDTO = new ProduktBatchKompDTO();
+            }
+
+        }catch (Exception e){
+            throw new DALException("Produktbacthkomp med det angivne pbId findes ikke");
+        }
+        dBconnector.closeConnection();
+        return produktBatchKompDAOList;
     }
 
     @Override

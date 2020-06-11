@@ -35,6 +35,7 @@ public class BrugerService {
 
     @POST
     @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response addUserJson(BrugerDTO brugerDTO) throws DALException {
         //TODO overvej om der skal være fejlfinding her - altså om man skal tjekke om brugeren allerede eksisterer
         brugerDAO.createBruger(brugerDTO);
