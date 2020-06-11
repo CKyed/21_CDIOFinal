@@ -9,6 +9,10 @@ th, td {
     text-align: left;
     padding: 8px;
 }
+a:hover{
+    color: red;
+
+}
 
 tr:nth-child(even) {background-color: #f2f2f2;}
 tr:nth-child(uneven){background-color: aquamarine}
