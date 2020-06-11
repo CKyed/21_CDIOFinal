@@ -80,7 +80,7 @@ public class ProduktBatchDAO implements iProduktBatchDAO {
             //Execute the insert statement
             statement.executeUpdate(SQLstatement);
 
-            //Insert the components of the recept in the database
+            //Insert the components of the produktBatch in the database
             //Add each element from the list to the database
             for (ProduktBatchKompDTO pbkDTO: produktbatch.getProduktBatchKomponenter()) {
                 produktBatchKompDAO.createProduktBatchKomp(pbkDTO);
