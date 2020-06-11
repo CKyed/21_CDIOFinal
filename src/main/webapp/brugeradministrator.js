@@ -26,7 +26,7 @@ function createBruger() {
     console.log(data);
     $.ajax({
         url: 'rest/bruger',
-            method: 'POST',
+        method: 'POST',
         contentType: "application/json",
         data: data,
         success: function (data) {
@@ -39,5 +39,5 @@ function createBruger() {
             alert(errorThrown);
         }
     })
-    
+
 }
