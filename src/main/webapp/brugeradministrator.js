@@ -51,11 +51,29 @@ function loadSpecificBruger() {
         url:'rest/bruger/'+id,
         success: function (data) {
             console.log(data);
+           /* console.log("status : "+toString(data.status))
+            console.log(typeof data.status)
+            var statusElt = document.getElementById("updateStatus");
+            console.log(statusElt);
+            statusElt.style.backgroundColor = "pink";
+            var brugernavnElt = document.getElementById("updateBrugerNavn");
+            brugernavnElt.value = data.brugerNavn;*/
+            document.getElementById("updateBrugerNavn").value = data.brugerNavn;
+            document.getElementById("updateInitialer").value = data.initialer;
+            document.getElementById("updateRolle").value = data.rolle;
+            document.getElementById("updateCPR").value = data.cpr;
+          //  document.getElementById("updateStatus").value = data.status;
         }
     })
 
 }
 
+function updateBruger() {
+    var id = document.getElementById("BrugerId").value;
+    var data =$('#brugerformUpdate').serializeJSON();
+    console.log(data);
+
+}
 
 
 
