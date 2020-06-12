@@ -21,8 +21,8 @@ th, td {
     max-width: 1000px;
     border: 2px solid black;
     padding: 5px;
-    margin:auto;
-
+    margin: auto;
+}
 .container{
 
     background-color: lightgray;
