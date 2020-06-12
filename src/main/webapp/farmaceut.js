@@ -90,25 +90,16 @@ function saveReceptToDatabase() {
     //VIRKER IKKE
     event.preventDefault();
     var recept = {
-        "receptId": 22695842,
-        "receptNavn": "Paracettamol",
-        "receptKomponenter": [
-            {
-                "nonNetto": 20.0,
-                "tolerance": 0.0,
-                "raavare": {
-                    "raavareID": 53698247,
-                    "raavareNavn": "Aloe Vera",
-                    "leverandoer": "Special-planter"
-                },
-                "receptId": 22695842
-            }
-        ]
+        "receptId": document.getElementById('receptid').value,
+        "receptNavn": document.getElementById('receptnavn').value,
+        "receptKomponenter": getReceptKomponenterJSON()
+
     }
+    data =JSON.stringify(recept);
 
     console.log(data);
     $.ajax({
-        url: 'rest/bruger',
+        url: 'rest/recept',
         method: 'POST',
         contentType: "application/json",
         data: data,
@@ -121,8 +112,25 @@ function saveReceptToDatabase() {
             alert(errorThrown);
         }
     })
+}
 
 
+function getReceptKomponenterJSON() {
+    var TableData = new Array();
 
+    $('#receptkomptablebody tr').each(function(row, tr){
+        TableData[row]={
+            "netto" : $(tr).find('td:eq(2)').text()
+            , "tolerance" : $(tr).find('td:eq(3)').text()
+            , "raavare" : {
+            "raavareID": $(tr).find('td:eq(1)').text(),
+                "raavareNavn": "ligemeget",
+                "leverandoer": "ligemeget"
+        } ,"receptId" : $(tr).find('td:eq(0)').text()
+        }
+    });
+    TableData.shift();  // first row will be empty - so remove
+    TableData = $.toJSON(TableData);
+    return result;
 }
 

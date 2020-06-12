@@ -84,9 +84,12 @@ public class ReceptDAO implements iReceptDAO{
             throw new DALException("Kunne ikke oprette den ønskede Recept");
         }
 
-        for (ReceptKompDTO rkDTO: recept.getReceptKomponenter()) {
-            receptKompDAO.createReceptKomp(rkDTO);
+        if (!recept.getReceptKomponenter().isEmpty()){
+            for (ReceptKompDTO rkDTO: recept.getReceptKomponenter()) {
+                receptKompDAO.createReceptKomp(rkDTO);
+            }
         }
+
 
         dBconnector.closeConnection();
     }
@@ -110,8 +113,10 @@ public class ReceptDAO implements iReceptDAO{
             throw new DALException("Kunne ikke opdatere den ønskede Recept");
         }
 
-        for (ReceptKompDTO rkDTO: recept.getReceptKomponenter()) {
-            receptKompDAO.updateReceptKomp(rkDTO);
+        if (!recept.getReceptKomponenter().isEmpty()){
+            for (ReceptKompDTO rkDTO: recept.getReceptKomponenter()) {
+                receptKompDAO.updateReceptKomp(rkDTO);
+            }
         }
 
         dBconnector.closeConnection();

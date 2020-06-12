@@ -98,8 +98,8 @@ public class ReceptKompDAO implements iReceptKompDAO {
             SQLstatement =String.format(SQLstatement,
                     receptkomponent.getNonNetto(), //NonNetto
                     receptkomponent.getTolerance(), //Tolerance
-                    receptkomponent.getRaavare().getRaavareID(), //RaavareID
-                    receptkomponent.getReceptId()); //ReceptID
+                    receptkomponent.getReceptId(),//ReceptID
+                    receptkomponent.getRaavare().getRaavareID()); //RaavareID
             //Execute the insert statement
             statement.executeUpdate(SQLstatement);
         }catch (Exception e){
