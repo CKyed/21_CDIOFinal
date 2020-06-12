@@ -41,6 +41,7 @@ function createBruger() {
         }
     })
 
+
 }
 
 function showForm() {
