@@ -1,4 +1,4 @@
-
+var brugertype;
 
 function switchPage(page){
     $("#container").load(page);
@@ -6,23 +6,25 @@ function switchPage(page){
 
 function checkLogin() {
     var id =document.getElementById("loginBrugerID").value;
-    console.log(id);
     $.ajax({
         method: 'GET',
         url:'rest/bruger/'+id,
         success: function (data) {
-            console.log(data);
             switch (data.rolle) {
                 case "Administrator":
-                    switchPage('brugeradministrator.html');
+                    brugertype=0;
+                    switchPage('brugerforwarding.html');
                     break;
                 case "Farmaceut":
-                    switchPage('farmaceut.html');
+                    brugertype=1;
+                    switchPage('brugerforwarding.html');
                     break;
                 case "Produktionsleder":
-                    switchPage('produktionsleder.html');
+                    brugertype=2;
+                    switchPage('brugerforwarding.html');
                     break;
                 case "Laborant":
+                    brugertype=3;
                     switchPage('laborant.html');
                     break;
             }
@@ -30,6 +32,10 @@ function checkLogin() {
   })
 }
 
-
-
-
+function brugerRettigheder() {
+    for (let i = 0; i < brugertype; i++) {
+        console.log(i);
+        var x=document.getElementById("brugerforwarding"+i);
+        x.style.display = "none";
+    }
+}
