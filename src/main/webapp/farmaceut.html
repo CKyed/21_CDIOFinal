@@ -53,18 +53,11 @@
     <h1>Tilføj linje i recepten</h1>
     <form id="receptkompform">
         <div>
-            <label for="raavareid">ID: </label> <input type="number"
-                                                id="raavareid" name="raavareid">
-        </div>
-        <!--<div>
-
             <label for="raavare">Råvare: </label>
             <select id ="raavare" name = "raavare">
-                <option>Råvare1</option>
-                <option>Råvare2</option>
             </select>
         </div>
-        -->
+
         <div>
             <label for="netto">Netto: </label> <input type="number" step="any" min="0" max="1000"
                                                        id="netto" name="netto">
@@ -74,7 +67,7 @@
                                                      id="tolerance" name="tolerance">
         </div>
 
-        <button onclick="addReceptKomp(); return false;">Tilføj linje</button>
+        <button type = 'button' onclick="addReceptKomp(); return false;">Tilføj linje</button>
     </form>
 </DIV>
 

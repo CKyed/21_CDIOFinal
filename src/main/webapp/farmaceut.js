@@ -6,8 +6,10 @@ $(document).ready(function () {
 function loadRaavarer() {
     $.get('rest/raavare', function (data, textStatus, req) {
         $("#raavaretable").empty();
+        $("#raavare").empty();
         $.each(data, function (i, elt) {
             $('#raavaretable').append(generateRaavareTable(elt));
+            $('#raavare').append(generateRaavareList(elt));
         });
     });
 }
@@ -17,6 +19,7 @@ function generateRaavareTable(raavare) {
         '<td>' + raavare.leverandoer + '</td>'+
         '</tr>'
 }
+
 
 function createRaavare() {
     event.preventDefault();
@@ -40,12 +43,18 @@ function createRaavare() {
 }
 
 function addReceptKomp() {
-    var HTML = '<tr><td>' + receptId + '</td>' +
-        '<td>' + raavareid + '</td>' +
-        '<td>' + netto + '</td>' +
-        '<td>' + tolerance + '</td>' + '</tr>'
-    $('#receptkomptablebody').append(HTML);
+    var HTML = '<tr><td>' + 'receptId' + '</td>' +
+        '<td>' + document.getElementById("raavare").value + '</td>' +
+        '<td>' + document.getElementById("netto").value + '</td>' +
+        '<td>' + document.getElementById("tolerance").value + '</td>' +
+        '<td><button>Slet linje</button></td></tr> '
     console.log(HTML);
+    $('#receptkomptablebody').append(HTML);
+
+}
+
+function  generateRaavareList(raavare) {
+    return '<option>' +raavare.raavareNavn +'</option>'
 }
 
 
