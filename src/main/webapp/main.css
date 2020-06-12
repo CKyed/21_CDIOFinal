@@ -1,6 +1,6 @@
 table {
     border-collapse: collapse;
-    width: 100%;
+    width: 80%;
     max-width: 1000px;
     margin: auto;
 }
@@ -19,20 +19,24 @@ a:hover{
 }
 
 .createBruger {
+    display: none;
     background-color: blueviolet;
-    width: 800px;
+    width: 80%;
+    max-width: 1000px;
     border: 2px solid black;
     padding: 5px;
     margin: auto;
 }
+
 .container{
 
-    background-color: lightgray;
+    background-color: plum;
     width: 500px;
     border: 2px solid black;
     padding: 5px;
     margin:auto;
 }
+
 
 h1{
     font-family: Verdana;
