@@ -17,8 +17,9 @@ function generateBrugerTable(bruger){
         '<td>' + bruger.rolle + '</td>' +
         '<td>' + bruger.brugerNavn + '</td>' +
         '<td>' + bruger.initialer + '</td>' +
-        '<td>' + bruger.cpr + '</td>'
-        '<td>' + bruger.aktiv + '</td>'
+        '<td>' + bruger.cpr + '</td>' +
+        '<td>' + bruger.aktiv + '</td>' +
+        '</tr>'
 }
 
 function createBruger() {

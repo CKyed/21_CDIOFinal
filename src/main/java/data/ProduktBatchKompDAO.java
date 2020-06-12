@@ -114,8 +114,8 @@ public class ProduktBatchKompDAO implements iProduktBatchKompDAO {
                     produktbatchkomponent.getRaavareBatchDTO().getRbId());
             //Execute the insert statement
             statement.executeUpdate(sqlStatement);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw new DALException("Kunne ikke oprette komponenten");
         }
         dBconnector.closeConnection();
     }
@@ -136,8 +136,8 @@ public class ProduktBatchKompDAO implements iProduktBatchKompDAO {
                     produktbatchkomponent.getRaavareBatchDTO().getRbId());
             //Execute the insert statement
             statement.executeUpdate(sqlStatement);
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw new DALException("Kunne ikke opdatere komponenten");
         }
         dBconnector.closeConnection();
 
