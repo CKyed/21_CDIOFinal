@@ -38,3 +38,14 @@ function createRaavare() {
         }
     })
 }
+
+function addReceptKomp() {
+    var HTML = '<tr><td>' + receptId + '</td>' +
+        '<td>' + raavareid + '</td>' +
+        '<td>' + netto + '</td>' +
+        '<td>' + tolerance + '</td>' + '</tr>'
+    $('#receptkomptablebody').append(HTML);
+    console.log(HTML);
+}
+
+
