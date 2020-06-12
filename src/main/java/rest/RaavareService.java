@@ -8,6 +8,7 @@ import dto.RaavareDTO;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Path("raavare")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -20,6 +21,11 @@ public class RaavareService {
     @Path("{id}")
     public RaavareDTO getRaavare(@PathParam("id") int id) throws DALException {
         return raavareDAO.getRaavare(id);
+    }
+
+    @GET
+    public List<RaavareDTO> getRaavare() throws DALException {
+        return raavareDAO.getRaavareList();
     }
 
     @POST
