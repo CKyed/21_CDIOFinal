@@ -30,7 +30,6 @@ a:hover{
 
 .container{
 
-    background-color: plum;
     width: 500px;
     border: 2px solid black;
     padding: 5px;
@@ -40,7 +39,8 @@ a:hover{
 
 h1{
     font-family: Verdana;
-    color: blue;
+    color: hotpink;
+
 }
 
 /* Add a black background color to the top navigation */
