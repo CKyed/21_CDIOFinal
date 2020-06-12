@@ -1,6 +1,5 @@
 $(document).ready(function () {
     loadRaavarer();
-
 });
 
 function loadRaavarer() {
@@ -79,4 +78,51 @@ function deleteRow() {
     tr.parentNode.removeChild(tr);
 }
 
+function lockReceptForm() {
+    document.getElementById('receptid').disabled = true;
+    document.getElementById('receptnavn').disabled = true;
+    document.getElementById('raavare').disabled = false;
+    document.getElementById('netto').disabled = false;
+    document.getElementById('tolerance').disabled = false;
+}
+
+function saveReceptToDatabase() {
+    //VIRKER IKKE
+    event.preventDefault();
+    var recept = {
+        "receptId": 22695842,
+        "receptNavn": "Paracettamol",
+        "receptKomponenter": [
+            {
+                "nonNetto": 20.0,
+                "tolerance": 0.0,
+                "raavare": {
+                    "raavareID": 53698247,
+                    "raavareNavn": "Aloe Vera",
+                    "leverandoer": "Special-planter"
+                },
+                "receptId": 22695842
+            }
+        ]
+    }
+
+    console.log(data);
+    $.ajax({
+        url: 'rest/bruger',
+        method: 'POST',
+        contentType: "application/json",
+        data: data,
+        success: function (data) {
+            alert(JSON.stringify(data));
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText);
+            alert(textStatus);
+            alert(errorThrown);
+        }
+    })
+
+
+
+}
 
