@@ -1,14 +1,16 @@
 $(document).ready(function () {
     loadRaavarer();
 });
+var raavareList = new Array();
 
 function loadRaavarer() {
     $.get('rest/raavare', function (data, textStatus, req) {
         $("#raavaretable").empty();
         $("#raavare").empty();
         $.each(data, function (i, elt) {
+            raavareList.push(elt);
             $('#raavaretable').append(generateRaavareTable(elt));
-            $('#raavare').append(generateRaavareList(elt));
+            $('#raavare').append(generateRaavareOptionList(elt));
         });
     });
 }
@@ -41,19 +43,9 @@ function createRaavare() {
     })
 }
 
-function addReceptKomp1() {
-    var HTML = '<tr><td>' + 'receptId' + '</td>' +
-        '<td>' + document.getElementById("raavare").value + '</td>' +
-        '<td>' + document.getElementById("netto").value + '</td>' +
-        '<td>' + document.getElementById("tolerance").value + '</td>' +
-        '<td><button>Slet linje</button></td></tr> '
-    console.log(HTML);
-    $('#receptkomptablebody').append(HTML);
 
-}
-
-function  generateRaavareList(raavare) {
-    return '<option>' +raavare.raavareNavn +'</option>'
+function generateRaavareOptionList(raavare) {
+    return '<option>' +raavare.raavareID +'</option>'
 }
 
 function addReceptKomp() {
@@ -120,7 +112,7 @@ function getReceptKomponenterJSON() {
 
     $('#receptkomptablebody tr').each(function(row, tr){
         TableData[row]={
-            "netto" : $(tr).find('td:eq(2)').text()
+            "nonNetto" : $(tr).find('td:eq(2)').text()
             , "tolerance" : $(tr).find('td:eq(3)').text()
             , "raavare" : {
             "raavareID": $(tr).find('td:eq(1)').text(),
@@ -129,8 +121,16 @@ function getReceptKomponenterJSON() {
         } ,"receptId" : $(tr).find('td:eq(0)').text()
         }
     });
-    TableData.shift();  // first row will be empty - so remove
-    TableData = $.toJSON(TableData);
-    return result;
+    //TableData.shift();  // first row will be empty - so remove
+    console.log(TableData);
+    return TableData;
+}
+
+function getRaavareNameById(id) {
+    raavareList.forEach(function (item) {
+        if (id = item.raavareID){
+            return item.raavareNavn;
+        }
+    });
 }
 
