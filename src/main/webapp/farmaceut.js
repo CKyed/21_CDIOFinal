@@ -1,7 +1,18 @@
 $(document).ready(function () {
     loadRaavarer();
+    loadRecepter();
 });
 var raavareList = new Array();
+var receptList = new Array();
+
+function loadRecepter() {
+    //So far, this only loads recepts into receptList - makes no table
+    $.get('rest/recept', function (data, textStatus, req) {
+        $.each(data, function (i, elt) {
+            receptList.push(elt);
+        });
+    });
+}
 
 function loadRaavarer() {
     $.get('rest/raavare', function (data, textStatus, req) {
@@ -45,7 +56,11 @@ function createRaavare() {
 
 
 function generateRaavareOptionList(raavare) {
-    return '<option>' +raavare.raavareID +'</option>'
+    //This formatting makes sure, that the whole raavareNavn gets shown - not just first word
+    var navn = '\"'+raavare.raavareNavn+'\"';
+    var id = raavare.raavareID;
+    //When hovered over, the raavareNavn corresponding til the ID is shown
+    return '<option title='+ navn+'> '+id+' </option>'
 }
 
 function addReceptKomp() {
@@ -71,11 +86,21 @@ function deleteRow() {
 }
 
 function lockReceptForm() {
-    document.getElementById('receptid').disabled = true;
-    document.getElementById('receptnavn').disabled = true;
-    document.getElementById('raavare').disabled = false;
-    document.getElementById('netto').disabled = false;
-    document.getElementById('tolerance').disabled = false;
+    var valid = receptIdValid(document.getElementById('receptid').value);
+    console.log('receptID valid:'+valid);
+    if (receptList.length ==0){
+        alert("Vent et øjeblik til siden er loadet færdigt.");
+    } else if (valid){
+        document.getElementById('receptid').disabled = true;
+        document.getElementById('receptnavn').disabled = true;
+        document.getElementById('raavare').disabled = false;
+        document.getElementById('netto').disabled = false;
+        document.getElementById('tolerance').disabled = false;
+    } else {
+        alert("Receptens ID er allerede i brug.")
+    }
+
+
 }
 
 function saveReceptToDatabase() {
@@ -132,5 +157,17 @@ function getRaavareNameById(id) {
             return item.raavareNavn;
         }
     });
+}
+
+function receptIdValid(proposedId){
+    var valid = true;
+    $.each(receptList, function (i,elt) {
+        console.log("proposed ID: " + proposedId + ", list ID: " + elt.receptId)
+        if (elt.receptId == proposedId){
+            valid = false;
+            return valid;
+        }
+    });
+    return valid;
 }
 
