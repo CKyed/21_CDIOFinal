@@ -6,7 +6,10 @@ var raavareList = new Array();
 var receptList = new Array();
 
 function loadRecepter() {
-    //So far, this only loads recepts into receptList - makes no table
+    //empty existing list
+    receptList = new Array();
+
+    //Load via GET-call to database
     $.get('rest/recept', function (data, textStatus, req) {
         $.each(data, function (i, elt) {
             receptList.push(elt);
@@ -15,6 +18,10 @@ function loadRecepter() {
 }
 
 function loadRaavarer() {
+    //empty existing list
+    raavareList = new Array();
+
+    //Load via GET-call to database
     $.get('rest/raavare', function (data, textStatus, req) {
         $("#raavaretable").empty();
         $("#raavare").empty();
@@ -104,7 +111,6 @@ function lockReceptForm() {
 }
 
 function saveReceptToDatabase() {
-    //VIRKER IKKE
     event.preventDefault();
     var recept = {
         "receptId": document.getElementById('receptid').value,
@@ -122,6 +128,7 @@ function saveReceptToDatabase() {
         data: data,
         success: function (data) {
             alert(JSON.stringify(data));
+            reloadReceptPage();
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText);
@@ -171,3 +178,8 @@ function receptIdValid(proposedId){
     return valid;
 }
 
+function reloadReceptPage() {
+    loadRaavarer();
+    loadRecepter();
+    switchPage("farmaceutCreateRecept.html");
+}
