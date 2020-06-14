@@ -4,6 +4,7 @@ $(document).ready(function () {
 });
 var raavareList = new Array();
 var receptList = new Array();
+var maxReceptId = 99999999;
 
 function loadRecepter() {
     //empty existing list
@@ -93,18 +94,26 @@ function deleteRow() {
 }
 
 function lockReceptForm() {
-    var valid = receptIdValid(document.getElementById('receptid').value);
-    console.log('receptID valid:'+valid);
-    if (receptList.length ==0){
-        alert("Vent et øjeblik til siden er loadet færdigt.");
+    var receptID =document.getElementById('receptid').value;
+    var valid = receptIdVacant(receptID);
+    //console.log('receptID valid:'+valid);
+    //console.log('ReceptId: '+ receptID);
+    //console.log("maxReceptId: " + maxReceptId);
+    if (receptID> maxReceptId){
+        alert("Receptens ID er for langt.");
+    } else if (receptList.length ==0){
+        alert("Vent et øjeblik til recepterne er loadet færdigt.");
     } else if (valid){
         document.getElementById('receptid').disabled = true;
         document.getElementById('receptnavn').disabled = true;
+        document.getElementById('lockReceptIdButton').disabled = true;
         document.getElementById('raavare').disabled = false;
         document.getElementById('netto').disabled = false;
         document.getElementById('tolerance').disabled = false;
+    } else if (!valid){
+        alert("Receptens ID er allerede i brug.");
     } else {
-        alert("Receptens ID er allerede i brug.")
+        alert("Uventet fejl.")
     }
 
 
@@ -128,7 +137,7 @@ function saveReceptToDatabase() {
         data: data,
         success: function (data) {
             alert(JSON.stringify(data));
-            reloadReceptPage();
+            switchPage("farmaceutCreateRecept.html");
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText);
@@ -158,15 +167,8 @@ function getReceptKomponenterJSON() {
     return TableData;
 }
 
-function getRaavareNameById(id) {
-    raavareList.forEach(function (item) {
-        if (id = item.raavareID){
-            return item.raavareNavn;
-        }
-    });
-}
 
-function receptIdValid(proposedId){
+function receptIdVacant(proposedId){
     var valid = true;
     $.each(receptList, function (i,elt) {
         console.log("proposed ID: " + proposedId + ", list ID: " + elt.receptId)
@@ -178,8 +180,3 @@ function receptIdValid(proposedId){
     return valid;
 }
 
-function reloadReceptPage() {
-    loadRaavarer();
-    loadRecepter();
-    switchPage("farmaceutCreateRecept.html");
-}
