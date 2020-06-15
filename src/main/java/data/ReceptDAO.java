@@ -1,7 +1,5 @@
 package data;
 
-import dto.ProduktBatchKompDTO;
-import dto.RaavareBatchDTO;
 import dto.ReceptDTO;
 import dto.ReceptKompDTO;
 
@@ -26,7 +24,7 @@ public class ReceptDAO implements iReceptDAO{
 
             receptDTO.setReceptId(resultSet.getInt(1));
             receptDTO.setReceptNavn(resultSet.getString(2));
-            receptDTO.setReceptKompomenter(receptKompDAO.getReceptKompList(receptId));
+            receptDTO.setReceptKomponenter(receptKompDAO.getReceptKompList(receptId));
 
 
         }catch (Exception e){
@@ -53,7 +51,7 @@ public class ReceptDAO implements iReceptDAO{
                 receptId = resultSet.getInt(1);
                 receptDTO.setReceptId(receptId);
                 receptDTO.setReceptNavn(resultSet.getString(2));
-                receptDTO.setReceptKompomenter(receptKompDAO.getReceptKompList(receptId));
+                receptDTO.setReceptKomponenter(receptKompDAO.getReceptKompList(receptId));
                 //Add to list
                 receptDTOList.add(receptDTO);
                 //Clear receptDTO object
@@ -86,9 +84,12 @@ public class ReceptDAO implements iReceptDAO{
             throw new DALException("Kunne ikke oprette den ønskede Recept");
         }
 
-        for (ReceptKompDTO rkDTO: recept.getReceptKompomenter()) {
-            receptKompDAO.createReceptKomp(rkDTO);
+        if (!recept.getReceptKomponenter().isEmpty()){
+            for (ReceptKompDTO rkDTO: recept.getReceptKomponenter()) {
+                receptKompDAO.createReceptKomp(rkDTO);
+            }
         }
+
 
         dBconnector.closeConnection();
     }
@@ -112,8 +113,10 @@ public class ReceptDAO implements iReceptDAO{
             throw new DALException("Kunne ikke opdatere den ønskede Recept");
         }
 
-        for (ReceptKompDTO rkDTO: recept.getReceptKompomenter()) {
-            receptKompDAO.updateReceptKomp(rkDTO);
+        if (!recept.getReceptKomponenter().isEmpty()){
+            for (ReceptKompDTO rkDTO: recept.getReceptKomponenter()) {
+                receptKompDAO.updateReceptKomp(rkDTO);
+            }
         }
 
         dBconnector.closeConnection();

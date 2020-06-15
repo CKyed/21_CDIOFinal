@@ -7,15 +7,15 @@ public class ReceptDTO {
 
     private int receptId;
     private String receptNavn;
-    private List<ReceptKompDTO> receptKompomenter;
+    private List<ReceptKompDTO> receptKomponenter;
 
     public ReceptDTO() {
     }
 
-    public ReceptDTO(int receptId, String receptNavn, List<ReceptKompDTO> receptKompomenter) {
+    public ReceptDTO(int receptId, String receptNavn, List<ReceptKompDTO> receptKomponenter) {
         this.receptId = receptId;
         this.receptNavn = receptNavn;
-        this.receptKompomenter = receptKompomenter;
+        this.receptKomponenter = receptKomponenter;
     }
 
     public int getReceptId() {
@@ -34,11 +34,11 @@ public class ReceptDTO {
         this.receptNavn = receptNavn;
     }
 
-    public List<ReceptKompDTO> getReceptKompomenter() {
-        return receptKompomenter;
+    public List<ReceptKompDTO> getReceptKomponenter() {
+        return receptKomponenter;
     }
 
-    public void setReceptKompomenter(List<ReceptKompDTO> receptKompomenter) {
-        this.receptKompomenter = receptKompomenter;
+    public void setReceptKomponenter(List<ReceptKompDTO> receptKomponenter) {
+        this.receptKomponenter = receptKomponenter;
     }
 }
