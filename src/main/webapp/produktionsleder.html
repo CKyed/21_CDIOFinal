@@ -16,22 +16,23 @@
     <h1>Opret RåvareBatch</h1>
     <form id="raavareBatchForm">
         <div>
-            <label for="opretRaavareBatchID"> Råvarebatch ID:</label>
-            <input type="number" id="opretRaavareBatchID" name="raavareBatchID" placeholder="Skriv råvarebatch nummer her">
+            <label for="opretRaavareBatchID">ID:</label>
+            <input type="number" id="opretRaavareBatchID" name="raavareBatchID" placeholder="Skriv råvarebatchID">
         </div>
         <div>
             <label for="RaavareBatchMængde">Mængde: </label>
-            <input type="number" id="RaavareBatchMængde" name="raavareBatchMængde">
+            <input type="number" id="RaavareBatchMængde" name="raavareBatchMængde" placeholder="Skriv mængde">
         </div>
         <div>
             <label for="opretLeverandoer">Leverandør: </label>
-            <input type="text" id="opretLeverandoer" name="leverandoer">
+            <input type="text" id="opretLeverandoer" name="raavareBatchLeverandoer" placeholder="Skriv leverandørens navn">
         </div>
 
         <button onclick="createRaavare();">Gem Råvarebatch</button>
     </form>
 </div>
 
+<!--
 
 <DIV class="container" id="createProduktbatch">
     <h1>Opret Produktbatch</h1>
@@ -58,7 +59,6 @@
 </DIV>
 
 
-<!--
 <div class="container" id="receptkomponenter">
     <h1>Receptlinjer</h1>
     <table>
