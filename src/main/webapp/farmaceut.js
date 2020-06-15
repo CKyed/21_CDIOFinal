@@ -65,10 +65,10 @@ function createRaavare() {
 
 function generateRaavareOptionList(raavare) {
     //This formatting makes sure, that the whole raavareNavn gets shown - not just first word
-    var navn = '\"'+raavare.raavareNavn+'\"';
+    var navn = raavare.raavareNavn;
     var id = raavare.raavareID;
     //When hovered over, the raavareNavn corresponding til the ID is shown
-    return '<option title='+ navn+'> '+id+' </option>'
+    return '<option> ' +navn+ '; ' + id + ' </option>'
 }
 
 function addReceptKomp() {
@@ -78,12 +78,10 @@ function addReceptKomp() {
     var cell2 = row.insertCell(1);
     var cell3 = row.insertCell(2);
     var cell4 = row.insertCell(3);
-    var cell5 = row.insertCell(4);
-    cell1.innerHTML = document.getElementById("receptid").value;;
-    cell2.innerHTML = document.getElementById("raavare").value;
-    cell3.innerHTML = document.getElementById("netto").value;
-    cell4.innerHTML = document.getElementById("tolerance").value;
-    cell5.innerHTML = '<td><input type="button" value="Slet linje" onclick="deleteRow()"></td>'
+    cell1.innerHTML = document.getElementById("raavare").value;
+    cell2.innerHTML = document.getElementById("netto").value;
+    cell3.innerHTML = document.getElementById("tolerance").value;
+    cell4.innerHTML = '<td><input type="button" value="Slet linje" onclick="deleteRow()"></td>'
 
 }
 
@@ -121,6 +119,7 @@ function lockReceptForm() {
 
 function saveReceptToDatabase() {
     event.preventDefault();
+
     var recept = {
         "receptId": document.getElementById('receptid').value,
         "receptNavn": document.getElementById('receptnavn').value,
@@ -150,16 +149,23 @@ function saveReceptToDatabase() {
 
 function getReceptKomponenterJSON() {
     var TableData = new Array();
-
+    console.log("okay");
     $('#receptkomptablebody tr').each(function(row, tr){
+        var raavareText = $(tr).find('td:eq(0)').text();
+        console.log(raavareText);
+        var raavareIdList = raavareText.split(";");
+        console.log(raavareIdList);
+        var raavareId = raavareIdList[1];
+        console.log(raavareId);
+
         TableData[row]={
-            "nonNetto" : $(tr).find('td:eq(2)').text()
-            , "tolerance" : $(tr).find('td:eq(3)').text()
+            "nonNetto" : $(tr).find('td:eq(1)').text()
+            , "tolerance" : $(tr).find('td:eq(2)').text()
             , "raavare" : {
-            "raavareID": $(tr).find('td:eq(1)').text(),
+            "raavareID": raavareId,
                 "raavareNavn": "ligemeget",
                 "leverandoer": "ligemeget"
-        } ,"receptId" : $(tr).find('td:eq(0)').text()
+        } ,"receptId" : document.getElementById('receptid').value
         }
     });
     //TableData.shift();  // first row will be empty - so remove
