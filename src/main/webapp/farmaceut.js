@@ -5,6 +5,13 @@ $(document).ready(function () {
 var raavareList = new Array();
 var receptList = new Array();
 var maxReceptId = 99999999;
+var maxTolerance = 10;
+var minTolerance = 0.1;
+var maxNetto = 10;
+var minNetto = 0.1;
+
+
+
 
 function loadRecepter() {
     //empty existing list
@@ -136,9 +143,7 @@ function deleteRow() {
 function lockReceptForm() {
     var receptID =document.getElementById('receptid').value;
     var valid = receptIdVacant(receptID);
-    //console.log('receptID valid:'+valid);
-    //console.log('ReceptId: '+ receptID);
-    //console.log("maxReceptId: " + maxReceptId);
+
     if (receptID> maxReceptId){
         alert("Receptens ID er for langt.");
     } else if (receptList.length ==0){
@@ -155,11 +160,44 @@ function lockReceptForm() {
     } else {
         alert("Uventet fejl.")
     }
+}
 
+function checkIfReceptIdValid() {
+    //Returns true only if the id was valid. Gives explaination otherwise
+    //Also updates the headline of the Recept box
 
+    var receptID =document.getElementById('receptid').value;
+    var vacant = receptIdVacant(receptID);
+
+    if (receptID> maxReceptId){
+        alert("Receptens ID er for langt.");
+        return false;
+    } else if (receptList.length ==0){
+        alert("Vent et øjeblik til recepterne er loadet færdigt.");
+        return false;
+    } else if (vacant){
+        var header = document.getElementById("receptnavn").value + ", " + receptID;
+        document.getElementById("receptHeadline").innerText = header;
+        return true;
+    } else {
+        alert("Receptens ID er allerede i brug.");
+        return false;
+    }
 }
 
 function saveReceptToDatabase() {
+    //First runs some checks to see, if everything is fine. Then writes to database
+    //checks if all input fields are valid - otherwise returns (does not write to DB)
+
+    validateReceptInputFields();
+
+    if (!validateReceptInputFields()){
+        alert("Noget gik galt");
+        return;
+    }
+
+
+
     event.preventDefault();
 
     var recept = {
@@ -191,7 +229,6 @@ function saveReceptToDatabase() {
 
 function getReceptKomponenterJSON() {
     var TableData = new Array();
-    console.log("okay");
     $('#receptkomptablebody tr').each(function(row, tr){
         var raavareText = $(tr).find('td:eq(0)').text();
         console.log(raavareText);
@@ -227,4 +264,31 @@ function receptIdVacant(proposedId){
     });
     return valid;
 }
+
+function validateReceptInputFields() {
+    //Returns true, if everything is fine. Returns false otherwise and displays messages.
+
+    var everyThingOK = checkIfReceptNavnValid() && checkIfReceptIdValid();
+    console.log("EverythingOK: " + everyThingOK);
+    return everyThingOK;
+}
+
+function checkIfReceptNavnValid(){
+    //Returns true only if the receptNavn is valid
+
+    var valid = true;
+    var receptNavn =document.getElementById("receptnavn").value;
+    if (receptNavn.length ===0){
+        alert("Recepten skal have et navn");
+        valid = false;
+    } else if (receptNavn.length >20){
+        alert("Receptens navn er for langt");
+        valid = false;
+    } else if (receptNavn.includes(";")){
+        alert("Receptens navn må ikke indeholde semikolon");
+        valid = false;
+    }
+    return valid;
+}
+
 
