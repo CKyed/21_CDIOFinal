@@ -1,1 +1,21 @@
-Hej laborant
+<DIV class="container" id="createProduktionsBatchKomp">
+    <h1>Tilføj linje i recepten</h1>
+    <form id="ProduktionsBatch">
+        <div>
+            <label for="produktBatch">Råvare: </label>
+            <select id ="produktBatch" name = "produktBatch">
+            </select> <p id =selectProduktBatch></p>
+        </div>
+
+        <div>
+            <label for="netto">Netto: </label> <input type="number" step="any" min="0" max="1000"
+                                                      id="netto" name="netto">
+        </div>
+        <div>
+            <label for="tolerance">Tolerance: </label><input type="number" step="any" min="0" max="1000"
+                                                             id="tolerance" name="tolerance">
+        </div>
+
+        <button type = 'button' onclick="addReceptKomp(); return false;">Tilføj linje</button>
+    </form>
+</DIV>

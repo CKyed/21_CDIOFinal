@@ -1,4 +1,5 @@
 var brugertype;
+var brugerID;
 
 function switchPage(page){
     $("#container").load(page);
@@ -13,6 +14,7 @@ function checkLogin() {
         method: 'GET',
         url:'rest/bruger/'+id,
         success: function (data) {
+            brugerID=data.brugerID;
             switch (data.rolle) {
                 case "Administrator":
                     brugertype=0;
