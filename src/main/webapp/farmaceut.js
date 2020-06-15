@@ -92,6 +92,27 @@ function generateRaavareOptionList(raavare) {
     return '<option> ' +navn+ '; ' + id + ' </option>'
 }
 
+function loadSpecificRaavare() {
+    var id = document.getElementById("RaavareId").value;
+    var errormessage;
+    errormessage = document.getElementById("errorMessage");
+    //  console.log(id);
+    $.ajax({
+        method: 'GET',
+        url:'rest/raavare/'+id,
+        success: function (data) {
+            errormessage.innerHTML="";
+            console.log(data);
+            console.log(data.aktiv);
+            document.getElementById("updateRaavareNavn").value = data.raavareNavn;
+            document.getElementById("updateLeverandoer").value = data.leverandoer;
+        },
+        error: function () {
+            errormessage.innerHTML="Kunne ikke finder råvarer med det ID, prøv igen";
+        }
+    })
+}
+
 function addReceptKomp() {
     var table = document.getElementById("receptkomptablebody");
     var row = table.insertRow(0);
