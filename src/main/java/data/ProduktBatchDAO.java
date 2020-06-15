@@ -82,9 +82,12 @@ public class ProduktBatchDAO implements iProduktBatchDAO {
 
             //Insert the components of the produktBatch in the database
             //Add each element from the list to the database
-            for (ProduktBatchKompDTO pbkDTO: produktbatch.getProduktBatchKomponenter()) {
-                produktBatchKompDAO.createProduktBatchKomp(pbkDTO);
+            if (!produktbatch.getProduktBatchKomponenter().isEmpty()){
+                for (ProduktBatchKompDTO pbkDTO: produktbatch.getProduktBatchKomponenter()) {
+                    produktBatchKompDAO.createProduktBatchKomp(pbkDTO);
+                }
             }
+
 
 
         }catch (Exception e){
@@ -112,9 +115,12 @@ public class ProduktBatchDAO implements iProduktBatchDAO {
             statement.executeUpdate(SQLstatement);
 
             //Update the components of the recept in the database
-            for (ProduktBatchKompDTO pbkDTO: produktbatch.getProduktBatchKomponenter()) {
-                produktBatchKompDAO.updateProduktBatchKomp(pbkDTO);
+            if (!produktbatch.getProduktBatchKomponenter().isEmpty()){
+                for (ProduktBatchKompDTO pbkDTO: produktbatch.getProduktBatchKomponenter()) {
+                    produktBatchKompDAO.updateProduktBatchKomp(pbkDTO);
+                }
             }
+
 
 
         }catch (Exception e){

@@ -1,33 +1,5 @@
 <script src="farmaceut.js"></script>
 
-<table>
-    <thead>
-    <tr>
-        <th>Råvare ID</th>
-        <th>Råvare Navn</th>
-        <th>Leverandør</th>
-    </tr>
-    </thead>
-    <tbody id="raavaretable">
-    </tbody>
-</table>
+<button onclick="switchPage('farmaceutRaavare.html');">Raavareadministration!</button>
+<button onclick="switchPage('farmaceutCreateRecept.html');">Receptadministration!</button>
 
-<div class="container", id="createRaavare">
-    <h1>Opret Råvare</h1>
-    <form id="raavareForm">
-        <div>
-            <label for="opretRaavareID"> Råvare ID:</label>
-            <input type="number" id="opretRaavareID" name="raavareID">
-        </div>
-        <div>
-            <label for="opretRaavareNavn">Råvare Navn: </label>
-            <input type="text" id="opretRaavareNavn" name="raavareNavn">
-        </div>
-        <div>
-            <label for="opretLeverandoer">Leverandør: </label>
-            <input type="text" id="opretLeverandoer" name="leverandoer">
-        </div>
-
-        <button onclick="createRaavare();">Gem Råvare</button>
-    </form>
-</div>

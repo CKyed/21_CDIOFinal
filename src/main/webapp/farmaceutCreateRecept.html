@@ -1,0 +1,73 @@
+<script>
+    $(document).ready(function () {
+        loadRaavarer();
+        loadRecepter();
+        document.getElementById('raavare').disabled = true;
+        document.getElementById('netto').disabled = true;
+        document.getElementById('tolerance').disabled = true;
+    });
+</script>
+
+
+<button onclick="switchPage('farmaceut.html');">Tilbage til farmaceut-forsiden</button>
+<button onclick="switchPage('farmaceutCreateRecept.html');">Nulstil</button>
+
+
+<DIV class="container" id="createrecept">
+    <h1>Opret Recept</h1>
+    <form id="receptform">
+        <div>
+            <label for="receptid">ID: </label>
+            <input type="number" min="0" max="99999999"
+                                                      id="receptid" name="receptid">
+        </div>
+
+        <div>
+            <label for="receptnavn">Receptnavn: </label> <input type="text"
+                                                                id="receptnavn" name="receptnavn">
+        </div>
+
+    </form>
+    <button onclick="lockReceptForm();" id="lockReceptIdButton">Gem recept ID og navn</button>
+</DIV>
+
+<DIV class="container" id="createreceptkomp">
+    <h1>Tilføj linje i recepten</h1>
+    <form id="receptkompform">
+        <div>
+            <label for="raavare">Råvare: </label>
+            <select id ="raavare" name = "raavare">
+            </select> <p id =selectedRaavareNavn></p>
+        </div>
+
+        <div>
+            <label for="netto">Netto: </label> <input type="number" step="any" min="0" max="1000"
+                                                      id="netto" name="netto">
+        </div>
+        <div>
+            <label for="tolerance">Tolerance: </label><input type="number" step="any" min="0" max="1000"
+                                                             id="tolerance" name="tolerance">
+        </div>
+
+        <button type = 'button' onclick="addReceptKomp(); return false;">Tilføj linje</button>
+    </form>
+</DIV>
+
+<div class="container" id="receptkomponenter">
+    <h1>Receptlinjer</h1>
+    <table>
+        <thead>
+        <tr>
+            <td>Recept ID</td>
+            <td>Råvare ID</td>
+            <td>Netto</td>
+            <td>Tolerance</td>
+        </tr>
+        </thead>
+        <tbody id="receptkomptablebody">
+
+        </tbody>
+    </table>
+    <hr>
+</div>
+<button onclick="saveReceptToDatabase();">Gem recept til databasen</button>
