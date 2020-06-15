@@ -58,9 +58,9 @@ function loadSpecificBruger() {
             document.getElementById("updateRolle").value = data.rolle;
             document.getElementById("updateCPR").value = data.cpr;
             if(data.aktiv == 1){
-                document.getElementById("updateStatus").value = "Aktiv";
+                document.getElementById("aktiv2").checked = true;
             }else{
-                document.getElementById("updateStatus").value = "Inaktiv"
+                document.getElementById("inaktiv2").checked = true;
             }
            }
     })
