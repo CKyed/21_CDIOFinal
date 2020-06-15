@@ -45,11 +45,14 @@ function createBruger() {
 
 function loadSpecificBruger() {
     var id = document.getElementById("BrugerId").value;
+    var errormessage;
+    errormessage = document.getElementById("errorMessage");
   //  console.log(id);
     $.ajax({
         method: 'GET',
         url:'rest/bruger/'+id,
         success: function (data) {
+            errormessage.innerHTML="";
             console.log(data);
             //console.log("status : "+toString(data.aktiv));
             console.log(data.aktiv);
@@ -62,7 +65,10 @@ function loadSpecificBruger() {
             }else{
                 document.getElementById("inaktiv2").checked = true;
             }
-           }
+           },
+        error: function () {
+            errormessage.innerHTML="Kunne ikke finder bruger med det ID, prøv igen";
+        }
     })
 
 }
