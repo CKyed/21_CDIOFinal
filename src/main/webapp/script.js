@@ -6,6 +6,9 @@ function switchPage(page){
 
 function checkLogin() {
     var id =document.getElementById("loginBrugerID").value;
+    var errorMessage;
+    errorMessage = document.getElementById("errorMessage");
+    errorMessage.innerHTML="";
     $.ajax({
         method: 'GET',
         url:'rest/bruger/'+id,
@@ -28,8 +31,11 @@ function checkLogin() {
                     switchPage('laborant.html');
                     break;
             }
+        },
+        error: function (jqXHR) {
+            errorMessage.innerHTML= jqXHR.responseText;
         }
-  })
+    })
 }
 
 function brugerRettigheder() {
