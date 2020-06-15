@@ -1,1 +1,83 @@
-Hej produktionsleder
+<script src="produktionsleder.js"></script>
+
+<table>
+    <thead>
+    <tr>
+        <th>Råvarebatch ID</th>
+        <th>Mængde</th>
+        <th>Leverandør</th>
+    </tr>
+    </thead>
+    <tbody id="raavarebatchtable">
+    </tbody>
+</table>
+
+<div class="container", id="createRaavareBatch">
+    <h1>Opret RåvareBatch</h1>
+    <form id="raavareBatchForm">
+        <div>
+            <label for="opretRaavareBatchID"> Råvarebatch ID:</label>
+            <input type="number" id="opretRaavareBatchID" name="raavareBatchID" placeholder="Skriv råvarebatch nummer her">
+        </div>
+        <div>
+            <label for="RaavareBatchMængde">Mængde: </label>
+            <input type="number" id="RaavareBatchMængde" name="raavareBatchMængde">
+        </div>
+        <div>
+            <label for="opretLeverandoer">Leverandør: </label>
+            <input type="text" id="opretLeverandoer" name="leverandoer">
+        </div>
+
+        <button onclick="createRaavare();">Gem Råvarebatch</button>
+    </form>
+</div>
+
+
+<DIV class="container" id="createProduktbatch">
+    <h1>Opret Produktbatch</h1>
+    <form id="produktbatchform">
+        <div>
+            <label for="produktbatchid">ID: </label>
+            <input type="number" min="0" max="99999999" id="produktbatchid" name="produktbatchid">
+        </div>
+
+        <div>
+            <label for="datoforOprettelse">Dato for oprettelse: </label>
+            <input type="date" id="datoforOprettelse" name="oprettelsesdato">
+        </div>
+        <div>
+            <label>Status</label>
+            <select name="Status">
+                <option value="Oprettet">Oprettet</option>
+                <option value="underProduktion">Under produktion</option>
+                <option value="Afsluttet">Afsluttet</option>
+            </select>
+        </div>
+        <button onclick="createRaavare();">Gem produktbatch</button>
+    </form>
+</DIV>
+
+
+<!--
+<div class="container" id="receptkomponenter">
+    <h1>Receptlinjer</h1>
+    <table>
+        <thead>
+        <tr>
+            <td>Recept ID</td>
+            <td>Råvare ID</td>
+            <td>Netto</td>
+            <td>Tolerance</td>
+        </tr>
+        </thead>
+        <tbody id="receptkomptablebody">
+
+        </tbody>
+    </table>
+    <hr>
+</div>
+
+-->
+
+
+
