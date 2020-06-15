@@ -38,3 +38,24 @@
     <tbody id="raavaretable">
     </tbody>
 </table>
+
+<div class="container" id="opdateRaavare">
+    <h1>Opdater Råvare</h1>
+    <form id="raavareUdateForm">
+        <div>
+            <label for="updateRaavareID"> Råvare ID:</label>
+            <input type="number" id="updateRaavareID" name="raavareID">
+        </div>
+        <div>
+            <label for="updateRaavareNavn">Råvare Navn: </label>
+            <input type="text" id="updateRaavareNavn" name="raavareNavn">
+        </div>
+        <div>
+            <label for="updateLeverandoer">Leverandør: </label>
+            <input type="text" id="updateLeverandoer" name="leverandoer">
+        </div>
+
+        <button onclick="updateRaavare();">Opdater Råvare</button>
+    </form>
+</div>
+

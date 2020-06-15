@@ -87,11 +87,11 @@ public class RaavareDAO implements iRaavareDAO{
 
         try {
             Statement statement = dBconnector.connection.createStatement();
-            String sqlStatement = "Update Raavarer set raavareNavn = '%s', leverandor = '%s' where raavareId = '%d');";
+            String sqlStatement = "Update Raavarer set raavareNavn = '%s', leverandoer = '%s' where raavareId = '%d';";
             sqlStatement = String.format(sqlStatement,
-                    raavare.getRaavareID(),
                     raavare.getRaavareNavn(),
-                    raavare.getLeverandoer());
+                    raavare.getLeverandoer(),
+                    raavare.getRaavareID());
             statement.executeUpdate(sqlStatement);
         } catch (Exception e) {
             throw new DALException("Kunne ikke opdatere råvaren");

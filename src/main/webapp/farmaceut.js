@@ -62,6 +62,27 @@ function createRaavare() {
     })
 }
 
+function updateRaavare() {
+    event.preventDefault();
+    var data =$('#raavareUdateForm').serializeJSON();
+    console.log(data);
+    $.ajax({
+        url: 'rest/raavare',
+        method: 'PUT',
+        contentType: "application/json",
+        data: data,
+        success: function (data) {
+            alert(JSON.stringify(data));
+            loadRaavarer();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText);
+            // alert(textStatus);
+            // alert(errorThrown);
+        }
+
+    })
+}
 
 function generateRaavareOptionList(raavare) {
     //This formatting makes sure, that the whole raavareNavn gets shown - not just first word
