@@ -60,11 +60,12 @@ function loadSpecificBruger() {
             document.getElementById("updateInitialer").value = data.initialer;
             document.getElementById("updateRolle").value = data.rolle;
             document.getElementById("updateCPR").value = data.cpr;
-            if(data.aktiv == 1){
+            document.getElementById("updateAktiv").value = data.aktiv;
+           /* if(data.aktiv == 1){
                 document.getElementById("aktiv2").checked = true;
             }else{
                 document.getElementById("inaktiv2").checked = true;
-            }
+            }*/
            },
         error: function () {
             errormessage.innerHTML="Kunne ikke finder bruger med det ID, prøv igen";
@@ -77,11 +78,50 @@ function loadSpecificBruger() {
 
 
 function updateBruger() {
-    var id = document.getElementById("BrugerId").value;
+    event.preventDefault();
     var data =$('#brugerformUpdate').serializeJSON();
-//
-//   console.log(data);
+    console.log(data);
+    $.ajax({
+        url: 'rest/bruger',
+        method: 'PUT',
+        contentType: "application/json",
+        data: data,
+        success: function (data) {
+            console.log("Det lykkedes")
+            alert(JSON.stringify(data));
+            loadBruger();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText);
+            // alert(textStatus);
+            // alert(errorThrown);
+        }
 
+    })
+}
+
+
+
+function updateRaavare() {
+    event.preventDefault();
+    var data =$('#raavareUdateForm').serializeJSON();
+    console.log(data);
+    $.ajax({
+        url: 'rest/raavare',
+        method: 'PUT',
+        contentType: "application/json",
+        data: data,
+        success: function (data) {
+            alert(JSON.stringify(data));
+            loadRaavarer();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText);
+            // alert(textStatus);
+            // alert(errorThrown);
+        }
+
+    })
 }
 
 
