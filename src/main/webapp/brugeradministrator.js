@@ -67,20 +67,7 @@ function loadSpecificBruger() {
 
 }
 
-function getStatusofBruger(){
-    var id = document.getElementById("BrugerId").value;
-   // console.log(id);
-    $.ajax({
-        method: 'GET',
-        url:'rest/bruger/'+id,
-        success: function (data) {
-            console.log("")
-     //       console.log(data);
-      //      console.log("status : "+toString(data.status));
-            console.log(data.status);
-        }
-    })
-}
+
 
 
 function updateBruger() {
