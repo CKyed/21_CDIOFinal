@@ -28,7 +28,7 @@ public class ProduktBatchKompDAO implements iProduktBatchKompDAO {
             ResultSet resultSet = statement.executeQuery(query);
             resultSet.next();
 
-            produktBatchKompDTO.setPbId(4);
+            produktBatchKompDTO.setPbId(resultSet.getInt(4));
             produktBatchKompDTO.setTara(resultSet.getDouble(1));
             produktBatchKompDTO.setNetto(resultSet.getDouble(2));
             int brugerId = resultSet.getInt(3);
@@ -55,7 +55,7 @@ public class ProduktBatchKompDAO implements iProduktBatchKompDAO {
 
                 produktBatchKompDTO.setTara(resultSet.getDouble(1));
                 produktBatchKompDTO.setNetto(resultSet.getDouble(2));
-                produktBatchKompDTO.setPbId(4);
+                produktBatchKompDTO.setPbId(resultSet.getInt(4));
                 int brugerId = resultSet.getInt(3);
                 produktBatchKompDTO.setLaborant(brugerDAO.getBruger(brugerId));
                 int rbId = resultSet.getInt(5);
@@ -85,7 +85,7 @@ public class ProduktBatchKompDAO implements iProduktBatchKompDAO {
                 produktBatchKompDTO.setTara(resultSet.getDouble(1));
                 produktBatchKompDTO.setNetto(resultSet.getDouble(2));
                 int brugerId = resultSet.getInt(3);
-                produktBatchKompDTO.setPbId(4);
+                produktBatchKompDTO.setPbId(resultSet.getInt(4));
                 produktBatchKompDTO.setLaborant(brugerDAO.getBruger(brugerId));
                 int rbId = resultSet.getInt(5);
                 produktBatchKompDTO.setRaavareBatchDTO(raavareBatchDAO.getRaavareBatch(rbId));
