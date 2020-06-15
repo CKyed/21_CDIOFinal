@@ -60,18 +60,18 @@ function loadSpecificBruger() {
             document.getElementById("updateInitialer").value = data.initialer;
             document.getElementById("updateRolle").value = data.rolle;
             document.getElementById("updateCPR").value = data.cpr;
-            document.getElementById("updateAktiv").value = data.aktiv;
-           /* if(data.aktiv == 1){
+            if(data.aktiv == 1){
                 document.getElementById("aktiv2").checked = true;
+                document.getElementById("aktiv2").value = 1;
             }else{
                 document.getElementById("inaktiv2").checked = true;
-            }*/
+                document.getElementById("inaktiv2").value = 0;
+            }
            },
         error: function () {
             errormessage.innerHTML="Kunne ikke finder bruger med det ID, prøv igen";
         }
     })
-
 }
 
 
