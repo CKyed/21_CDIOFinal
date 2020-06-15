@@ -10,6 +10,23 @@ var minTolerance = 0.1;
 var maxNetto = 10;
 var minNetto = 0.1;
 
+function validateNettoInput() {
+    var value = document.getElementById("netto").value;
+    if (value > maxNetto) {
+        document.getElementById("netto").value = maxNetto;
+    } else if (value < minNetto){
+        document.getElementById("netto").value = minTolerance;
+    }
+};
+
+function validateToleranceInput() {
+    var value = document.getElementById("tolerance").value;
+    if (value > maxTolerance) {
+        document.getElementById("tolerance").value = maxTolerance;
+    } else if (value < minTolerance){
+        document.getElementById("tolerance").value = minTolerance;
+    }
+};
 
 
 
@@ -79,7 +96,7 @@ function generateRaavareOptionList(raavare) {
 }
 
 function addReceptKomp() {
-    var table = document.getElementById("receptkomptablebody");
+        var table = document.getElementById("receptkomptablebody");
     var row = table.insertRow(0);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
