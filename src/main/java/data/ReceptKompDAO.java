@@ -19,8 +19,8 @@ public class ReceptKompDAO implements iReceptKompDAO {
             Statement statement = dBconnector.connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM ReceptKomp WHERE raavareId = "+raavareId+"and receptId = "+receptId+";");
             resultSet.next();
-            receptKompDTO.setNonNetto(resultSet.getInt(1));
-            receptKompDTO.setTolerance(resultSet.getInt(2));
+            receptKompDTO.setNonNetto(resultSet.getDouble(1));
+            receptKompDTO.setTolerance(resultSet.getDouble(2));
             receptKompDTO.setReceptId(resultSet.getInt(3));
             raavareId = resultSet.getInt(4);
             receptKompDTO.setRaavare(raavareDAO.getRaavare(raavareId));
@@ -41,8 +41,8 @@ public class ReceptKompDAO implements iReceptKompDAO {
             Statement statement = dBconnector.connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM ReceptKomp WHERE receptId = "+receptId+";");
             while (resultSet.next()){
-                receptKompDTO.setNonNetto(resultSet.getInt(1));
-                receptKompDTO.setTolerance(resultSet.getInt(2));
+                receptKompDTO.setNonNetto(resultSet.getDouble(1));
+                receptKompDTO.setTolerance(resultSet.getDouble(2));
                 receptKompDTO.setReceptId(resultSet.getInt(3));
                 int raavareId = resultSet.getInt(4);
                 receptKompDTO.setRaavare(raavareDAO.getRaavare(raavareId));
@@ -69,8 +69,8 @@ public class ReceptKompDAO implements iReceptKompDAO {
             Statement statement = dBconnector.connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM ReceptKomp;");
             while (resultSet.next()){
-                receptKompDTO.setNonNetto(resultSet.getInt(1));
-                receptKompDTO.setTolerance(resultSet.getInt(2));
+                receptKompDTO.setNonNetto(resultSet.getDouble(1));
+                receptKompDTO.setTolerance(resultSet.getDouble(2));
                 receptKompDTO.setReceptId(resultSet.getInt(3));
                 int raavareId = resultSet.getInt(4);
                 receptKompDTO.setRaavare(raavareDAO.getRaavare(raavareId));

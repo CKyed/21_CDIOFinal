@@ -10,24 +10,24 @@
         <form id="chooseReceptform">
             <div>
                 <label for="selectReceptId">Recept ID: </label>
-                <select id ="selectReceptId" name = "selectReceptId">
-                </select>
+                <input type="number" min="0" max="99999999"
+                       id="selectReceptId" name="selectReceptId">
 
             </div>
 
             <div>
-                <label for="selectedReceptnavn">Receptnavn: </label> <input type="text"
-                                                                    id="selectedReceptnavn" name="selectedReceptnavn">
+                <label for="receptnavn_edit">Receptnavn: </label> <input type="text"
+                                                                    id="receptnavn_edit" name="receptnavn_edit">
             </div>
 
         </form>
-        <button onclick="checkIfReceptNavnValid();"
-                id="checkIfReceptIdValidButton">Tjek om navnet er gyldigt</button>
+        <button onclick="getRecept_edit();"
+                id="getReceptButton">Hent recept</button>
     </DIV>
 
-    <DIV class="container" id="editreceptkomp">
+    <DIV class="container" id="receptkomp_edit">
         <h1>Tilføj linje i recepten</h1>
-        <form id="editreceptkompform">
+        <form id="receptkompform_edit">
             <div>
                 <label for="raavare_edit">Råvare: </label>
                 <select id ="raavare_edit" name = "raavare_edit">

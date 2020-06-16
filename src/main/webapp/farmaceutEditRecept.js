@@ -1,12 +1,9 @@
 $(document).ready(function () {
     loadRaavarer_edit();
-    loadRecepter_edit();
 });
+var chosenRecept;
 var raavareList_edit = [];
 var raavareOptionList_edit = document.getElementById('raavare_edit');
-var receptOptionList_edit = document.getElementById('selectReceptId');
-var receptList_edit = [];
-var maxReceptId = 99999999;
 var maxTolerance = 10;
 var minTolerance = 0.1;
 var maxNetto = 10;
@@ -32,22 +29,6 @@ function validateToleranceInput_edit() {
 
 
 
-function loadRecepter_edit() {
-    //empty existing list
-    receptList_edit = [];
-    console.log("receptlist_edit:"+ receptList_edit);
-
-    //Load via GET-call to database
-    $.get('rest/recept', function (data, textStatus, req) {
-        $.each(data, function (i, elt) {
-            receptList_edit.push(elt);
-            if (i == data.length-1){
-                generateReceptOptionList_edit();
-                console.log("Oprettet receptlisten");
-            }
-        });
-    });
-}
 
 function loadRaavarer_edit() {
     //empty existing list
@@ -71,7 +52,7 @@ function generateRaavareOptionList_edit() {
 
     $.each(raavareList_edit, function (i, elt) {
         var raavareOption = document.createElement("OPTION");
-        raavareOption.setAttribute("value", i);
+        raavareOption.setAttribute("value", elt.raavareID);
         var t = document.createTextNode(elt.raavareNavn + "; " + elt.raavareID);
         raavareOption.appendChild(t);
         raavareOptionList_edit.appendChild(raavareOption);
@@ -82,8 +63,8 @@ function generateRaavareOptionList_edit() {
 function addReceptKomp_edit() {
     // TODO find ud af, hvorfor denne giver fejlen Uncaught TypeError: Cannot read property 'value' of undefined
     //Men alligevel virker
-
     if (raavareOptionList_edit.length==0){
+        console.log("Har ikke loadet raavareOptionList endnu");
         return;
     }
 
@@ -94,19 +75,19 @@ function addReceptKomp_edit() {
     var cell3 = row.insertCell(2);
     var cell4 = row.insertCell(3);
     var cell5 = row.insertCell(4);
-    var selectedRaavareId = raavareList_edit[document.getElementById("raavare_edit").value].raavareID;
-    cell1.innerHTML = raavareList_edit[document.getElementById("raavare_edit").value].raavareNavn;
+    var selectedRaavareId = document.getElementById("raavare_edit").value;
+    var selectedRaavare = getRaavareById_edit(selectedRaavareId);
+    cell1.innerHTML = selectedRaavare.raavareNavn;
     cell2.innerHTML = selectedRaavareId;
     cell3.innerHTML = document.getElementById("netto_edit").value;
     cell4.innerHTML = document.getElementById("tolerance_edit").value;
     cell5.innerHTML = '<td><input type="button" value="Slet linje" onclick="deleteRow_edit()"></td>';
 
+
     //Remove the option from the raavareOptionList
-    raavareOptionList_edit = document.getElementById('raavare_edit');
-    const index = document.getElementById("raavare_edit").value;
-    console.log(raavareOptionList_edit);
+    console.log("Forsøger at slette raavaren med Id "+ selectedRaavareId + " fra raavareListen.");
     $.each(raavareOptionList_edit, function (i, elt) {
-        if (elt.value == index){
+        if (elt.value == selectedRaavareId){
             raavareOptionList_edit.removeChild(elt);
         }
     });
@@ -126,29 +107,6 @@ function deleteRow_edit() {
 
 
 
-}
-
-function checkIfReceptIdValid_edit() {
-    //Returns true only if the id was valid. Gives explaination otherwise
-    //Also updates the headline of the Recept box
-
-    var receptID =document.getElementById('selectReceptId').value;
-    var vacant = receptIdVacant_edit(receptID);
-
-    if (receptID> maxReceptId){
-        alert("Receptens ID er for langt.");
-        return false;
-    } else if (receptList_edit.length ==0){
-        alert("Vent et øjeblik til recepterne er loadet færdigt.");
-        return false;
-    } else if (vacant){
-        var header = document.getElementById("selectedReceptnavn").value + ", " + receptID;
-        document.getElementById("receptHeadline_edit").innerText = header;
-        return true;
-    } else {
-        alert("Receptens ID er allerede i brug.");
-        return false;
-    }
 }
 
 function updateReceptToDatabase() {
@@ -208,18 +166,6 @@ function getReceptKomponenterJSON_edit() {
 }
 
 
-function receptIdVacant_edit(proposedId){
-    var valid = true;
-    $.each(receptList_edit, function (i,elt) {
-        console.log("proposed ID: " + proposedId + ", list ID: " + elt.receptId)
-        if (elt.receptId == proposedId){
-            valid = false;
-            return valid;
-        }
-    });
-    return valid;
-}
-
 function validateReceptInputFields_edit() {
     //Returns true, if everything is fine. Returns false otherwise and displays messages.
 
@@ -278,18 +224,58 @@ function addToRaavareOptionList_edit(raavareId) {
     raavareOptionList_edit.appendChild(raavareOption);
 }
 
-function generateReceptOptionList_edit(){
-    $("#selectReceptId").empty();
-    receptOptionList_edit = document.getElementById('selectReceptId');
-    console.log(receptOptionList_edit);
-    $.each(receptList_edit, function (i, elt) {
-        var receptOption = document.createElement("OPTION");
-        receptOption.setAttribute("value", elt);
-        var t = document.createTextNode(elt.receptNavn + "; " + elt.receptId);
-        receptOption.appendChild(t);
-        receptOptionList_edit.appendChild(receptOption);
+function getRecept_edit() {
+    var receptId = document.getElementById("selectReceptId").value;
+    console.log(receptId);
+    if (receptId.length ===0){
+        console.log("undefined recept id");
+        return;
+    }
+
+    $.get('rest/recept/' + receptId + '/', function (data, textStatus, req) {
+        chosenRecept = data;
+        console.log(chosenRecept);
     });
-    console.log(receptOptionList_edit);
+
+    //Set the header of the recept
+    document.getElementById("receptHeadline_edit").innerText = chosenRecept.receptNavn + ', ' +chosenRecept.receptId;
+
+    //set the input values corresponding to the chosen recept
+    document.getElementById("receptnavn_edit").value = chosenRecept.receptNavn;
+
+    $("#receptkomptablebody_edit tr").remove();
+    var optionsToremove = [];
+
+    for (let j = 0; j < chosenRecept.receptKomponenter.length; j++) {
+        raavareOptionList_edit = document.getElementById('raavare_edit');
+        var komp = chosenRecept.receptKomponenter[j];
+        console.log("Betragter elementet:" +komp);
+        var table = document.getElementById("receptkomptablebody_edit");
+        var row = table.insertRow(0);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+        cell1.innerHTML = komp.raavare.raavareNavn;
+        cell2.innerHTML = komp.raavare.raavareID;
+        cell3.innerHTML = komp.nonNetto;
+        cell4.innerHTML = komp.tolerance;
+        cell5.innerHTML = '<td><input type="button" value="Slet linje" onclick="deleteRow_edit()"></td>';
+
+        const selectedRaavareId = komp.raavare.raavareID;
+        //Remove the option from the raavareOptionList
+        console.log("Forsøger at slette raavaren med Id "+ selectedRaavareId + " fra raavareListen.");
+        $.each(document.getElementById('raavare_edit'), function (i, elt) {
+            console.log(elt.value + "==" + selectedRaavareId + " = "+ (elt.value ==selectedRaavareId));
+            if (elt.value == selectedRaavareId){
+                optionsToremove.push(elt);
+            }
+        });
+    }
+        //TODO har ikke formået at få funktionen til at slette elementer fra raavareOptionslist
+
 }
+
 
 
