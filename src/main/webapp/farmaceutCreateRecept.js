@@ -169,20 +169,15 @@ function saveReceptToDatabase() {
 function getReceptKomponenterJSON() {
     var TableData = new Array();
     $('#receptkomptablebody tr').each(function(row, tr){
-        var raavareText = $(tr).find('td:eq(0)').text();
-        console.log(raavareText);
-        var raavareIdList = raavareText.split(";");
-        console.log(raavareIdList);
-        var raavareId = raavareIdList[1];
-        console.log(raavareId);
-
+        var raavareId = $(tr).find('td:eq(1)').text();
+        var raavare = getRaavareById(raavareId);
         TableData[row]={
-            "nonNetto" : $(tr).find('td:eq(1)').text()
-            , "tolerance" : $(tr).find('td:eq(2)').text()
+            "nonNetto" : $(tr).find('td:eq(2)').text()
+            , "tolerance" : $(tr).find('td:eq(3)').text()
             , "raavare" : {
-                "raavareID": raavareId,
-                "raavareNavn": "ligemeget",
-                "leverandoer": "ligemeget"
+                "raavareID": raavare.raavareID,
+                "raavareNavn": raavare.raavareNavn,
+                "leverandoer": raavare.leverandoer
             } ,"receptId" : document.getElementById('receptid').value
         }
     });
@@ -227,6 +222,17 @@ function checkIfReceptNavnValid(){
         valid = false;
     }
     return valid;
+}
+
+function getRaavareById(raavareId){
+    var returnObject;
+    $.each(raavareList, function (i,elt) {
+        if (elt.raavareID == raavareId){
+            returnObject = elt;
+            return;
+        }
+    });
+    return returnObject;
 }
 
 
