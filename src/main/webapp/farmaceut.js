@@ -1,3 +1,4 @@
+/*
 $(document).ready(function () {
     loadRaavarer();
     loadRecepter();
@@ -333,5 +334,7 @@ function checkIfReceptNavnValid(){
     }
     return valid;
 }
+
+ */
 
 

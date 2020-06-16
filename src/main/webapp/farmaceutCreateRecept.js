@@ -86,12 +86,14 @@ function addReceptKomp() {
     cell4.innerHTML = document.getElementById("tolerance").value;
     cell5.innerHTML = '<td><input type="button" value="Slet linje" onclick="deleteRow()"></td>';
 
-
+/*
     $.each(raavareList, function (i, elt) {
         if (elt.raavareID ===selectedRaavareId){
             raavareList.remove(i);
         }
     });
+
+ */
 
 }
 
