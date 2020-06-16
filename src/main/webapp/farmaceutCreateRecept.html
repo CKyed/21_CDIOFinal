@@ -2,9 +2,6 @@
     $(document).ready(function () {
         loadRaavarer();
         loadRecepter();
-        document.getElementById('raavare').disabled = true;
-        document.getElementById('netto').disabled = true;
-        document.getElementById('tolerance').disabled = true;
     });
 </script>
 
@@ -28,7 +25,8 @@
         </div>
 
     </form>
-    <button onclick="lockReceptForm();" id="lockReceptIdButton">Gem recept ID og navn</button>
+    <button onclick="checkIfReceptIdValid(); checkIfReceptNavnValid();"
+            id="checkIfReceptIdValidButton">Tilføj navn og ID til recept</button>
 </DIV>
 
 <DIV class="container" id="createreceptkomp">
@@ -41,12 +39,12 @@
         </div>
 
         <div>
-            <label for="netto">Netto: </label> <input type="number" step="any" min="0" max="1000"
-                                                      id="netto" name="netto">
+            <label for="netto">Nettovægt i kg: </label> <input type="number" step="0.0001" min="0.05" max="20.0" value ="0.05"
+                                                      id="netto" name="netto" oninput="validateNettoInput();">
         </div>
         <div>
-            <label for="tolerance">Tolerance: </label><input type="number" step="any" min="0" max="1000"
-                                                             id="tolerance" name="tolerance">
+            <label for="tolerance">Toleranceprocent: </label><input type="number" step="0.001" min="0.1" max="10" value ="0.1"
+                                                             id="tolerance" name="tolerance" oninput="validateToleranceInput();">
         </div>
 
         <button type = 'button' onclick="addReceptKomp(); return false;">Tilføj linje</button>
@@ -54,7 +52,7 @@
 </DIV>
 
 <div class="container" id="receptkomponenter">
-    <h1>Receptlinjer</h1>
+    <h2 id="receptHeadline">Unavngivet recept</h2>
     <table>
         <thead>
         <tr>
