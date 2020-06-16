@@ -1,0 +1,41 @@
+<script src="produktionsleder.js"></script>
+
+<div class="container", id="createRaavareBatch">
+    <h1>Opret RåvareBatch</h1>
+    <form id="raavareBatchForm">
+        <div>
+            <label style="display: block" for="opretRaavareBatchID">ID:</label>
+            <input type="number" id="opretRaavareBatchID" name="raavareBatchID" placeholder="Skriv råvarebatchID">
+        </div>
+        <div>
+            <label style="display: block" for="RaavareBatchMængde">Mængde: </label>
+            <input style="padding: 8px" type="number" id="RaavareBatchMængde" name="raavareBatchMængde" placeholder="Skriv mængde">
+        </div>
+        <div>
+            <label style="display: block" for="opretLeverandoer">Leverandør: </label>
+            <input style="padding: 8px" type="text" id="opretLeverandoer" name="raavareBatchLeverandoer" placeholder="Skriv leverandørens navn">
+        </div>
+
+        <button style="margin-top: 8px" onclick="createRaavare();">Gem Råvarebatch</button>
+    </form>
+</div>
+
+<br>
+<table>
+    <thead>
+    <tr>
+        <th>Råvarebatch ID</th>
+        <th>Mængde</th>
+        <th>Leverandør</th>
+    </tr>
+    </thead>
+    <tbody id="raavarebatchtable">
+    </tbody>
+</table>
+
+
+
+
+
+
+
