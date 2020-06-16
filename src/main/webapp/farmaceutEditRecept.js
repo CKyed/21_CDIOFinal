@@ -76,14 +76,17 @@ function addReceptKomp_edit() {
     var cell4 = row.insertCell(3);
     var cell5 = row.insertCell(4);
     var selectedRaavareId = document.getElementById("raavare_edit").value;
+    //console.log("selectedRaavareId: "+ selectedRaavareId);
     var selectedRaavare = getRaavareById_edit(selectedRaavareId);
     cell1.innerHTML = selectedRaavare.raavareNavn;
     cell2.innerHTML = selectedRaavareId;
     cell3.innerHTML = document.getElementById("netto_edit").value;
     cell4.innerHTML = document.getElementById("tolerance_edit").value;
+    //console.log("document.getElementById(\"netto_edit\").value: "+ document.getElementById("netto_edit").value);
+    //console.log("document.getElementById(\"tolerance_edit\").value: "+ document.getElementById("tolerance_edit").value);
     cell5.innerHTML = '<td><input type="button" value="Slet linje" onclick="deleteRow_edit()"></td>';
 
-
+    /*
     //Remove the option from the raavareOptionList
     console.log("Forsøger at slette raavaren med Id "+ selectedRaavareId + " fra raavareListen.");
     $.each(raavareOptionList_edit, function (i, elt) {
@@ -91,6 +94,8 @@ function addReceptKomp_edit() {
             raavareOptionList_edit.removeChild(elt);
         }
     });
+
+     */
 
 }
 
@@ -120,13 +125,14 @@ function updateReceptToDatabase() {
     }
 
     event.preventDefault();
-
+    console.log("so far so good");
     var recept = {
-        "receptId": document.getElementById('selectReceptId').value,
-        "receptNavn": document.getElementById('selectedReceptnavn').value,
+        "receptId": chosenRecept.receptId,
+        "receptNavn": document.getElementById('receptnavn_edit').value,
         "receptKomponenter": getReceptKomponenterJSON_edit()
 
     }
+    console.log(recept);
     data =JSON.stringify(recept);
 
     console.log(data);
@@ -169,7 +175,7 @@ function getReceptKomponenterJSON_edit() {
 function validateReceptInputFields_edit() {
     //Returns true, if everything is fine. Returns false otherwise and displays messages.
 
-    var everyThingOK = checkIfReceptNavnValid_edit() && checkIfReceptIdValid_edit();
+    var everyThingOK = checkIfReceptNavnValid_edit();
     console.log("EverythingOK: " + everyThingOK);
     return everyThingOK;
 }
@@ -178,7 +184,7 @@ function checkIfReceptNavnValid_edit(){
     //Returns true only if the receptNavn is valid
 
     var valid = true;
-    var receptNavn =document.getElementById("selectedReceptnavn").value;
+    var receptNavn =document.getElementById("receptnavn_edit").value;
     if (receptNavn.length ===0){
         alert("Recepten skal have et navn");
         valid = false;
@@ -200,6 +206,7 @@ function getRaavareById_edit(raavareId){
             return;
         }
     });
+    console.log("getRaavareById() returnerer nu råvaren med navn"+ returnObject.raavareNavn);
     return returnObject;
 }
 

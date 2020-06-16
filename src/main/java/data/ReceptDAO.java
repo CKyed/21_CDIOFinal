@@ -100,7 +100,7 @@ public class ReceptDAO implements iReceptDAO{
         try {
             Statement statement = dBconnector.connection.createStatement();
             //Create String for the SQL Insert Statement
-            String SQLstatement = "update Recepter set receptNavn = '%s' where receptId = '%d');";
+            String SQLstatement = "update Recepter set receptNavn = '%s' where receptId = '%d';";
             //Format the string
             SQLstatement =String.format(SQLstatement,
                     recept.getReceptNavn(), // Ja, det  skal stå i omvendt rækkefølge, grundet sql statementen
