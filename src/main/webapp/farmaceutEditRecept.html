@@ -1,0 +1,69 @@
+<script src="farmaceutEditRecept.js" defer></script>
+
+
+<button onclick="switchPage('farmaceut.html');">Tilbage til farmaceut-forsiden</button>
+<button onclick="switchPage('farmaceutEditRecept.html');">Nulstil</button>
+
+<DIV class="largeContainer" id="createrecept">
+    <DIV class="container" id="chooseRecept">
+        <h1>Rediger recept</h1>
+        <form id="chooseReceptform">
+            <div>
+                <label for="selectReceptId">Recept ID: </label>
+                <select id ="selectReceptId" name = "selectReceptId">
+                </select>
+
+            </div>
+
+            <div>
+                <label for="selectedReceptnavn">Receptnavn: </label> <input type="text"
+                                                                    id="selectedReceptnavn" name="selectedReceptnavn">
+            </div>
+
+        </form>
+        <button onclick="checkIfReceptNavnValid();"
+                id="checkIfReceptIdValidButton">Tjek om navnet er gyldigt</button>
+    </DIV>
+
+    <DIV class="container" id="editreceptkomp">
+        <h1>Tilføj linje i recepten</h1>
+        <form id="editreceptkompform">
+            <div>
+                <label for="raavare_edit">Råvare: </label>
+                <select id ="raavare_edit" name = "raavare_edit">
+                </select> <p id =selectedRaavareNavn_edit></p>
+            </div>
+
+            <div>
+                <label for="netto_edit">Nettovægt i kg: </label> <input type="number" step="0.0001" min="0.05" max="20.0" value ="0.05"
+                                                                   id="netto_edit" name="netto_edit" oninput="validateNettoInput_edit();">
+            </div>
+            <div>
+                <label for="tolerance_edit">Toleranceprocent: </label><input type="number" step="0.001" min="0.1" max="10" value ="0.1"
+                                                                        id="tolerance_edit" name="tolerance_edit" oninput="validateToleranceInput_edit();">
+            </div>
+
+            <button type = 'button' onclick="addReceptKomp_edit(); return false;">Tilføj linje</button>
+        </form>
+    </DIV>
+
+    <div class="container" id="receptkomponenter_edit">
+        <h2 id="receptHeadline_edit">Unavngivet recept</h2>
+        <table>
+            <thead>
+            <tr>
+                <td>Råvarenavn</td>
+                <td>Råvare ID</td>
+                <td>Netto</td>
+                <td>Tolerance</td>
+            </tr>
+            </thead>
+            <tbody id="receptkomptablebody_edit">
+
+            </tbody>
+        </table>
+        <hr>
+    </div>
+    <button onclick="updateReceptToDatabase();">Opdater recept til databasen</button>
+</DIV>
+
