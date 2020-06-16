@@ -1,9 +1,4 @@
-<script>
-    $(document).ready(function () {
-        loadRaavarer();
-        loadRecepter();
-    });
-</script>
+<script src="farmaceutCreateRecept.js" defer></script>
 
 
 <button onclick="switchPage('farmaceut.html');">Tilbage til farmaceut-forsiden</button>
@@ -56,7 +51,8 @@
     <table>
         <thead>
         <tr>
-            <td>Råvare</td>
+            <td>Råvarenavn</td>
+            <td>Råvare ID</td>
             <td>Netto</td>
             <td>Tolerance</td>
         </tr>
@@ -68,3 +64,5 @@
     <hr>
 </div>
 <button onclick="saveReceptToDatabase();">Gem recept til databasen</button>
+
+
