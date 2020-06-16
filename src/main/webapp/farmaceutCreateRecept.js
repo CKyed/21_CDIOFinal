@@ -59,7 +59,9 @@ function loadRaavarer() {
 }
 
 function generateRaavareOptionList() {
+    $("#raavare").empty();
     raavareOptionList = document.getElementById('raavare');
+
 
     $.each(raavareList, function (i, elt) {
         var raavareOption = document.createElement("OPTION");
@@ -72,6 +74,13 @@ function generateRaavareOptionList() {
 }
 
 function addReceptKomp() {
+    // TODO find ud af, hvorfor denne giver fejlen Uncaught TypeError: Cannot read property 'value' of undefined
+    //Men alligevel virker
+
+    if (raavareOptionList.length==0){
+        return;
+    }
+
     var table = document.getElementById("receptkomptablebody");
     var row = table.insertRow(0);
     var cell1 = row.insertCell(0);
@@ -86,21 +95,31 @@ function addReceptKomp() {
     cell4.innerHTML = document.getElementById("tolerance").value;
     cell5.innerHTML = '<td><input type="button" value="Slet linje" onclick="deleteRow()"></td>';
 
-/*
-    $.each(raavareList, function (i, elt) {
-        if (elt.raavareID ===selectedRaavareId){
-            raavareList.remove(i);
+    //Remove the option from the raavareOptionList
+    raavareOptionList = document.getElementById('raavare');
+    const index = document.getElementById("raavare").value;
+    console.log(raavareOptionList);
+    $.each(raavareOptionList, function (i, elt) {
+        if (elt.value == index){
+            raavareOptionList.removeChild(elt);
         }
     });
-
- */
 
 }
 
 function deleteRow() {
     var td = event.target.parentNode;
+
     var tr = td.parentNode;
     tr.parentNode.removeChild(tr);
+
+    //Return the raavare to the raavareOptionList
+    var removedRaavareId = $(tr).find('td:eq(1)').text();
+    console.log("removed raavareId:" + removedRaavareId);
+    addToRaavareOptionList(removedRaavareId);
+
+
+
 }
 
 function checkIfReceptIdValid() {
@@ -233,6 +252,28 @@ function getRaavareById(raavareId){
         }
     });
     return returnObject;
+}
+
+function addToRaavareOptionList(raavareId) {
+    var raavare;
+    var index;
+    $.each(raavareList, function (i,elt) {
+        if (elt.raavareID == raavareId){
+            raavare = elt;
+            index = i;
+            return;
+        }
+    });
+    console.log(raavare);
+    console.log(index);
+
+    raavareOptionList = document.getElementById('raavare');
+    console.log(raavare);
+    var raavareOption = document.createElement("OPTION");
+    raavareOption.setAttribute("value", index);
+    var t = document.createTextNode(raavare.raavareNavn + "; " + raavare.raavareID);
+    raavareOption.appendChild(t);
+    raavareOptionList.appendChild(raavareOption);
 }
 
 
