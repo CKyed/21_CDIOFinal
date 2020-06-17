@@ -1,20 +1,23 @@
 
-<script src="brugeradministrator.js"></script>
+<script src="brugeradmin/brugeradministrator.js"></script>
 
 <h1>Brugeradministration</h1>
 
-
+<!--
 <button onclick="showUpdateBruger()"> redigér bruger</button>
+-->
+
 
 <div class="updateBruger" id="updateBruger">
     <h1>Redigér bruger</h1>
-
+    <form id="brugerformUpdate">
     <div>
         <label for="BrugerId"> Bruger ID</label>
         <input type="number" id="BrugerId" name="brugerID">
     </div>
     <button onclick="loadSpecificBruger();return false;">Find bruger</button>
-    <form id="brugerformUpdate">
+    <p id="errorMessage" class="errorMessage"></p>
+
         <div>
             <label for="updateBrugerNavn">Navn: </label>
             <input type="text" id="updateBrugerNavn" name="brugerNavn">
@@ -32,11 +35,14 @@
             <input type="text" id="updateCPR" name="cpr">
         </div>
         <div>
-            <label for="updateStatus">Status: </label>
-            <input type="number" id="updateStatus" name="status" >
+            <label for="aktiv2">Aktiv: </label>
+            <input type="radio" id="aktiv2" name="aktiv" value=1 checked>
+            <label for="inaktiv2">Inaktiv: </label>
+            <input type="radio" id="inaktiv2" name="aktiv" value=0>
+
+
         </div>
-
-
+        <button onclick="updateBruger();return false;">gem ændringer</button>
 
     </form>
 </div>
@@ -81,6 +87,12 @@
         <div>
             <label for="opretCPR">CPR: </label>
             <input type="text" id="opretCPR" name="cpr">
+        </div>
+        <div>
+            <label for="aktiv">Aktiv: </label>
+            <input type="radio" id="aktiv" name="aktiv" value=1 checked>
+            <label for="inaktiv">Inaktiv: </label>
+            <input type="radio" id="inaktiv" name="aktiv" value=0>
         </div>
         <button onclick="createBruger();">Gem bruger</button>
     </form>

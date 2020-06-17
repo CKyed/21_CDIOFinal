@@ -1,0 +1,29 @@
+<script src="produktionsleder/produktAdminProduktBatch.js"></script>
+
+<DIV class="container" id="createProduktbatch">
+    <h1>Opret Produktbatch</h1>
+    <form id="produktbatchform">
+        <div>
+            <label style="display: block" for="produktbatchid">ID: </label>
+            <input type="number" min="0" max="99999999" id="produktbatchid" name="produktbatchid">
+        </div>
+
+        <div>
+            <label style="display: block" for="datoforOprettelse">Dato for oprettelse: </label>
+            <input type="date" id="datoforOprettelse" name="oprettelsesdato">
+        </div>
+        <div>
+            <label style="display: block">Status</label>
+            <select name="Status">
+                <option value="Oprettet">Oprettet</option>
+                <option value="underProduktion">Under produktion</option>
+                <option value="Afsluttet">Afsluttet</option>
+            </select>
+        </div>
+        <button style="margin-top: 8px" onclick="createRaavareBatch();">Gem produktbatch</button>
+    </form>
+</DIV>
+
+
+
+

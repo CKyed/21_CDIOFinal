@@ -35,7 +35,8 @@ public class ProduktBatchKompDAO implements iProduktBatchKompDAO {
             produktBatchKompDTO.setLaborant(brugerDAO.getBruger(brugerId));
             produktBatchKompDTO.setRaavareBatchDTO(raavareBatchDAO.getRaavareBatch(rbId));
 
-        } catch (Exception e) {
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("Kunne ikke finde produktbatchkomp med de angivne ID");
         }
         dBconnector.closeConnection();
@@ -64,7 +65,8 @@ public class ProduktBatchKompDAO implements iProduktBatchKompDAO {
                 produktBatchKompDTO = new ProduktBatchKompDTO();
             }
 
-        } catch (Exception e) {
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("Produktbacthkomp med det angivne pbId findes ikke");
         }
         dBconnector.closeConnection();
@@ -93,7 +95,8 @@ public class ProduktBatchKompDAO implements iProduktBatchKompDAO {
                 produktBatchKompDTO = new ProduktBatchKompDTO();
             }
 
-        } catch (Exception e) {
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("Produktbacthkomp med det angivne pbId findes ikke");
         }
         dBconnector.closeConnection();
@@ -114,7 +117,8 @@ public class ProduktBatchKompDAO implements iProduktBatchKompDAO {
                     produktbatchkomponent.getRaavareBatchDTO().getRbId());
             //Execute the insert statement
             statement.executeUpdate(sqlStatement);
-        } catch (Exception e) {
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("Kunne ikke oprette komponenten");
         }
         dBconnector.closeConnection();
@@ -136,7 +140,8 @@ public class ProduktBatchKompDAO implements iProduktBatchKompDAO {
                     produktbatchkomponent.getRaavareBatchDTO().getRbId());
             //Execute the insert statement
             statement.executeUpdate(sqlStatement);
-        } catch (Exception e) {
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("Kunne ikke opdatere komponenten");
         }
         dBconnector.closeConnection();

@@ -45,34 +45,83 @@ function createBruger() {
 
 function loadSpecificBruger() {
     var id = document.getElementById("BrugerId").value;
-    console.log(id);
+    var errormessage;
+    errormessage = document.getElementById("errorMessage");
+  //  console.log(id);
     $.ajax({
         method: 'GET',
         url:'rest/bruger/'+id,
         success: function (data) {
+            errormessage.innerHTML="";
             console.log(data);
-           /* console.log("status : "+toString(data.status))
-            console.log(typeof data.status)
-            var statusElt = document.getElementById("updateStatus");
-            console.log(statusElt);
-            statusElt.style.backgroundColor = "pink";
-            var brugernavnElt = document.getElementById("updateBrugerNavn");
-            brugernavnElt.value = data.brugerNavn;*/
+            //console.log("status : "+toString(data.aktiv));
+            console.log(data.aktiv);
             document.getElementById("updateBrugerNavn").value = data.brugerNavn;
             document.getElementById("updateInitialer").value = data.initialer;
             document.getElementById("updateRolle").value = data.rolle;
             document.getElementById("updateCPR").value = data.cpr;
-          //  document.getElementById("updateStatus").value = data.status;
+            if(data.aktiv == 1){
+                document.getElementById("aktiv2").checked = true;
+                document.getElementById("aktiv2").value = 1;
+            }else{
+                document.getElementById("inaktiv2").checked = true;
+                document.getElementById("inaktiv2").value = 0;
+            }
+           },
+        error: function () {
+            errormessage.innerHTML="Kunne ikke finder bruger med det ID, prøv igen";
         }
     })
-
 }
 
+
+
+
 function updateBruger() {
-    var id = document.getElementById("BrugerId").value;
+    event.preventDefault();
     var data =$('#brugerformUpdate').serializeJSON();
     console.log(data);
+    $.ajax({
+        url: 'rest/bruger',
+        method: 'PUT',
+        contentType: "application/json",
+        data: data,
+        success: function (data) {
+            console.log("Det lykkedes")
+            alert(JSON.stringify(data));
+            loadBruger();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText);
+            // alert(textStatus);
+            // alert(errorThrown);
+        }
 
+    })
+}
+
+
+
+function updateRaavare() {
+    event.preventDefault();
+    var data =$('#raavareUdateForm').serializeJSON();
+    console.log(data);
+    $.ajax({
+        url: 'rest/raavare',
+        method: 'PUT',
+        contentType: "application/json",
+        data: data,
+        success: function (data) {
+            alert(JSON.stringify(data));
+            loadRaavarer();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert(jqXHR.responseText);
+            // alert(textStatus);
+            // alert(errorThrown);
+        }
+
+    })
 }
 
 
