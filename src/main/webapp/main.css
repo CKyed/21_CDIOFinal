@@ -11,16 +11,50 @@
     padding: 1px;
 }
 
+
 .grid-containerInner {
     display: grid;
-    grid-template-areas:
-        'menu main main main '
-        'menu main main main';
+    grid-template-columns: auto auto auto auto;
     grid-gap: 1px;
     background-color: blue;
     padding: 1px;
+    max-width: fit-content;
 }
 
+.itemRight{
+    grid-column: 4;
+    grid-row: 1 / span auto;
+    background-color: red;
+}
+
+.form{
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.itemMiddle{
+    grid-column: 2 / span 2;
+    grid-row: 1 / span 2;
+    background-color: darkturquoise;
+}
+
+.itemDown{
+    grid-column: 2 / span 2;
+    grid-row: 3;
+    background-color: grey;
+}
+
+.itemLeft{
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    background-color: hotpink;
+}
+
+.itemLeftCorner{
+    grid-column: 1;
+    grid-row: auto;
+    background-color: orange;
+}
 
 
 .grid-containerOuter > div {
@@ -29,10 +63,13 @@
     padding: 20px;
     font-size: 30px;
 }
+
+
+
+
 .menu button{
     background-color: red;
 }
-
 
 h1{
     color: deeppink;

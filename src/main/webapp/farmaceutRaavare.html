@@ -1,9 +1,11 @@
 <script src="farmaceutRaavare.js" defer></script>
 
 <div class="grid-containerInner">
-<button onclick="switchPage('farmaceut.html');">Tilbage til farmaceut-forsiden!</button>
+    <div class="itemLeft">
+        <button onclick="switchPage('farmaceut.html');">Tilbage til farmaceut-forsiden!</button>
+    </div>
 
-<div class="container" id="createRaavare">
+<div class="itemDown" id="createRaavare">
     <h1>Opret Råvare</h1>
     <form id="raavareForm">
         <div>
@@ -22,20 +24,25 @@
         <button onclick="createRaavare();">Gem Råvare</button>
     </form>
 </div>
+<div class="itemRight">
+    <table>
+        <thead>
+        <tr>
+            <th>Råvare ID</th>
+            <th>Råvare Navn</th>
+            <th>Leverandør</th>
+        </tr>
+        </thead>
+        <tbody id="raavaretable">
+        </tbody>
+    </table>
+</div>
 
-<table>
-    <thead>
-    <tr>
-        <th>Råvare ID</th>
-        <th>Råvare Navn</th>
-        <th>Leverandør</th>
-    </tr>
-    </thead>
-    <tbody id="raavaretable">
-    </tbody>
-</table>
+<div class="itemLeftCorner"> auto </div>
 
-<div class="container" id="opdateRaavare">
+
+
+<div class="itemMiddle" id="opdateRaavare">
     <h1>Opdater Råvare</h1>
     <form id="raavareUdateForm">
         <div>
