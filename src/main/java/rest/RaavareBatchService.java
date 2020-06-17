@@ -1,7 +1,6 @@
 package rest;
 
 import data.*;
-import dto.ProduktBatchDTO;
 import dto.RaavareBatchDTO;
 
 import javax.ws.rs.*;

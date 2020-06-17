@@ -25,7 +25,8 @@ public class RaavareDAO implements iRaavareDAO{
             raavareDTO.setRaavareNavn(resultSet.getString(2));
             raavareDTO.setLeverandoer(resultSet.getString(3));
 
-        }catch (Exception e){
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("kunne ikke finde råvare");
         }
 
@@ -56,7 +57,8 @@ public class RaavareDAO implements iRaavareDAO{
                     raavareDTO = new RaavareDTO();
 
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
+                e.printStackTrace();
                 throw new DALException("Kunne ikke finde raavarelisten");
             }
         }
@@ -75,7 +77,8 @@ public class RaavareDAO implements iRaavareDAO{
                     raavare.getRaavareNavn(),
                     raavare.getLeverandoer());
             statement.executeUpdate(sqlStatement);
-        } catch (Exception e) {
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("Kunne ikke oprette råvaren");
         }
        dBconnector.closeConnection();
@@ -87,13 +90,14 @@ public class RaavareDAO implements iRaavareDAO{
 
         try {
             Statement statement = dBconnector.connection.createStatement();
-            String sqlStatement = "Update Raavarer set raavareNavn = '%s', leverandor = '%s' where raavareId = '%d');";
+            String sqlStatement = "Update Raavarer set raavareNavn = '%s', leverandoer = '%s' where raavareId = '%d';";
             sqlStatement = String.format(sqlStatement,
-                    raavare.getRaavareID(),
                     raavare.getRaavareNavn(),
-                    raavare.getLeverandoer());
+                    raavare.getLeverandoer(),
+                    raavare.getRaavareID());
             statement.executeUpdate(sqlStatement);
-        } catch (Exception e) {
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("Kunne ikke opdatere råvaren");
         }
         dBconnector.closeConnection();
