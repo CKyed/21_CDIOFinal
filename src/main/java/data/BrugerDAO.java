@@ -21,7 +21,8 @@ public class BrugerDAO implements iBrugerDAO{
                  bruger.setCPR(resultSet.getString(4));
                  bruger.setRolle(resultSet.getString(5));
                  bruger.setAktiv(resultSet.getInt(6));
-         }catch (Exception e){
+         }catch (SQLException e){
+             e.printStackTrace();
              throw new DALException("Kunne ikke finde bruger med det ID");
          }
 

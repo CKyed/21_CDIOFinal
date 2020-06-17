@@ -30,7 +30,8 @@ public class DBconnector {
     public void closeConnection() throws DALException {
         try {
             connection.close();
-        }catch(Exception e){
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("Fejl med at lukke forbindelse til SQL server");
         }
     }

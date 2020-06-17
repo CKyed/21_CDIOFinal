@@ -149,8 +149,6 @@ function saveReceptToDatabase() {
     //First runs some checks to see, if everything is fine. Then writes to database
     //checks if all input fields are valid - otherwise returns (does not write to DB)
 
-    validateReceptInputFields();
-
     if (!validateReceptInputFields()){
         alert("Noget gik galt");
         return;
@@ -176,10 +174,8 @@ function saveReceptToDatabase() {
             alert(JSON.stringify(data));
             switchPage("farmaceutCreateRecept.html");
         },
-        error: function (jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR) {
             alert(jqXHR.responseText);
-            alert(textStatus);
-            alert(errorThrown);
         }
     })
 }

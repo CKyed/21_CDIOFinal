@@ -5,6 +5,7 @@ import dto.ProduktBatchDTO;
 import dto.ProduktBatchKompDTO;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,8 @@ public class ProduktBatchDAO implements iProduktBatchDAO {
             produktBatchDTO.setReceptId(resultSet.getInt(3));
             produktBatchDTO.setProduktBatchKomponenter(produktBatchKompDAO.getProduktBatchKompList(pbId));
 
-        }catch (Exception e){
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("Kunne ikke finde produktbatch med det ID");
         }
         dBconnector.closeConnection();
@@ -56,7 +58,8 @@ public class ProduktBatchDAO implements iProduktBatchDAO {
             }
 
 
-        }catch (Exception e){
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("Kunne ikke finde listen af produktbatches");
         }
         dBconnector.closeConnection();
@@ -90,7 +93,8 @@ public class ProduktBatchDAO implements iProduktBatchDAO {
 
 
 
-        }catch (Exception e){
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("Kunne ikke oprette bruger med det ID");
         }
 
@@ -123,7 +127,8 @@ public class ProduktBatchDAO implements iProduktBatchDAO {
 
 
 
-        }catch (Exception e){
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("Kunne ikke oprette bruger med det ID");
         }
 

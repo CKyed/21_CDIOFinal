@@ -4,6 +4,7 @@ import dto.ReceptDTO;
 import dto.ReceptKompDTO;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,8 @@ public class ReceptDAO implements iReceptDAO{
             receptDTO.setReceptKomponenter(receptKompDAO.getReceptKompList(receptId));
 
 
-        }catch (Exception e){
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("Kunne ikke finde recepten med det ID");
         }
 
@@ -58,7 +60,8 @@ public class ReceptDAO implements iReceptDAO{
                 receptDTO = new ReceptDTO();
             }
 
-        } catch (Exception e){
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("Kunne ikke finde listen af recepter");
         }
 
@@ -80,7 +83,8 @@ public class ReceptDAO implements iReceptDAO{
 
             //Execute the insert statement
             statement.executeUpdate(SQLstatement);
-        }catch (Exception e){
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("Kunne ikke oprette den ønskede Recept");
         }
 
@@ -100,7 +104,7 @@ public class ReceptDAO implements iReceptDAO{
         try {
             Statement statement = dBconnector.connection.createStatement();
             //Create String for the SQL Insert Statement
-            String SQLstatement = "update Recepter set receptNavn = '%s' where receptId = '%d');";
+            String SQLstatement = "update Recepter set receptNavn = '%s' where receptId = '%d';";
             //Format the string
             SQLstatement =String.format(SQLstatement,
                     recept.getReceptNavn(), // Ja, det  skal stå i omvendt rækkefølge, grundet sql statementen
@@ -109,7 +113,8 @@ public class ReceptDAO implements iReceptDAO{
 
             //Execute the insert statement
             statement.executeUpdate(SQLstatement);
-        }catch (Exception e){
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("Kunne ikke opdatere den ønskede Recept");
         }
 
