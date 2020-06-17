@@ -11,13 +11,15 @@ function getRecept() {
     $.get('rest/recept/' + receptId + '/', function (data, textStatus, req) {
         chosenRecept = data;
         console.log(chosenRecept);
+        generateReceptTable();
     });
+}
 
+function generateReceptTable() {
     //Set the header of the recept
     document.getElementById("receptHeadline_edit").innerText = chosenRecept.receptNavn + ', ' +chosenRecept.receptId;
 
     $("#receptkomptablebody_edit tr").remove();
-    var optionsToremove = [];
 
     for (let j = 0; j < chosenRecept.receptKomponenter.length; j++) {
         var komp = chosenRecept.receptKomponenter[j];
@@ -35,7 +37,6 @@ function getRecept() {
         cell4.innerHTML = komp.tolerance;
         cell5.innerHTML = '<td><input type="button" value="Slet linje" onclick="deleteRow_edit()"></td>';
     }
-
 }
 
 
