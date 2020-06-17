@@ -1,4 +1,4 @@
-$(document).ready(function () {
+ge$(document).ready(function () {
     loadRaavarer();
 });
 var raavareList = [];
