@@ -5,6 +5,7 @@ import dto.RaavareBatchDTO;
 import dto.RaavareDTO;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -99,7 +100,7 @@ public class RaavareBatchDAO implements iRaavareBatchDAO{
         try {
             Statement statement = dBconnector.connection.createStatement();
             //Create String for the SQL Insert Statement
-            String SQLstatement = "insert into RaavareBatches values('%d', '%f', '%d');";
+            String SQLstatement = "insert into RaavareBatches values('%d', '%.4f', '%d');";
             //Format the string
             SQLstatement =String.format(SQLstatement,
                     raavareBatch.getRbId(), //RaavareBatchID
@@ -107,8 +108,9 @@ public class RaavareBatchDAO implements iRaavareBatchDAO{
                     raavareBatch.getRaavare().getRaavareID()); //RaavareID
             //Execute the insert statement
             statement.executeUpdate(SQLstatement);
-        }catch (Exception e){
-            throw new DALException("Kunne ikke oprette den ønskede RaavareBatch");
+        }catch (SQLException e){
+            //throw new DALException("Kunne ikke oprette den ønskede RaavareBatch");
+            e.getMessage().toUpperCase();
         }
         dBconnector.closeConnection();
     }
