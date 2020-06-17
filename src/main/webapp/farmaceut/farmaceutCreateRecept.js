@@ -44,6 +44,7 @@ function loadRaavarer() {
     });
 }
 
+
 function generateRaavareOptionList() {
     $("#raavare").empty();
     raavareOptionList = document.getElementById('raavare');
@@ -127,7 +128,7 @@ function checkIfReceptIdValid() {
         }
 
     } else {
-        alert("Receptens ID er allerede i brug...");
+        alert("Receptens ID er allerede i brug");
         return false;
     }
 }
@@ -136,6 +137,7 @@ function saveReceptToDatabase() {
     //First runs some checks to see, if everything is fine. Then writes to database
     //checks if all input fields are valid - otherwise returns (does not write to DB)
 
+    //TODO denne fejlmeddelelse kommer samtidig med "receptens ID/navn er for langt/allerede i brug" når man forsøger at gemme til databasen
     if (!checkIfReceptIdValid()){
         alert("Noget gik galt");
         return;

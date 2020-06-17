@@ -36,8 +36,6 @@ function createBruger() {
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert(jqXHR.responseText);
-            alert(textStatus);
-            alert(errorThrown);
         }
     })
 
