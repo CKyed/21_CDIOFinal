@@ -17,8 +17,6 @@ function checkLogin() {
         success: function (data) {
             brugerID=data.brugerID;
             brugerNavn=data.brugerNavn;
-            console.log(brugerID);
-            console.log(brugerNavn);
             switch (data.rolle) {
                 case "Administrator":
                     brugertype=0;
@@ -46,7 +44,6 @@ function checkLogin() {
 
 function brugerRettigheder() {
     for (let i = 0; i < brugertype; i++) {
-        console.log(i);
         var x=document.getElementById("brugerforwarding"+i);
         x.style.display = "none";
     }
