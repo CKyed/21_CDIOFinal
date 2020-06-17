@@ -32,7 +32,7 @@ function checkLogin() {
                     break;
                 case "Laborant":
                     brugertype=3;
-                    switchPage('laborant.html');
+                    switchPage('laborant/laborant.html');
                     break;
             }
         },

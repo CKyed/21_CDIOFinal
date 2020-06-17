@@ -31,7 +31,7 @@ function createProduktionsBatchView(data) {
     $('#receptRaavareListe').empty();
     $('#receptRaavareListe').append(generateRaavareView());
     generateRaavareView();
-
+    updatePbStatus();
     $('#afvejningsInfo').show();
 }
 
@@ -46,8 +46,6 @@ function getRecept(receptID) {
         }
     })
 }
-
-
 
 function generateRaavareView() {
     var x = "test ";
@@ -64,7 +62,6 @@ function generateRaavareView() {
     return x;
 }
 
-
 function generateReceptView() {
     return '<tr><td>' + recept.raavare + '</td>' +
         '<td>' + recept.receptNavn + '</td>' +
@@ -72,7 +69,16 @@ function generateReceptView() {
 
 }
 
+function updatePbStatus() {
+    produktBatch.status = 1;
+    data=produktBatch;
+    $.ajax({
+        method:'PUT',
+        url:'rest/produktbatch',
+        data: data
 
+    })
+}
 
 
 /*
