@@ -3,6 +3,7 @@ package data;
 import dto.ReceptKompDTO;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,8 @@ public class ReceptKompDAO implements iReceptKompDAO {
             receptKompDTO.setReceptId(resultSet.getInt(3));
             raavareId = resultSet.getInt(4);
             receptKompDTO.setRaavare(raavareDAO.getRaavare(raavareId));
-        }catch (Exception e){
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("kunne ikke finde receptkomponenten");
         }
         dBconnector.closeConnection();
@@ -51,7 +53,8 @@ public class ReceptKompDAO implements iReceptKompDAO {
 
             }
 
-        }catch (Exception e){
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("kunne ikke finde receptkomponent");
         }
         dBconnector.closeConnection();
@@ -79,7 +82,8 @@ public class ReceptKompDAO implements iReceptKompDAO {
 
             }
 
-        }catch (Exception e){
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("kunne ikke finde receptkomponent");
         }
         dBconnector.closeConnection();
@@ -102,7 +106,8 @@ public class ReceptKompDAO implements iReceptKompDAO {
                     receptkomponent.getRaavare().getRaavareID()); //RaavareID
             //Execute the insert statement
             statement.executeUpdate(SQLstatement);
-        }catch (Exception e){
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("Kunne ikke oprette den ønskede Receptkompnent");
         }
 
@@ -127,7 +132,8 @@ public class ReceptKompDAO implements iReceptKompDAO {
                 receptkomponent.getRaavare().getRaavareID());
             //Execute the insert statement
             statement.executeUpdate(SQLstatement);
-        }catch (Exception e){
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("Kunne ikke oprette den ønskede Receptkompnent");
         }
 
