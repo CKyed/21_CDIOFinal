@@ -23,7 +23,7 @@
 
 .itemRight{
     grid-column: 4;
-    grid-row: 1 / span 3;
+    grid-row: 1 / span auto;
     background-color: red;
 }
 
@@ -46,9 +46,16 @@
 
 .itemLeft{
     grid-column: 1;
-    grid-row: 1 / span 3;
+    grid-row: 1 / span 2;
     background-color: hotpink;
 }
+
+.itemLeftCorner{
+    grid-column: 1;
+    grid-row: auto;
+    background-color: orange;
+}
+
 
 .grid-containerOuter > div {
     background-color: yellow;
@@ -56,6 +63,7 @@
     padding: 20px;
     font-size: 30px;
 }
+
 
 
 
