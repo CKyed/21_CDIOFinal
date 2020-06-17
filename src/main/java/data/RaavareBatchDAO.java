@@ -5,6 +5,7 @@ import dto.RaavareBatchDTO;
 import dto.RaavareDTO;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,8 @@ public class RaavareBatchDAO implements iRaavareBatchDAO{
             int raavareId = resultSet.getInt(3);
             raavareBatchDTO.setRaavare(raavareDAO.getRaavare(raavareId));
 
-        }catch (Exception e){
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("Kunne ikke finde råvareBatch med det ID");
         }
 
@@ -53,7 +55,8 @@ public class RaavareBatchDAO implements iRaavareBatchDAO{
                 raavareBatchDTO=new RaavareBatchDTO();
             }
 
-        }catch (Exception e){
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("kunne ikke finde råvareBatches");
         }
 
@@ -84,7 +87,8 @@ public class RaavareBatchDAO implements iRaavareBatchDAO{
                 raavareBatchDTO=new RaavareBatchDTO();
             }
 
-        }catch (Exception e){
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("kunne ikke finde råvareBatches");
         }
 
@@ -107,7 +111,8 @@ public class RaavareBatchDAO implements iRaavareBatchDAO{
                     raavareBatch.getRaavare().getRaavareID()); //RaavareID
             //Execute the insert statement
             statement.executeUpdate(SQLstatement);
-        }catch (Exception e){
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("Kunne ikke oprette den ønskede RaavareBatch");
         }
         dBconnector.closeConnection();
@@ -128,7 +133,8 @@ public class RaavareBatchDAO implements iRaavareBatchDAO{
                     raavareBatch.getRbId()); //RaavareBatchID
             //Execute the insert statement
             statement.executeUpdate(SQLstatement);
-        }catch (Exception e){
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("Kunne ikke opdatere den ønskede RaavareBatch");
         }
         dBconnector.closeConnection();
