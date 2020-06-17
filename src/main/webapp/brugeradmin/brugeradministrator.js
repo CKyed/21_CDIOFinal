@@ -52,9 +52,9 @@ function loadSpecificBruger() {
         url:'rest/bruger/'+id,
         success: function (data) {
             errormessage.innerHTML="";
-            console.log(data);
+            //console.log(data);
             //console.log("status : "+toString(data.aktiv));
-            console.log(data.aktiv);
+            //console.log(data.aktiv);
             document.getElementById("updateBrugerNavn").value = data.brugerNavn;
             document.getElementById("updateInitialer").value = data.initialer;
             document.getElementById("updateRolle").value = data.rolle;
@@ -65,6 +65,13 @@ function loadSpecificBruger() {
             }else{
                 document.getElementById("inaktiv2").checked = true;
                 document.getElementById("inaktiv2").value = 0;
+            }
+            if(data.brugerNavn == undefined){
+                console.log("mangler ID");
+                errormessage.innerHTML="Kan ikke finde bruger uden ID";
+                document.getElementById("updateBrugerNavn").value=" ";
+                document.getElementById("updateInitialer").value=" ";
+                document.getElementById("updateCPR").value=" ";
             }
            },
         error: function () {
