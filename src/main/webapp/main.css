@@ -2,18 +2,28 @@
 .menu { grid-area: menu; }
 .main { grid-area: main; }
 
-.grid-container {
+.grid-containerOuter {
     display: grid;
     grid-template-areas:
-            'header header header header'
-            'menu main main main '
-            'menu main main main';
+            'header'
+            'index';
+    grid-gap: 1px;
+    padding: 1px;
+}
+
+.grid-containerInner {
+    display: grid;
+    grid-template-areas:
+        'menu main main main '
+        'menu main main main';
     grid-gap: 1px;
     background-color: blue;
     padding: 1px;
 }
 
-.grid-container > div {
+
+
+.grid-containerOuter > div {
     background-color: yellow;
     text-align: center;
     padding: 20px;
