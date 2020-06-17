@@ -1,11 +1,8 @@
-<script src="farmaceutRaavare.js" defer></script>
+<script src="farmaceut/farmaceutRaavare.js" defer></script>
 
-<div class="grid-containerInner">
-    <div class="itemLeft">
-        <button onclick="switchPage('farmaceut.html');">Tilbage til farmaceut-forsiden!</button>
-    </div>
+<button onclick="switchPage('farmaceut/farmaceut.html');">Tilbage til farmaceut-forsiden!</button>
 
-<div class="itemDown" id="createRaavare">
+<div class="container" id="createRaavare">
     <h1>Opret Råvare</h1>
     <form id="raavareForm">
         <div>
@@ -24,25 +21,20 @@
         <button onclick="createRaavare();">Gem Råvare</button>
     </form>
 </div>
-<div class="itemRight">
-    <table>
-        <thead>
-        <tr>
-            <th>Råvare ID</th>
-            <th>Råvare Navn</th>
-            <th>Leverandør</th>
-        </tr>
-        </thead>
-        <tbody id="raavaretable">
-        </tbody>
-    </table>
-</div>
 
-<div class="itemLeftCorner"> auto </div>
+<table>
+    <thead>
+    <tr>
+        <th>Råvare ID</th>
+        <th>Råvare Navn</th>
+        <th>Leverandør</th>
+    </tr>
+    </thead>
+    <tbody id="raavaretable">
+    </tbody>
+</table>
 
-
-
-<div class="itemMiddle" id="opdateRaavare">
+<div class="container" id="opdateRaavare">
     <h1>Opdater Råvare</h1>
     <form id="raavareUdateForm">
         <div>
@@ -66,6 +58,5 @@
 
         <button onclick="updateRaavare();">Opdater Råvare</button>
     </form>
-</div>
 </div>
 

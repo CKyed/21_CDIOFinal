@@ -1,0 +1,41 @@
+<script src="farmaceut/farmaceutShowSpecificRecept.js"></script>
+
+
+<button onclick="switchPage('farmaceut/farmaceut.html');">Tilbage til farmaceut-forsiden</button>
+<button onclick="switchPage('farmaceut/farmaceutShowSpecificRecept.html');">Nulstil</button>
+
+<DIV class="largeContainer" id="createrecept">
+    <DIV class="container" id="chooseRecept">
+        <h1>Vis inhold af en recept</h1>
+        <form id="chooseReceptform">
+            <div>
+                <label for="selectReceptId">Recept ID: </label>
+                <input type="number" min="0" max="99999999"
+                       id="selectReceptId" name="selectReceptId">
+
+            </div>
+
+        </form>
+        <button onclick="getRecept();"
+                id="getReceptButton">Hent recept</button>
+    </DIV>
+
+    <div class="container" id="receptkomponenter_edit">
+        <h2 id="receptHeadline_edit">Unavngivet recept</h2>
+        <table>
+            <thead>
+            <tr>
+                <td>Råvarenavn</td>
+                <td>Råvare ID</td>
+                <td>Netto</td>
+                <td>Tolerance</td>
+            </tr>
+            </thead>
+            <tbody id="receptkomptablebody_edit">
+
+            </tbody>
+        </table>
+        <hr>
+    </div>
+</DIV>
+
