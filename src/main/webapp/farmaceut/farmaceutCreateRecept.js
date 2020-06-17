@@ -104,9 +104,6 @@ function deleteRow() {
     var removedRaavareId = $(tr).find('td:eq(1)').text();
     console.log("removed raavareId:" + removedRaavareId);
     addToRaavareOptionList(removedRaavareId);
-
-
-
 }
 
 function checkIfReceptIdValid() {

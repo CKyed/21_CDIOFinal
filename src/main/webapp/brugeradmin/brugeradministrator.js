@@ -31,6 +31,7 @@ function createBruger() {
         contentType: "application/json",
         data: data,
         success: function (data) {
+            console.log(data);
             alert(JSON.stringify(data));
             loadBruger();
         },
