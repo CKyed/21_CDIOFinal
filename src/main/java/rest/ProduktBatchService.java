@@ -8,6 +8,7 @@ import dto.ProduktBatchDTO;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 
 @Path("produktbatch")
@@ -16,6 +17,11 @@ import javax.ws.rs.core.Response;
 
 public class ProduktBatchService {
     iProduktBatchDAO produktBatchDAO = new ProduktBatchDAO();
+
+    @GET
+    public List<ProduktBatchDTO> getProduktBatchList() throws DALException{
+        return produktBatchDAO.getProduktBatchList();
+    }
 
     @GET
     @Path("{id}")
