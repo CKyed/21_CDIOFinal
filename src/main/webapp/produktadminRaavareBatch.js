@@ -1,19 +1,38 @@
 $(document).ready(function () {
     loadRaavareBatch();
+    loadRaavarer();
 });
+var raavareList = [];
 var raavareBatchList = [];
 var raavareBatchTable = document.getElementById('raavarebatchtable');
 
+function loadRaavarer() {
+    //empty existing list
+    raavareList = [];
+    raavareOptionList = document.getElementById('raavare');
+
+    //Load via GET-call to database
+    $.get('rest/raavare', function (data, textStatus, req) {
+        $("#raavare").empty();
+        $.each(data, function (i, elt) {
+            raavareList.push(elt);
+            var raavareOption = document.createElement("OPTION");
+            raavareOption.setAttribute("value", i);
+            var t = document.createTextNode(elt.raavareNavn + "; " + elt.raavareID);
+            raavareOption.appendChild(t);
+            raavareOptionList.appendChild(raavareOption);
+        });
+    });
+}
+
 function loadRaavareBatch() {
     //empty existing list
-    while (raavareBatchList.pop() != null){}
     raavareBatchList = [];
-    console.log("raavareList lige inden load"+ raavareBatchList);
+    console.log("raavareBatchList lige inden load"+ raavareBatchList);
 
     //Load via GET-call to database
     $.get('rest/raavarebatch', function (data, textStatus, req) {
         $("#raavarebatchtabletable").empty();
-       // $("#raavare").empty();
         $.each(data, function (i, elt) {
             raavareBatchList.push(elt);
         });
@@ -24,11 +43,9 @@ function loadRaavareBatch() {
 function generateRaavareBatchTable() {
     //Make sure, raavareTable is updated
     raavareBatchTable = document.getElementById('raavarebatchtable');
-    for(var i = raavareBatchTable.rows.length - 1; i > 0; i--)
-    {
-        raavareBatchTable.deleteRow(i);
-    }
-    console.log(raavareBatchList);
+    $("#raavarebatchtable").empty();
+
+    console.log("raavareBatchList "+ raavareBatchList);
 
     //fill the table with elements from raavareList
     $.each(raavareBatchList, function (i, elt) {
@@ -36,19 +53,28 @@ function generateRaavareBatchTable() {
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
-        cell1.innerHTML = elt.raavareBatchID;
-        cell2.innerHTML = elt.raavareBatchMængde;
-        cell3.innerHTML = elt.raavareBatchLeverandoer;
+        var cell4 = row.insertCell(3);
+        cell1.innerHTML = elt.rbId;
+        cell2.innerHTML = elt.maengde;
+        cell3.innerHTML = elt.raavare.raavareID;
+        cell4.innerHTML = elt.raavare.raavareNavn;
     });
-
-    //set the table in the HTML document by id
-    //$('#raavaretable').value = raavareTable;
 }
 
 
 function createRaavareBatch() {
     event.preventDefault();
-    var data =$('#raavareBatchFormForm').serializeJSON();
+
+    var raavare = raavareList[document.getElementById('raavare').value];
+    console.log("raavare: " + raavare.raavareNavn);
+    var raavarebatch = {
+        "rbId": document.getElementById('opretRaavareBatchID').value,
+        "raavare": raavare,
+        "maengde": document.getElementById('RaavareBatchMaengde').value
+
+    }
+    var data =JSON.stringify(raavarebatch);
+
     console.log(data);
     $.ajax({
         url: 'rest/raavarebatch',
@@ -59,10 +85,8 @@ function createRaavareBatch() {
             alert(JSON.stringify(data));
             loadRaavareBatch();
         },
-        error: function (jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR) {
             alert(jqXHR.responseText);
-            alert(textStatus);
-            alert(errorThrown);
         }
     })
 }
@@ -109,6 +133,25 @@ function loadSpecificRaavare() {
         }
     })
 }
+
+function validateMaengdeInput() {
+    var value = document.getElementById("RaavareBatchMaengde").value;
+    if (value > 999.9999) {
+        document.getElementById("RaavareBatchMaengde").value = 999.9999;
+    } else if (value < 0.0001){
+        document.getElementById("RaavareBatchMaengde").value = 0.0001;
+    }
+}
+
+function validateIdInput() {
+    var value = document.getElementById("opretRaavareBatchID").value;
+    if (value > 99999999) {
+        document.getElementById("opretRaavareBatchID").value = 99999999;
+    } else if (value < 0){
+        document.getElementById("opretRaavareBatchID").value = 0;
+    }
+}
+
 
 
 
