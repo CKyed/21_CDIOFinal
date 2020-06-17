@@ -1,5 +1,6 @@
 var brugertype;
 var brugerID;
+var brugerNavn;
 
 function switchPage(page){
     $("#container").load(page);
@@ -15,6 +16,9 @@ function checkLogin() {
         url:'rest/bruger/'+id,
         success: function (data) {
             brugerID=data.brugerID;
+            brugerNavn=data.brugerNavn;
+            console.log(brugerID);
+            console.log(brugerNavn);
             switch (data.rolle) {
                 case "Administrator":
                     brugertype=0;

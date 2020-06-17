@@ -1,21 +1,10 @@
-<DIV class="container" id="createProduktionsBatchKomp">
-    <h1>Tilføj linje i recepten</h1>
-    <form id="ProduktionsBatch">
-        <div>
-            <label for="produktBatch">Råvare: </label>
-            <select id ="produktBatch" name = "produktBatch">
-            </select> <p id =selectProduktBatch></p>
-        </div>
+<script src="laborant.js"></script>
 
-        <div>
-            <label for="netto">Netto: </label> <input type="number" step="any" min="0" max="1000"
-                                                      id="netto" name="netto">
-        </div>
-        <div>
-            <label for="tolerance">Tolerance: </label><input type="number" step="any" min="0" max="1000"
-                                                             id="tolerance" name="tolerance">
-        </div>
+<div id="laborantLogin">
+    <h2>Godkend venligst dine login oplysninger</h2>
+    <p id="laborantID">Bruger ID: </p>
+    <p id="laborantBrugernavn">Brugernavn: </p>
+    <button onclick="switchPage('afvejning.html');">Godkend</button>
+    <button onclick="switchPage('frontpage.html');">Afvis</button>
 
-        <button type = 'button' onclick="addReceptKomp(); return false;">Tilføj linje</button>
-    </form>
-</DIV>
+</div>

@@ -1,3 +1,59 @@
+$(document).ready(function loadLaborant() {
+    $('#laborantID').append(brugerID);
+    $('#laborantBrugernavn').append(brugerNavn);
+
+});
+var recept;
+var produktBatch;
+
+function getProduktBatch() {
+    var id = document.getElementById("pbId").value;
+    var errorMessage;
+    errorMessage = document.getElementById("errorMessage");
+    errorMessage.innerHTML="";
+    console.log(id);
+    $.ajax({
+        method: 'GET',
+        url:'rest/produktbatch/'+id,
+        success: function(data){
+            produktBatch=data;
+            console.log(data);
+            createProduktionsBatchView(data)
+        },
+        error(jqXHR){
+            errorMessage.innerHTML= jqXHR.responseText;
+        }
+    })
+}
+function createProduktionsBatchView(data) {
+    console.log("createProduktBatchView metoden er startet");
+    getRecept(data.receptId);
+    $('#receptRaavareListe').append(generateReceptView());
+
+    $('#afvejningsInfo').show();
+}
+
+
+function getRecept(receptID) {
+    $.ajax({
+        method: 'GET',
+        url: 'rest/recept/'+receptID,
+        success: function(data){
+            recept = data;
+        }
+    })
+}
+
+function generateReceptView() {
+    return '<tr><td>' + recept.receptId + '</td>' +
+        '<td>' + recept.receptNavn + '</td>' +
+        '<td>' + produktBatch.pbId  + '</td>'
+}
+
+
+
+
+/*
 function createProduktBatchKomp() {
     event.preventDefault();
     //var data skal være = et produktBatchDTO på JSON format
@@ -37,4 +93,4 @@ function loadProduktBatches() {
 
 function generateProduktBatchOption(id, ) {
     
-}
+}*/
