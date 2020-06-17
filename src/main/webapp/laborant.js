@@ -18,7 +18,7 @@ function getProduktBatch() {
         success: function(data){
             produktBatch=data;
             console.log(data);
-            createProduktionsBatchView(data)
+            getRecept(data.receptId);
         },
         error(jqXHR){
             errorMessage.innerHTML= jqXHR.responseText;
@@ -27,8 +27,12 @@ function getProduktBatch() {
 }
 function createProduktionsBatchView(data) {
     console.log("createProduktBatchView metoden er startet");
-    getRecept(data.receptId);
-    $('#receptRaavareListe').append(generateReceptView());
+    $('#receptInfo').empty();
+    $('#receptInfo').append(generateReceptView());
+    $('#receptRaavareListe').empty();
+    $('#receptRaavareListe').append(generateReceptView())
+    console.log(recept.receptKomponenter);
+    (recept.receptKomponenter).forEach();
 
     $('#afvejningsInfo').show();
 }
@@ -40,17 +44,28 @@ function getRecept(receptID) {
         url: 'rest/recept/'+receptID,
         success: function(data){
             recept = data;
+            createProduktionsBatchView(data)
+            console.log(data);
         }
     })
 }
 
 function generateReceptView() {
-    return '<tr><td>' + recept.receptId + '</td>' +
+
+    return '<tr><td>' + recept.raavareID + '</td>' +
+        '<td>' + recept.raavareNavn + '</td>' +
+        '<td>' + recept.nonNetto  + '</td>' +
+        '<td>' + recept.tolerance + '</td>'
+}
+/*
+function generateRaavareView() {
+    return '<tr><td>' + recept.raavare + '</td>' +
         '<td>' + recept.receptNavn + '</td>' +
         '<td>' + produktBatch.pbId  + '</td>'
+
 }
 
-
+*/
 
 
 /*
