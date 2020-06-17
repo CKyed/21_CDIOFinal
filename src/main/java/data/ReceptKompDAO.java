@@ -3,6 +3,7 @@ package data;
 import dto.ReceptKompDTO;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +20,13 @@ public class ReceptKompDAO implements iReceptKompDAO {
             Statement statement = dBconnector.connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM ReceptKomp WHERE raavareId = "+raavareId+"and receptId = "+receptId+";");
             resultSet.next();
-            receptKompDTO.setNonNetto(resultSet.getInt(1));
-            receptKompDTO.setTolerance(resultSet.getInt(2));
+            receptKompDTO.setNonNetto(resultSet.getDouble(1));
+            receptKompDTO.setTolerance(resultSet.getDouble(2));
             receptKompDTO.setReceptId(resultSet.getInt(3));
             raavareId = resultSet.getInt(4);
             receptKompDTO.setRaavare(raavareDAO.getRaavare(raavareId));
-        }catch (Exception e){
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("kunne ikke finde receptkomponenten");
         }
         dBconnector.closeConnection();
@@ -41,8 +43,8 @@ public class ReceptKompDAO implements iReceptKompDAO {
             Statement statement = dBconnector.connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM ReceptKomp WHERE receptId = "+receptId+";");
             while (resultSet.next()){
-                receptKompDTO.setNonNetto(resultSet.getInt(1));
-                receptKompDTO.setTolerance(resultSet.getInt(2));
+                receptKompDTO.setNonNetto(resultSet.getDouble(1));
+                receptKompDTO.setTolerance(resultSet.getDouble(2));
                 receptKompDTO.setReceptId(resultSet.getInt(3));
                 int raavareId = resultSet.getInt(4);
                 receptKompDTO.setRaavare(raavareDAO.getRaavare(raavareId));
@@ -51,7 +53,8 @@ public class ReceptKompDAO implements iReceptKompDAO {
 
             }
 
-        }catch (Exception e){
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("kunne ikke finde receptkomponent");
         }
         dBconnector.closeConnection();
@@ -69,8 +72,8 @@ public class ReceptKompDAO implements iReceptKompDAO {
             Statement statement = dBconnector.connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM ReceptKomp;");
             while (resultSet.next()){
-                receptKompDTO.setNonNetto(resultSet.getInt(1));
-                receptKompDTO.setTolerance(resultSet.getInt(2));
+                receptKompDTO.setNonNetto(resultSet.getDouble(1));
+                receptKompDTO.setTolerance(resultSet.getDouble(2));
                 receptKompDTO.setReceptId(resultSet.getInt(3));
                 int raavareId = resultSet.getInt(4);
                 receptKompDTO.setRaavare(raavareDAO.getRaavare(raavareId));
@@ -79,7 +82,8 @@ public class ReceptKompDAO implements iReceptKompDAO {
 
             }
 
-        }catch (Exception e){
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("kunne ikke finde receptkomponent");
         }
         dBconnector.closeConnection();
@@ -102,7 +106,8 @@ public class ReceptKompDAO implements iReceptKompDAO {
                     receptkomponent.getRaavare().getRaavareID()); //RaavareID
             //Execute the insert statement
             statement.executeUpdate(SQLstatement);
-        }catch (Exception e){
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("Kunne ikke oprette den ønskede Receptkompnent");
         }
 
@@ -127,7 +132,8 @@ public class ReceptKompDAO implements iReceptKompDAO {
                 receptkomponent.getRaavare().getRaavareID());
             //Execute the insert statement
             statement.executeUpdate(SQLstatement);
-        }catch (Exception e){
+        }catch (SQLException e){
+            e.printStackTrace();
             throw new DALException("Kunne ikke oprette den ønskede Receptkompnent");
         }
 
