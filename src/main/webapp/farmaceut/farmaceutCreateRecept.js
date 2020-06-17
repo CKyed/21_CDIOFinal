@@ -1,4 +1,4 @@
-ge$(document).ready(function () {
+$(document).ready(function () {
     loadRaavarer();
 });
 var raavareList = [];
@@ -159,7 +159,7 @@ function saveReceptToDatabase() {
         data: data,
         success: function (data) {
             alert(JSON.stringify(data));
-            switchPage("farmaceutCreateRecept.html");
+            switchPage("farmaceut/farmaceutCreateRecept.html");
         },
         error: function (jqXHR) {
             alert(jqXHR.responseText);
