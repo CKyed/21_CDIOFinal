@@ -192,7 +192,6 @@ function validateAfvejningInput() {
 
 }
 function saveAfvejningToDatabase() {
-    alert("HUrra")
 
     //Rest POST
     var pbKomp = {
