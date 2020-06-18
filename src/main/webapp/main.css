@@ -1,6 +1,6 @@
 table {
     border-collapse: collapse;
-    width: 80%;
+    width: 90%;
     max-width: 1000px;
     margin: auto;
 }
@@ -8,10 +8,6 @@ table {
 th, td {
     text-align: left;
     padding: 8px;
-}
-a:hover{
-    color: red;
-
 }
 
 #container{
@@ -80,9 +76,20 @@ h1{
 .my-form .form-group {
     padding-bottom: 10px;
 }
-.my-form input[type="number"]{
+.my-form input[type="number"], input[type="text"]{
     padding: 4px;
     width: 50%;
 }
+.button{
+    background-color: #333;
+    color: #fff;
+    padding: 10px 15px;
+    border:none;
+}
+.button:hover{
+    background: red;
+    color: #fff;
+}
+
 
 
