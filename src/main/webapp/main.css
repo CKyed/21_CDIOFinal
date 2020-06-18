@@ -39,7 +39,7 @@ th, td {
 
 h1{
     font-family: Verdana;
-    color: yellow;
+    color: Pink;
 
 }
 
@@ -89,6 +89,17 @@ h1{
 .button:hover{
     background: red;
     color: #fff;
+}
+
+.btn{
+    background: coral;
+    color: #fff;
+    border: none;
+    outline: none;
+    padding: 0.7rem 2rem;
+}
+.btn:hover{
+    opacity: 0.9;
 }
 
 

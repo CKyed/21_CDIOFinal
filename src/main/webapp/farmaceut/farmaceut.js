@@ -3,6 +3,7 @@ $(document).ready(function () {
     loadRaavarer();
     loadRecepter();
 });
+
 var raavareList = [];
 var raavareOptionList = document.getElementById('raavare');
 var raavareTable = document.getElementById('raavaretable');
@@ -336,5 +337,7 @@ function checkIfReceptNavnValid(){
 }
 
  */
+
+
 
 

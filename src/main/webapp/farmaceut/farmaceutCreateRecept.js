@@ -44,7 +44,6 @@ function loadRaavarer() {
     });
 }
 
-
 function generateRaavareOptionList() {
     $("#raavare").empty();
     raavareOptionList = document.getElementById('raavare');
