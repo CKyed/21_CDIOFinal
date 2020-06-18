@@ -1,10 +1,11 @@
 <script src="produktionsleder/produktAdminProduktBatch.js"></script>
 
+
 <DIV class="container" id="createProduktbatch">
     <h1>Opret Produktbatch</h1>
     <form id="produktbatchform">
         <div>
-            <label style="display: block" for="produktbatchid">ID: </label>
+            <label style="display: block" for="produktbatchid">Produktbatch ID: </label>
             <input type="number" min="0" max="99999999" id="produktbatchid" name="produktbatchid">
         </div>
 
@@ -13,15 +14,32 @@
             <input type="date" id="datoforOprettelse" name="oprettelsesdato">
         </div>
         <div>
-            <label style="display: block">Status</label>
-            <select name="Status">
-                <option value="Oprettet">Oprettet</option>
-                <option value="underProduktion">Under produktion</option>
-                <option value="Afsluttet">Afsluttet</option>
-            </select>
+            <label style="display: block" for="pb_receptId">Recept ID:</label>
+            <input type="number" id="pb_receptId" min="0" max="99999999"
+                   name="pb_receptId" placeholder="Skriv receptID">
         </div>
-        <button style="margin-top: 8px" onclick="createRaavareBatch();">Gem produktbatch</button>
+
+        <button style="margin-top: 8px" onclick="showProduktBatchFromReceptID(); return false;">Vis Produktbatch</button>
     </form>
+
+    <table>
+        <thead>
+        <tr>
+            <td>Råvare ID</td>
+            <td>Råvarenavn</td>
+            <td>Mængde</td>
+            <td>Tolerance</td>
+            <td>Tara</td>
+            <td>Netto</td>
+            <td>Batch</td>
+            <td>Laborant ID</td>
+        </tr>
+        </thead>
+        <tbody id="ProduktBatchPrintable">
+        </tbody>
+    </table>
+    <button style="margin-top: 8px" onclick="validateInputs(); return false;">Gem og print til PDF</button>
+
 </DIV>
 
 
