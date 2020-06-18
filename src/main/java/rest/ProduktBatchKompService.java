@@ -7,6 +7,7 @@ import data.iProduktBatchKompDAO;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 
@@ -29,5 +30,13 @@ public class ProduktBatchKompService {
         @Path("{pbId}")
         public List<ProduktBatchKompDTO> getProduktBatchKompList(@PathParam("pbId") int pbId) throws DALException {
             return produktBatchKompDAO.getProduktBatchKompList(pbId);
+        }
+
+        @POST
+        @Produces(MediaType.TEXT_PLAIN)
+        @Consumes(MediaType.APPLICATION_JSON)
+        public Response createProduktBatch(ProduktBatchKompDTO produktBatchKompDTO) throws DALException{
+                produktBatchKompDAO.createProduktBatchKomp(produktBatchKompDTO);
+                return Response.ok("Tilføjet").build();
         }
 }

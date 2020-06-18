@@ -3,23 +3,23 @@
 
 <DIV class="container" id="createProduktbatch">
     <h1>Opret Produktbatch</h1>
-    <form id="produktbatchform">
-        <div>
-            <label style="display: block" for="produktbatchid">Produktbatch ID: </label>
-            <input type="number" min="0" max="99999999" id="produktbatchid" name="produktbatchid">
+    <form class="my-form" id="produktbatchform">
+        <div class="form-group">
+            <label for="produktbatchid">Produktbatch ID: </label>
+            <input type="number" min="0" max="99999999" id="produktbatchid" name="produktbatchid" placeholder="Skriv produktbatchID">
         </div>
 
-        <div>
-            <label style="display: block" for="datoforOprettelse">Dato for oprettelse: </label>
+        <div class="form-group">
+            <label for="datoforOprettelse">Dato for oprettelse: </label>
             <input type="date" id="datoforOprettelse" name="oprettelsesdato">
         </div>
-        <div>
-            <label style="display: block" for="pb_receptId">Recept ID:</label>
+        <div class="form-group">
+            <label for="pb_receptId">Recept ID:</label>
             <input type="number" id="pb_receptId" min="0" max="99999999"
                    name="pb_receptId" placeholder="Skriv receptID">
         </div>
 
-        <button style="margin-top: 8px" onclick="showProduktBatchFromReceptID(); return false;">Vis Produktbatch</button>
+        <button class="button" onclick="showProduktBatchFromReceptID(); return false;">Vis Produktbatch</button>
     </form>
 
     <table>
@@ -38,7 +38,7 @@
         <tbody id="ProduktBatchPrintable">
         </tbody>
     </table>
-    <button style="margin-top: 8px" onclick="validateInputs(); return false;">Gem og print til PDF</button>
+    <button class="button" onclick="validateInputs(); return false;">Gem og print til PDF</button>
 
 </DIV>
 
