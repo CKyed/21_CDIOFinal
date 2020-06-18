@@ -43,7 +43,7 @@ function createBruger() {
     }
 
 
-function validateBrugerID() {
+function validateBrugerInitialer() {
     var letters = /^[A-Za-z]+$/;
     var id = document.getElementById("opretInitialer").value;
     if(id.match(letters)){
@@ -106,10 +106,9 @@ function updateBruger() {
             alert(JSON.stringify(data));
             loadBruger();
         },
-        error: function (jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR) {
             alert(jqXHR.responseText);
-            // alert(textStatus);
-            // alert(errorThrown);
+
         }
 
     })
@@ -130,10 +129,9 @@ function updateRaavare() {
             alert(JSON.stringify(data));
             loadRaavarer();
         },
-        error: function (jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR) {
             alert(jqXHR.responseText);
-            // alert(textStatus);
-            // alert(errorThrown);
+
         }
 
     })
