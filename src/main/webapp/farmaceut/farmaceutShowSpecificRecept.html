@@ -7,17 +7,17 @@
 <DIV class="largeContainer" id="createrecept">
     <DIV class="container" id="chooseRecept">
         <h1>Vis inhold af en recept</h1>
-        <form id="chooseReceptform">
-            <div>
+
+        <form class="my-form" id="chooseReceptform">
+            <div class="form-group">
                 <label for="selectReceptId">Recept ID: </label>
                 <input type="number" min="0" max="99999999"
                        id="selectReceptId" name="selectReceptId">
-
             </div>
 
         </form>
-        <button onclick="getRecept();"
-                id="getReceptButton">Hent recept</button>
+        <button class="button" onclick="getRecept();"
+                id="getReceptButton">Hent Recept</button>
     </DIV>
 
     <div class="container" id="receptkomponenter_edit">

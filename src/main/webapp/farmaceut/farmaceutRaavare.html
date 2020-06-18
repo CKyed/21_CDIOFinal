@@ -4,21 +4,21 @@
 
 <div class="container" id="createRaavare">
     <h1>Opret Råvare</h1>
-    <form id="raavareForm">
-        <div>
+    <form class="my-form" id="raavareForm">
+        <div class="form-group">
             <label for="opretRaavareID"> Råvare ID:</label>
             <input type="number" id="opretRaavareID" name="raavareID">
         </div>
-        <div>
+        <div class="form-group">
             <label for="opretRaavareNavn">Råvare Navn: </label>
             <input type="text" id="opretRaavareNavn" name="raavareNavn">
         </div>
-        <div>
+        <div class="form-group">
             <label for="opretLeverandoer">Leverandør: </label>
             <input type="text" id="opretLeverandoer" name="leverandoer">
         </div>
 
-        <button onclick="createRaavare();">Gem Råvare</button>
+        <button class="button" onclick="createRaavare();">Gem Råvare</button>
     </form>
 </div>
 
@@ -36,27 +36,27 @@
 
 <div class="container" id="opdateRaavare">
     <h1>Opdater Råvare</h1>
-    <form id="raavareUdateForm">
-        <div>
+    <form class="my-form" id="raavareUdateForm">
+        <div class="form-group">
             <label for="RaavareId"> Raavare ID</label>
             <input type="number" id="RaavareId" name="raavareID">
         </div>
-        <button onclick="loadSpecificRaavare();return false;">Find råvare</button>
+        <button class="button" onclick="loadSpecificRaavare();return false;">Find Råvare</button>
         <p id="errorMessage" class="errorMessage"></p>
 <!--        <div>-->
 <!--            <label for="updateRaavareID"> Råvare ID:</label>-->
 <!--            <input type="number" id="updateRaavareID" name="raavareID">-->
 <!--        </div>-->
-        <div>
+        <div class="form-group">
             <label for="updateRaavareNavn">Råvare Navn: </label>
             <input type="text" id="updateRaavareNavn" name="raavareNavn">
         </div>
-        <div>
+        <div class="form-group">
             <label for="updateLeverandoer">Leverandør: </label>
             <input type="text" id="updateLeverandoer" name="leverandoer">
         </div>
 
-        <button onclick="updateRaavare();">Opdater Råvare</button>
+        <button class="button" onclick="updateRaavare();">Opdater Råvare</button>
     </form>
 </div>
 
