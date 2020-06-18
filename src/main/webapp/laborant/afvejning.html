@@ -1,8 +1,8 @@
-<script>$('#afvejningsInfo').hide();</script>
+<script src="laborant/laborant.js"></script>
 
 <div id="afvening">
     <form id="produktionsbatchID">
-        <label for="pbId">Indtast produktionsbatch ID</label>
+        <label for="pbId">Indtast Produktbatch ID</label>
         <input type="number" id="pbId" name="pbId">
         <button onclick="getProduktBatch(); return false;">Godkend</button>
         <p id="errorMessage"></p>
@@ -35,6 +35,28 @@
         <tbody id="receptRaavareListe">
         </tbody>
     </table>
+</div>
 
+<button id ="afvejningButton" onclick="startAfvejning();">Start afvejning</button>
+
+<div id="afvejningsDiv">
+    <h2 id="currentRaavare">Afvejning af:</h2>
+    <label style="display: block" for="tara">Tara [kg]</label>
+    <input type="number" id="tara" min="0.0001" max="999.99999"
+           name="tara" placeholder="tara">
+
+    <label style="display: block" for="rbId">Råvarebatch ID</label>
+    <input type="number" id="rbId" min="0" max="99999999"
+           name="rbId" placeholder="ID">
+
+    <label style="display: block" for="netto">Nettovægt [kg]</label>
+    <input type="number" id="netto" min="0.0001" max="999.99999"
+           name="tara" placeholder="nettovægt">
+
+
+
+    <button id ="saveAfvejningButton"onclick="validateAfvejningInput();">Gem afvejning</button>
+    <button id = "nextAfvejningButton" onclick="nextAfvejning();">Næste afvejning</button>
+    <button id = "finishAfvejningButton" onclick="finishAfvejning();">Afslut afvejning</button>
 
 </div>
