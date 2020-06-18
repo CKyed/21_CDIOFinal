@@ -31,7 +31,7 @@ function createProduktionsBatchView(data) {
     $('#receptRaavareListe').empty();
     $('#receptRaavareListe').append(generateRaavareView());
     generateRaavareView();
-    updatePbStatus();
+    updatePbStatus(1);
     $('#afvejningsInfo').show();
 }
 
@@ -63,19 +63,26 @@ function generateRaavareView() {
 }
 
 function generateReceptView() {
-    return '<tr><td>' + recept.raavare + '</td>' +
+    return '<tr><td>' + recept.receptId + '</td>' +
         '<td>' + recept.receptNavn + '</td>' +
         '<td>' + produktBatch.pbId  + '</td>'
 
 }
 
-function updatePbStatus() {
-    produktBatch.status = 1;
+function updatePbStatus(status) {
+    produktBatch.status = status;
+    console.log(produktBatch);
     data=produktBatch;
+    
+    console.log(data);
     $.ajax({
         method:'PUT',
         url:'rest/produktbatch',
-        data: data
+        data: JSON.stringify(data),
+        success: console.log("Put lykkedes"),
+        error(jqXHR) {
+            console.log("Put fejlede: "+jqXHR);
+        }
 
     })
 }
