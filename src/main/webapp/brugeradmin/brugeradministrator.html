@@ -2,6 +2,50 @@
 <script src="brugeradmin/brugeradministrator.js"></script>
 
 <h1>Brugeradministration</h1>
+<div class="createBruger" id="createBruger" style="display: block">
+    <h1>Opret bruger</h1>
+    <form id="brugerform">
+        <div>
+            <label for="opretBrugerID"> ID:</label>
+            <input type="number" id="opretBrugerID" name="brugerID">
+        </div>
+        <div>
+            <label for="opretBrugerNavn">Navn: </label>
+            <input type="text" id="opretBrugerNavn" name="brugerNavn">
+        </div>
+        <div>
+            <label for="opretInitialer">Initialer: </label>
+            <!--
+            <input type="text" id="opretInitialer" name="initialer">
+            -->
+            <input type="text" id="opretInitialer" name="initialer">
+
+        </div>
+        <div>
+            <label for="opretRolle">Vælg rolle: </label>
+            <select id="opretRolle" name ="rolle">
+                <option value="Administrator">Administrator</option>
+                <option value="Produktionsleder">Produktionsleder</option>
+                <option value="Farmaceut">Farmaceut</option>
+                <option value="Laborant">Laborant</option>
+            </select>
+            <!--
+            <input type="text" id="opretRolle" name="rolle">
+            -->
+        </div>
+        <div>
+            <label for="opretCPR">CPR: </label>
+            <input type="text" id="opretCPR" name="cpr">
+        </div>
+        <div>
+            <label for="aktiv">Aktiv: </label>
+            <input type="radio" id="aktiv" name="aktiv" value=1 checked>
+            <label for="inaktiv">Inaktiv: </label>
+            <input type="radio" id="inaktiv" name="aktiv" value=0>
+        </div>
+        <button onclick="validateBrugerID();">Gem bruger</button>
+    </form>
+</div>
 
 <!--
 <button onclick="showUpdateBruger()"> redigér bruger</button>
@@ -66,47 +110,7 @@
     <tbody id="brugertable">
     </tbody>
 </table>
-
+<!--
     <button onclick="showCreateBruger()">Opret Bruger</button>
+-->
 
-
-<div class="createBruger" id="createBruger" >
-    <h1>Opret bruger</h1>
-    <form id="brugerform">
-        <div>
-            <label for="opretBrugerID"> ID:</label>
-            <input type="number" id="opretBrugerID" name="brugerID">
-        </div>
-        <div>
-            <label for="opretBrugerNavn">Navn: </label>
-            <input type="text" id="opretBrugerNavn" name="brugerNavn">
-        </div>
-        <div>
-            <label for="opretInitialer">Initialer: </label>
-            <input type="text" id="opretInitialer" name="initialer">
-        </div>
-        <div>
-            <label for="opretRolle">Vælg rolle: </label>
-            <select id="opretRolle" name ="rolle">
-                <option value="Administrator">Administrator</option>
-                <option value="Produktionsleder">Produktionsleder</option>
-                <option value="Farmaceut">Farmaceut</option>
-                <option value="Laborant">Laborant</option>
-            </select>
-            <!--
-            <input type="text" id="opretRolle" name="rolle">
-            -->
-        </div>
-        <div>
-            <label for="opretCPR">CPR: </label>
-            <input type="text" id="opretCPR" name="cpr">
-        </div>
-        <div>
-            <label for="aktiv">Aktiv: </label>
-            <input type="radio" id="aktiv" name="aktiv" value=1 checked>
-            <label for="inaktiv">Inaktiv: </label>
-            <input type="radio" id="inaktiv" name="aktiv" value=0>
-        </div>
-        <button onclick="createBruger();">Gem bruger</button>
-    </form>
-</div>
