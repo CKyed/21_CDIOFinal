@@ -120,6 +120,11 @@ function savePBtoDatabase() {
 function printToPDF() {
 
     //TODO print
+    var print = document.getElementById("raavarebatchtabellen");
+    print.contentWindow.focus();
+    print.contentWindow.print();
+
+
 
 
 }
