@@ -74,5 +74,15 @@ h1{
     background-color: #6500f6;
     color: white;
 }
+.my-form label{
+    display: block;
+}
+.my-form .form-group {
+    padding-bottom: 10px;
+}
+.my-form input[type="number"]{
+    padding: 4px;
+    width: 50%;
+}
 
 

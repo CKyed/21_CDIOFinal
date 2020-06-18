@@ -2,19 +2,19 @@
 
 <div class="container", id="createRaavareBatch">
     <h1>Opret RåvareBatch</h1>
-    <form id="raavareBatchForm">
-        <div>
-            <label style="display: block" for="opretRaavareBatchID">ID:</label>
+    <form class="my-form" id="raavareBatchForm">
+        <div class="form-group">
+            <label for="opretRaavareBatchID">ID:</label>
             <input type="number" id="opretRaavareBatchID" min="0" max="99999999"
                    name="opretRaavareBatchID" placeholder="Skriv råvarebatchID" oninput="validateIdInput();">
         </div>
-        <div>
-            <label style="display: block" for="RaavareBatchMaengde">Mængde: </label>
-            <input style="padding: 8px" type="number" min="0.0001" max="999.9999" id="RaavareBatchMaengde"
+        <div class="form-group">
+            <label for="RaavareBatchMaengde">Mængde: </label>
+            <input type="number" min="0.0001" max="999.9999" id="RaavareBatchMaengde"
                    name="raavareBatchMaengde" placeholder="Skriv mængde" oninput="validateMaengdeInput();">
         </div>
-        <div>
-            <label for="raavare">Råvare: </label>
+        <div class="form-group">
+            <label  for="raavare">Råvare: </label>
             <select id ="raavare" name = "raavare">
             </select>
         </div>
