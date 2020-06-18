@@ -42,6 +42,9 @@ function createProduktionsBatchView(data) {
 
     if (produktBatch.status ===0){
         updatePbStatus(1);
+    } else if (produktBatch.status === 3){
+        alert("Den angivne produktbatch er allerede afsluttet.")
+        return;
     }
     $('#afvejningsInfo').show();
     document.getElementById("afvejningButton").disabled = false;
@@ -123,6 +126,10 @@ function updatePbStatus(status) {
         success: function () {
             console.log(data);
             console.log("Put lykkedes: status opdateret");
+            if (status==2){
+                alert("Produktbatchen er nu afsluttet.");
+                switchPage('laborant/laborant.html');
+            }
         },
         error(jqXHR){
             console.log(data);
@@ -134,7 +141,6 @@ function updatePbStatus(status) {
 
 function startAfvejning() {
     $('#afvejningsDiv').show();
-    $('#finishAfvejningButton').hide();
     document.getElementById("afvejningButton").disabled = true;
 
     if (recept.receptKomponenter.length >0) {
@@ -149,14 +155,19 @@ function startAfvejning() {
     //Update råvare-text
     document.getElementById("currentRaavare").innerText = "Afvejning af: " + raavare.raavareNavn + ", " + raavare.raavareID;
 
-    //disable næste-afvejning-knap
-    //document.getElementById("nextAfvejningButton").disabled = true;
 
-    //enable save-afvejning-knap
-    document.getElementById("saveAfvejningButton").disabled = false;
 }
 
 function validateAfvejningInput() {
+    //Check that the råvare is not already afvejet
+    var raavrareID = currentReceptKomp.raavare.raavareID;
+
+    for (let j = 0; j < finishedRaaIDs.length; j++) {
+        if (finishedRaaIDs[j]===raavrareID){
+            alert("Råvaren er allerede afvejet, og kan ikke afvejes igen.")
+            return;
+        }
+    }
 
     //Validation: tara
     var tara = document.getElementById("tara").value;
@@ -257,8 +268,6 @@ function saveAfvejningToDatabase() {
 }
 
 function saveToDBWasSuccesful() {
-    //disable gemafvejningbutton
-    document.getElementById("saveAfvejningButton").disabled = true;
 
     //Add to finishedRaaIds
     var finishedRaaID= currentReceptKomp.raavare.raavareID;
@@ -274,16 +283,6 @@ function saveToDBWasSuccesful() {
         }
     }
 
-    //check if there are more receptkomponenter
-    if (recept.receptKomponenter.length <= currentReceptKompIndex +1){
-        //hide "next afvejning"-button
-        $('#nextAfvejningButton').hide();
-        $('#finishAfvejningButton').show();
-
-    } else {
-        //Enable "next afvejning"-button
-        //document.getElementById("nextAfvejningButton").disabled = false;
-    }
 
 }
 
@@ -293,7 +292,9 @@ function nextAfvejning() {
     if (recept.receptKomponenter.length > currentReceptKompIndex +1){
         currentReceptKomp = recept.receptKomponenter[++currentReceptKompIndex];
     } else{
-        alert("Der er ikke flere receptkomponenenter.")
+        //Starts over with the first receptkomp
+        currentReceptKompIndex=0;
+        currentReceptKomp = recept.receptKomponenter[currentReceptKompIndex];
     }
 
     var raavare = currentReceptKomp.raavare;
@@ -305,7 +306,7 @@ function nextAfvejning() {
     //document.getElementById("nextAfvejningButton").disabled = true;
 
     //enable save-afvejning-knap
-    document.getElementById("saveAfvejningButton").disabled = false;
+    //document.getElementById("saveAfvejningButton").disabled = false;
 
     //empty input fields
     document.getElementById("tara").value = "";
@@ -315,6 +316,21 @@ function nextAfvejning() {
 }
 
 function finishAfvejning() {
+    //Check that the produktbatch is done
+    if (!(finishedRaaIDs.length ===recept.receptKomponenter.length)){
+        alert("Der er stadig råvarer som mangler at blive afvejet i denne produktbatch.");
+        return;
+    }
+    //check that the current status is 1 meaning påbegyndt
+    if (produktBatch.status==1){
+        updatePbStatus(2);
+    } else if (produktBatch.status==2){
+        alert("Produktbatchen er allerede afsluttet.");
+    } else {
+        alert("Fejl. Produktbatchens nuværende status er ikke \"Under produktion\" og det kan derfor ikke afsluttes");
+        return;
+    }
+
 
 }
 

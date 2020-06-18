@@ -129,7 +129,7 @@ public class ProduktBatchDAO implements iProduktBatchDAO {
 
         }catch (SQLException e){
             e.printStackTrace();
-            throw new DALException("Kunne ikke oprette bruger med det ID");
+            throw new DALException("Kunne ikke opdatere produktbatchen.");
         }
 
         dBconnector.closeConnection();
