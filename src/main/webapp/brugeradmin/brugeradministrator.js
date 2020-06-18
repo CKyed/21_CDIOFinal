@@ -22,6 +22,7 @@ function generateBrugerTable(bruger){
 }
 
 function createBruger() {
+
     event.preventDefault();
         var data =$('#brugerform').serializeJSON();
         console.log(data);
@@ -41,14 +42,12 @@ function createBruger() {
         })
     }
 
+
 function validateBrugerID() {
     var letters = /^[A-Za-z]+$/;
     var id = document.getElementById("opretInitialer").value;
     if(id.match(letters)){
         return true;
-    }else{
-        alert("brugerID må kun være bogstaver");
-        console.log("Fejl i validateBrugerID");
     }
 }
 

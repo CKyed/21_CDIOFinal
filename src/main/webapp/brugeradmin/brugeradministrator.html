@@ -11,14 +11,16 @@
         </div>
         <div>
             <label for="opretBrugerNavn">Navn: </label>
-            <input type="text" id="opretBrugerNavn" name="brugerNavn">
+            <input type="text" id="opretBrugerNavn" name="brugerNavn" onkeypress=" return (event.charCode > 64 &&
+            event.charCode < 91) || (event.charCode > 96 && event.charCode < 123  || (event.charCode == 32))">
         </div>
         <div>
             <label for="opretInitialer">Initialer: </label>
             <!--
             <input type="text" id="opretInitialer" name="initialer">
             -->
-            <input type="text" id="opretInitialer" name="initialer">
+            <input type="text" id="opretInitialer" name="initialer" onkeypress=" return ((event.charCode > 64 &&
+            event.charCode < 91) || (event.charCode > 96 && event.charCode < 123))">
 
         </div>
         <div>
@@ -101,7 +103,7 @@
     <tr>
         <th>BrugerID</th>
         <th>Rolle</th>
-        <th>BrugerNavn</th>
+        <th>Navn</th>
         <th>Initialer</th>
         <th>CPR</th>
         <th>Aktiv</th>
