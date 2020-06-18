@@ -12,13 +12,11 @@
         <div>
             <label for="opretBrugerNavn">Navn: </label>
             <input type="text" id="opretBrugerNavn" name="brugerNavn" onkeypress=" return (event.charCode > 64 &&
-            event.charCode < 91) || (event.charCode > 96 && event.charCode < 123  || (event.charCode == 32))">
+            event.charCode < 91) || (event.charCode > 96 && event.charCode < 123  || (event.charCode == 32))" maxlength="20">
+
         </div>
         <div>
             <label for="opretInitialer">Initialer: </label>
-            <!--
-            <input type="text" id="opretInitialer" name="initialer">
-            -->
             <input type="text" id="opretInitialer" name="initialer" onkeypress=" return (event.charCode > 64 &&
             event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" maxlength="4" placeholder="mindst to">
 
@@ -37,7 +35,8 @@
         </div>
         <div>
             <label for="opretCPR">CPR: </label>
-            <input type="text" id="opretCPR" name="cpr">
+            <input type="text" id="opretCPR" name="cpr" maxlength="10" onkeypress="return(event.charCode > 47 && event.charCode < 58)"
+            placeholder="uden bindestreg">
         </div>
         <div>
             <label for="aktiv">Aktiv: </label>
@@ -66,11 +65,13 @@
 
         <div>
             <label for="updateBrugerNavn">Navn: </label>
-            <input type="text" id="updateBrugerNavn" name="brugerNavn">
+            <input type="text" id="updateBrugerNavn" name="brugerNavn" onkeypress=" return (event.charCode > 64 &&
+            event.charCode < 91) || (event.charCode > 96 && event.charCode < 123  || (event.charCode == 32))" maxlength="20" >
         </div>
         <div>
             <label for="updateInitialer">Initialer: </label>
-            <input type="text" id="updateInitialer" name="initialer">
+            <input type="text" id="updateInitialer" name="initialer" onkeypress=" return (event.charCode > 64 &&
+            event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" maxlength="4" placeholder="mindst to">
         </div>
         <div>
             <label for="updateRolle">Vælg rolle: </label>
@@ -83,7 +84,8 @@
         </div>
         <div>
             <label for="updateCPR">CPR: </label>
-            <input type="text" id="updateCPR" name="cpr">
+            <input type="text" id="updateCPR" name="cpr" maxlength="10" onkeypress="return(event.charCode > 47 && event.charCode < 58)"
+                   placeholder="uden bindestreg">
         </div>
         <div>
             <label for="aktiv2">Aktiv: </label>
