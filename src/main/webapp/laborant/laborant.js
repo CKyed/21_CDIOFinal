@@ -8,6 +8,7 @@ var produktBatch;
 var currentReceptKompIndex=0;
 var currentReceptKomp;
 var currentRaavareBatch;
+var finishedRaaIDs =[];
 
 function getProduktBatch() {
     var id = document.getElementById("pbId").value;
@@ -26,15 +27,22 @@ function getProduktBatch() {
         }
     })
 }
+
+function initializeFinishedRaaIDs() {
+    for (let i = 0; i < produktBatch.produktBatchKomponenter.length; i++) {
+        finishedRaaIDs.push(produktBatch.produktBatchKomponenter[i].raavareBatchDTO.raavare.raavareID);
+    }
+}
 function createProduktionsBatchView(data) {
     console.log(recept);
     console.log(produktBatch);
     $('#receptInfo').empty();
     $('#receptInfo').append(generateReceptView());
-    $('#receptRaavareListe').empty();
-    $('#receptRaavareListe').append(generateRaavareView());
     generateRaavareView();
-    updatePbStatus(1);
+
+    if (produktBatch.status ===0){
+        updatePbStatus(1);
+    }
     $('#afvejningsInfo').show();
     document.getElementById("afvejningButton").disabled = false;
 }
@@ -46,14 +54,40 @@ function getRecept(receptID) {
         url: 'rest/recept/'+receptID,
         success: function(data){
             recept = data;
+            initializeFinishedRaaIDs();
             createProduktionsBatchView(data);
         }
     })
 }
 
 function generateRaavareView() {
-    var x = "test ";
-    var i = "";
+    $('#receptRaavareListe').empty();
+    var table = document.getElementById("receptRaavareListe");
+    console.log(finishedRaaIDs);
+    for (let i = 0; i < recept.receptKomponenter.length; i++) {
+        komp = recept.receptKomponenter[i];
+        var row = table.insertRow(-1);
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        var cell3 = row.insertCell(2);
+        var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
+        cell1.innerHTML = komp.raavare.raavareNavn;
+        cell2.innerHTML = komp.raavare.raavareID;
+        cell3.innerHTML = komp.nonNetto;
+        cell4.innerHTML = komp.tolerance;
+        cell5.innerHTML = "Nej";
+
+        for (let j = 0; j < finishedRaaIDs.length; j++) {
+            if (finishedRaaIDs[j]===komp.raavare.raavareID){
+                cell5.innerHTML = "Ja";
+            }
+        }
+
+    }
+
+
+/*
     for(i in recept.receptKomponenter){
         x += '<tr><td>' + recept.receptKomponenter[i].raavare.raavareNavn + '</td>' +
         '<td>' + recept.receptKomponenter[i].raavare.raavareID + '</td>' +
@@ -64,6 +98,8 @@ function generateRaavareView() {
 
     }
     return x;
+
+ */
 }
 
 function generateReceptView() {
@@ -114,7 +150,7 @@ function startAfvejning() {
     document.getElementById("currentRaavare").innerText = "Afvejning af: " + raavare.raavareNavn + ", " + raavare.raavareID;
 
     //disable næste-afvejning-knap
-    document.getElementById("nextAfvejningButton").disabled = true;
+    //document.getElementById("nextAfvejningButton").disabled = true;
 
     //enable save-afvejning-knap
     document.getElementById("saveAfvejningButton").disabled = false;
@@ -210,8 +246,9 @@ function saveAfvejningToDatabase() {
         contentType: "application/json",
         data: data,
         success: function (data) {
+            saveToDBWasSuccesful();
             alert(JSON.stringify(data));
-            saveToDBWasSuccesful
+
         },
         error: function (jqXHR) {
             alert(jqXHR.responseText);
@@ -223,6 +260,20 @@ function saveToDBWasSuccesful() {
     //disable gemafvejningbutton
     document.getElementById("saveAfvejningButton").disabled = true;
 
+    //Add to finishedRaaIds
+    var finishedRaaID= currentReceptKomp.raavare.raavareID;
+    finishedRaaIDs.push(finishedRaaID);
+
+    var table = document.getElementById("receptRaavareListe");
+
+    for (var i = 0, row; row = table.rows[i]; i++) {
+        console.log("HEJHEJ" + i);
+        //iterate through rows and set text to "Ja" if raavareID === finishedRaaID
+        if (finishedRaaID == row.cells[1].innerHTML){
+            row.cells[4].innerHTML = "Ja";
+        }
+    }
+
     //check if there are more receptkomponenter
     if (recept.receptKomponenter.length <= currentReceptKompIndex +1){
         //hide "next afvejning"-button
@@ -231,7 +282,7 @@ function saveToDBWasSuccesful() {
 
     } else {
         //Enable "next afvejning"-button
-        document.getElementById("nextAfvejningButton").disabled = false;
+        //document.getElementById("nextAfvejningButton").disabled = false;
     }
 
 }
@@ -251,7 +302,7 @@ function nextAfvejning() {
     document.getElementById("currentRaavare").innerText = "Afvejning af: " + raavare.raavareNavn + ", " + raavare.raavareID;
 
     //disable næste-afvejning-knap
-    document.getElementById("nextAfvejningButton").disabled = true;
+    //document.getElementById("nextAfvejningButton").disabled = true;
 
     //enable save-afvejning-knap
     document.getElementById("saveAfvejningButton").disabled = false;
