@@ -108,7 +108,7 @@ public class ProduktBatchKompDAO implements iProduktBatchKompDAO {
         DBconnector dBconnector = new DBconnector();
         try {
             Statement statement = dBconnector.connection.createStatement();
-            String sqlStatement = "insert into ProduktbatchKomp values('%f', '%f', '%d', '%d', '%d');";
+            String sqlStatement = "insert into ProduktBatchKomp values('%f', '%f', '%d', '%d', '%d');";
             sqlStatement = String.format(sqlStatement,
                     produktbatchkomponent.getTara(),
                     produktbatchkomponent.getNetto(),
