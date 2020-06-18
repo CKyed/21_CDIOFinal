@@ -4,7 +4,7 @@
     <form id="produktionsbatchID">
         <label for="pbId">Indtast Produktbatch ID</label>
         <input type="number" id="pbId" name="pbId">
-        <button class="button" onclick="getProduktBatch(); return false;">Godkend</button>
+        <button class="button" onclick="getProduktBatch(); return false;">Vis produktbatch</button>
         <p id="errorMessage"></p>
     </form>
 
@@ -28,9 +28,12 @@
         <tr>
             <th>Råvare</th>
             <th>Råvare ID</th>
-            <th>Netto vægt</th>
+            <th>Nettovægt i recept</th>
             <th>Tolerance</th>
-            <th>Afvejet</th>
+            <th>Målt nettovægt</th>
+            <th>Målt tara</th>
+            <th>Laborant ID</th>
+            <th>Råvarebatch ID</th>
         </tr>
         </thead>
         <tbody id="receptRaavareListe">
@@ -52,7 +55,7 @@
 
     <label style="display: block" for="netto">Nettovægt [kg]</label>
     <input type="number" id="netto" min="0.0001" max="999.99999"
-           name="tara" placeholder="nettovægt">
+           name="netto" placeholder="nettovægt">
 
 
 

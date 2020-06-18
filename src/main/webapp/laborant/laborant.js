@@ -10,7 +10,17 @@ var currentReceptKomp;
 var currentRaavareBatch;
 var finishedRaaIDs =[];
 
+function resetGlobalVariables() {
+    recept=null;
+    produktBatch=null;
+    currentReceptKompIndex=0;
+    currentReceptKomp=null;
+    currentRaavareBatch=null;
+    finishedRaaIDs =[];
+}
+
 function getProduktBatch() {
+    resetGlobalVariables();
     var id = document.getElementById("pbId").value;
     var errorMessage;
     errorMessage = document.getElementById("errorMessage");
@@ -75,15 +85,29 @@ function generateRaavareView() {
         var cell3 = row.insertCell(2);
         var cell4 = row.insertCell(3);
         var cell5 = row.insertCell(4);
+        var cell6 = row.insertCell(5);
+        var cell7 = row.insertCell(6);
+        var cell8 = row.insertCell(7);
         cell1.innerHTML = komp.raavare.raavareNavn;
         cell2.innerHTML = komp.raavare.raavareID;
         cell3.innerHTML = komp.nonNetto;
         cell4.innerHTML = komp.tolerance;
-        cell5.innerHTML = "Nej";
+        cell5.innerHTML = "";
+        cell6.innerHTML = "";
+        cell7.innerHTML = "";
+        cell8.innerHTML = "";
 
         for (let j = 0; j < finishedRaaIDs.length; j++) {
             if (finishedRaaIDs[j]===komp.raavare.raavareID){
-                cell5.innerHTML = "Ja";
+                var pbKomp = getProduktBatchKompFromRaaID(finishedRaaIDs[j]);
+                if (pbKomp == undefined){
+                    alert("Meget uventet fejl i generateRaavareView()");
+                }
+
+                cell5.innerHTML = pbKomp.netto;
+                cell6.innerHTML = pbKomp.tara;
+                cell7.innerHTML = pbKomp.laborant.brugerID;
+                cell8.innerHTML = pbKomp.raavareBatchDTO.rbId;
             }
         }
 
@@ -184,6 +208,7 @@ function validateAfvejningInput() {
 
     //Validation: netto
     var netto = document.getElementById("netto").value;
+    console.log("netto "+netto)
     if (!netto){
         alert("Angiv netto.")
         return;
@@ -245,7 +270,7 @@ function saveAfvejningToDatabase() {
         "pbId": produktBatch.pbId,
         "raavareBatchDTO": currentRaavareBatch,
         "tara": document.getElementById("tara").value,
-        "netto": document.getElementById("tara").netto,
+        "netto": document.getElementById("netto").value,
         "laborant": user
     }
     data =JSON.stringify(pbKomp);
@@ -279,9 +304,15 @@ function saveToDBWasSuccesful() {
         console.log("HEJHEJ" + i);
         //iterate through rows and set text to "Ja" if raavareID === finishedRaaID
         if (finishedRaaID == row.cells[1].innerHTML){
-            row.cells[4].innerHTML = "Ja";
+            row.cells[4].innerHTML =document.getElementById("netto").value;
+            row.cells[5].innerHTML = document.getElementById("tara").value;
+            row.cells[6].innerHTML = user.brugerID;
+            row.cells[7].innerHTML = document.getElementById("rbId").value;
+
         }
     }
+
+
 
 
 }
@@ -330,9 +361,21 @@ function finishAfvejning() {
         alert("Fejl. Produktbatchens nuværende status er ikke \"Under produktion\" og det kan derfor ikke afsluttes");
         return;
     }
-
-
 }
+
+function getProduktBatchKompFromRaaID(raavareID) {
+    //Search through the pbKomp's that were in the PB that was loaded in th begninning
+    //return the pbKomp with the corresponding raavareID
+
+    var list = produktBatch.produktBatchKomponenter;
+    for (let i = 0; i < list.length; i++) {
+        if (list[i].raavareBatchDTO.raavare.raavareID == raavareID){
+            return list[i];
+        }
+    }
+    return undefined;
+}
+
 
 /*
 function createProduktBatchKomp() {
