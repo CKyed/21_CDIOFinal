@@ -1,4 +1,7 @@
 var brugertype;
+var brugerID;
+var brugerNavn;
+var user;
 
 function switchPage(page){
     $("#container").load(page);
@@ -13,6 +16,10 @@ function checkLogin() {
         method: 'GET',
         url:'rest/bruger/'+id,
         success: function (data) {
+            //set global variable "data" for later use
+            user = data;
+            brugerID=data.brugerID;
+            brugerNavn=data.brugerNavn;
             switch (data.rolle) {
                 case "Administrator":
                     brugertype=0;
@@ -28,7 +35,7 @@ function checkLogin() {
                     break;
                 case "Laborant":
                     brugertype=3;
-                    switchPage('laborant.html');
+                    switchPage('laborant/laborant.html');
                     break;
             }
         },
@@ -40,7 +47,6 @@ function checkLogin() {
 
 function brugerRettigheder() {
     for (let i = 0; i < brugertype; i++) {
-        console.log(i);
         var x=document.getElementById("brugerforwarding"+i);
         x.style.display = "none";
     }

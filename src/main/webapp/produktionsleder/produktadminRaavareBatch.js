@@ -60,11 +60,32 @@ function generateRaavareBatchTable() {
         cell4.innerHTML = elt.raavare.raavareNavn;
     });
 }
+function validateRaavareBatchInputs() {
+    //Input validation
+    var maengde = document.getElementById('RaavareBatchMaengde').value;
+    if ( maengde< 0.0001 || maengde > 999.9999){
+        alert("Angiv en mængde først.");
+        return
+    }
 
+    if (!document.getElementById('opretRaavareBatchID').value){
+        alert("Angiv et råvarebatch ID.")
+        return;
+    }
+
+    if (!rbIdVacant(document.getElementById('opretRaavareBatchID').value)){
+        alert("Råvarebatch ID'et er allerede i brug.")
+        return;
+    }
+
+
+
+}
 
 function createRaavareBatch() {
     event.preventDefault();
 
+    //Create JSON object
     var raavare = raavareList[document.getElementById('raavare').value];
     console.log("raavare: " + raavare.raavareNavn);
     var raavarebatch = {
@@ -75,13 +96,7 @@ function createRaavareBatch() {
     }
     var data =JSON.stringify(raavarebatch);
 
-
-    if (!rbIdVacant(document.getElementById('opretRaavareBatchID').value)){
-        alert("Råvarebatch ID'et er allerede i brug.")
-        return;
-    };
-
-
+    //REST POST call
     console.log(data);
     $.ajax({
         url: 'rest/raavarebatch',
@@ -97,28 +112,6 @@ function createRaavareBatch() {
         }
     })
 }
-/*
-function updateRaavare() {
-    event.preventDefault();
-    var data =$('#raavareUdateForm').serializeJSON();
-    console.log(data);
-    $.ajax({
-        url: 'rest/raavare',
-        method: 'PUT',
-        contentType: "application/json",
-        data: data,
-        success: function (data) {
-            alert(JSON.stringify(data));
-            loadRaavareBatch();
-        },
-        error: function (jqXHR) {
-            alert(jqXHR.responseText);
-        }
-
-    })
-}
-
- */
 
 function loadSpecificRaavare() {
     var id = document.getElementById("RaavareId").value;
@@ -162,20 +155,20 @@ function validateIdInput() {
 function rbIdVacant(proposedId){
     var vacant;
     $.ajax({
-        async: false,//TODO overvej om dette er smart
         method: 'GET',
         url:'rest/raavarebatch/'+proposedId+'/',
         success: function () {
             vacant = false;
-            console.log("Get-kaldet var en succes");
+            console.log("Get-kaldet var en succes. Det betyder at ID'et er optaget.");
+            return false;
         },
         error: function () {
             vacant = true;
-            console.log("Get-kaldet var en fiasko");
+            console.log("Get-kaldet var en fiasko. Det betyder at ID'et er ledigt.");
+            createRaavareBatch();
+            return true;
         }
     })
-    return vacant;
-
 }
 
 
