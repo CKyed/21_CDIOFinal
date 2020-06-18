@@ -1,0 +1,40 @@
+<script>$('#afvejningsInfo').hide();</script>
+
+<div id="afvening">
+    <form id="produktionsbatchID">
+        <label for="pbId">Indtast produktionsbatch ID</label>
+        <input type="number" id="pbId" name="pbId">
+        <button onclick="getProduktBatch(); return false;">Godkend</button>
+        <p id="errorMessage"></p>
+    </form>
+
+</div>
+
+
+<div id="afvejningsInfo">
+    <table>
+        <thead>
+        <tr>
+            <th>Recept ID</th>
+            <th>Recept navn</th>
+            <th>Produktions Batch ID</th>
+        </tr>
+        </thead>
+        <tbody id="receptInfo">
+        </tbody>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Råvare</th>
+            <th>Råvare ID</th>
+            <th>Netto vægt</th>
+            <th>Tolerance</th>
+        </tr>
+        </thead>
+        <tbody id="receptRaavareListe">
+        </tbody>
+    </table>
+
+
+</div>
