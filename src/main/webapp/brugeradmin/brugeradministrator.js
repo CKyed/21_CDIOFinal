@@ -46,11 +46,9 @@ function validateBrugerID() {
     var id = document.getElementById("opretInitialer").value;
     if(id.match(letters)){
         return true;
-        createBruger();
     }else{
         alert("brugerID må kun være bogstaver");
         console.log("Fejl i validateBrugerID");
-
     }
 }
 
