@@ -200,6 +200,7 @@ function receptIdVacant(proposedId){
         error: function () {
             vacant = true;
             console.log("Get-kaldet var en fiasko");
+
         }
     })
     return vacant;

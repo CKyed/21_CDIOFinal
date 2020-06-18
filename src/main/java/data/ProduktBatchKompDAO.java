@@ -108,7 +108,7 @@ public class ProduktBatchKompDAO implements iProduktBatchKompDAO {
         DBconnector dBconnector = new DBconnector();
         try {
             Statement statement = dBconnector.connection.createStatement();
-            String sqlStatement = "insert into ProduktbatchKomp values('%f', '%f', '%d', '%d', '%d');";
+            String sqlStatement = "insert into ProduktBatchKomp values('%f', '%f', '%d', '%d', '%d');";
             sqlStatement = String.format(sqlStatement,
                     produktbatchkomponent.getTara(),
                     produktbatchkomponent.getNetto(),
@@ -129,8 +129,8 @@ public class ProduktBatchKompDAO implements iProduktBatchKompDAO {
         DBconnector dBconnector = new DBconnector();
         try {
             Statement statement = dBconnector.connection.createStatement();
-            String sqlStatement = "UPDATE ProduktbatchKomp " +
-                    "SET Tara = '%f' , Netto = '%f' ,BrugerID = '%d' " +
+            String sqlStatement = "UPDATE ProduktBatchKomp " +
+                    "SET tara = '%f' , netto = '%f' ,brugerId = '%d' " +
                     "WHERE pbId = '%d' AND rbId = '%d';";
             sqlStatement = String.format(sqlStatement,
                     produktbatchkomponent.getTara(),

@@ -35,9 +35,8 @@ public class ProduktBatchKompService {
         @POST
         @Produces(MediaType.TEXT_PLAIN)
         @Consumes(MediaType.APPLICATION_JSON)
-        public ProduktBatchKompDTO createProduktBatch(ProduktBatchKompDTO produktBatchKompDTO) throws DALException{
+        public Response createProduktBatch(ProduktBatchKompDTO produktBatchKompDTO) throws DALException{
                 produktBatchKompDAO.createProduktBatchKomp(produktBatchKompDTO);
-                //TODO Den skal nok retunere noget andet en null
-                return null;
+                return Response.ok("Tilføjet").build();
         }
 }

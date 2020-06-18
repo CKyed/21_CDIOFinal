@@ -59,10 +59,9 @@ function createRaavare() {
             alert(JSON.stringify(data));
             loadRaavarer();
         },
-        error: function (jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR) {
             alert(jqXHR.responseText);
-            alert(textStatus);
-            alert(errorThrown);
+
         }
     })
 }

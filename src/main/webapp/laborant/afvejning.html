@@ -1,10 +1,10 @@
-<script>$('#afvejningsInfo').hide();</script>
+<script src="laborant/laborant.js"></script>
 
 <div id="afvening">
     <form id="produktionsbatchID">
-        <label for="pbId">Indtast Produktionsbatch ID</label>
+        <label for="pbId">Indtast Produktbatch ID</label>
         <input type="number" id="pbId" name="pbId">
-        <button class="button" onclick="getProduktBatch(); return false;">Godkend</button>
+        <button class="button" onclick="getProduktBatch(); return false;">Vis produktbatch</button>
         <p id="errorMessage"></p>
     </form>
 
@@ -12,12 +12,12 @@
 
 
 <div id="afvejningsInfo">
-    <d>
+    <table>
         <thead>
         <tr>
             <th>Recept ID</th>
             <th>Recept navn</th>
-            <th>Produktions Batch ID</th>
+            <th>Produktbatch ID</th>
         </tr>
         </thead>
         <tbody id="receptInfo">
@@ -28,11 +28,39 @@
         <tr>
             <th>Råvare</th>
             <th>Råvare ID</th>
-            <th>Netto vægt</th>
+            <th>Nettovægt i recept</th>
             <th>Tolerance</th>
+            <th>Målt nettovægt</th>
+            <th>Målt tara</th>
+            <th>Laborant ID</th>
+            <th>Råvarebatch ID</th>
         </tr>
         </thead>
         <tbody id="receptRaavareListe">
         </tbody>
     </table>
+</div>
+
+<button class="button" id ="afvejningButton" onclick="startAfvejning();">Start Afvejning</button>
+
+<div id="afvejningsDiv">
+    <h2 id="currentRaavare">Afvejning af:</h2>
+    <label style="display: block" for="tara">Tara [kg]</label>
+    <input type="number" id="tara" min="0.0001" max="999.99999"
+           name="tara" placeholder="tara">
+
+    <label style="display: block" for="rbId">Råvarebatch ID</label>
+    <input type="number" id="rbId" min="0" max="99999999"
+           name="rbId" placeholder="ID">
+
+    <label style="display: block" for="netto">Nettovægt [kg]</label>
+    <input type="number" id="netto" min="0.0001" max="999.99999"
+           name="netto" placeholder="nettovægt">
+
+
+
+    <button id ="saveAfvejningButton"onclick="validateAfvejningInput();">Gem afvejning</button>
+    <button id = "nextAfvejningButton" onclick="nextAfvejning();">Næste råvare</button>
+    <button id = "finishAfvejningButton" onclick="finishAfvejning();">Afslut afvejning</button>
+
 </div>

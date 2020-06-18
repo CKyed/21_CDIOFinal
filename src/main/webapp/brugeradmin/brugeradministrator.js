@@ -22,24 +22,33 @@ function generateBrugerTable(bruger){
 }
 
 function createBruger() {
-    event.preventDefault();
-    var data =$('#brugerform').serializeJSON();
-    console.log(data);
-    $.ajax({
-        url: 'rest/bruger',
-        method: 'POST',
-        contentType: "application/json",
-        data: data,
-        success: function (data) {
-            console.log(data);
-            alert(JSON.stringify(data));
-            loadBruger();
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert(jqXHR.responseText);
-        }
-    })
 
+    event.preventDefault();
+        var data =$('#brugerform').serializeJSON();
+        console.log(data);
+        $.ajax({
+            url: 'rest/bruger',
+            method: 'POST',
+            contentType: "application/json",
+            data: data,
+            success: function (data) {
+                console.log(data);
+                alert(JSON.stringify(data));
+                loadBruger();
+            },
+            error: function (jqXHR) {
+                alert(jqXHR.responseText);
+            }
+        })
+    }
+
+
+function validateBrugerInitialer() {
+    var letters = /^[A-Za-z]+$/;
+    var id = document.getElementById("opretInitialer").value;
+    if(id.match(letters)){
+        return true;
+    }
 }
 
 function loadSpecificBruger() {
@@ -68,7 +77,7 @@ function loadSpecificBruger() {
             }
             if(data.brugerNavn == undefined){
                 console.log("mangler ID");
-                errormessage.innerHTML="Kan ikke finde bruger uden ID";
+                errormessage.innerHTML="Kan ikke finde bruger uden ID. Indtast et brugerID";
                 document.getElementById("updateBrugerNavn").value=" ";
                 document.getElementById("updateInitialer").value=" ";
                 document.getElementById("updateCPR").value=" ";
@@ -97,10 +106,9 @@ function updateBruger() {
             alert(JSON.stringify(data));
             loadBruger();
         },
-        error: function (jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR) {
             alert(jqXHR.responseText);
-            // alert(textStatus);
-            // alert(errorThrown);
+
         }
 
     })
@@ -121,10 +129,9 @@ function updateRaavare() {
             alert(JSON.stringify(data));
             loadRaavarer();
         },
-        error: function (jqXHR, textStatus, errorThrown) {
+        error: function (jqXHR) {
             alert(jqXHR.responseText);
-            // alert(textStatus);
-            // alert(errorThrown);
+
         }
 
     })
