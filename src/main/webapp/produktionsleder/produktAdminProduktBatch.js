@@ -53,7 +53,13 @@ function showPrintablePB(recept){
 function validateInputs() {
     //Check that input is valid in all fields
 
-    //TODO valider datoen
+    var date = document.getElementById("datoforOprettelse").value;
+
+    if (!date){
+        alert("Du skal angive en dato.")
+        return;
+
+    }
 
     if (!receptIdValid){
         alert("Du skal indlæse en gyldig recept først.")
@@ -62,7 +68,7 @@ function validateInputs() {
 
     var proposedId = document.getElementById("produktbatchid").value;
 
-    if (proposedId.length ===0){
+    if (proposedId.length === 0){
         alert("Du skal angive et produktbatch ID.");
         return;
     }
@@ -75,7 +81,7 @@ function validateInputs() {
             alert("Der eksisterer allerede en produktbatch med dette ID")
         },
         error: function () {
-            console.log("Get-kaldet var en fiasko");
+            console.log("Get-kaldet var en fiasko, det betyder at ID'et er ledigt.");
             savePBtoDatabase();
         }
     })
@@ -114,5 +120,6 @@ function savePBtoDatabase() {
 function printToPDF() {
 
     //TODO print
+
 
 }
