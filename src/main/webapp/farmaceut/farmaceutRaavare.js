@@ -69,12 +69,12 @@ function createRaavare() {
 function validateOpdateInputs() {
     //Input validation
     if (!document.getElementById('opretRaavareID').value) {
-        alert("Venligst angiv et gyldigt Råvare ID.")
+        alert("Venligst! Angiv et gyldigt Råvare ID.")
         return
     } else if (!document.getElementById('opretRaavareNavn').value) {
-        alert("Venligst skriv navnet på det råvare du gerne vil oprette.")
+        alert("Venligst! Skriv navnet på det råvare du gerne vil oprette.")
     } else if (!document.getElementById('opretLeverandoer').value) {
-        alert("Skriv venligt nanvet på leverandøren")
+        alert("Skriv venligst navnet på leverandøren")
     } else {
         createRaavare()
         return;
@@ -83,7 +83,6 @@ function validateOpdateInputs() {
 
     }
 }
-
 
 function updateRaavare() {
     event.preventDefault();
