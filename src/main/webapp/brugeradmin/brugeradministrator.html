@@ -7,7 +7,7 @@
     <form id="brugerform">
         <div>
             <label for="opretBrugerID"> ID:</label>
-            <input type="number" id="opretBrugerID" name="brugerID">
+            <input type="number" id="opretBrugerID" min = "0" max = "999" name="brugerID">
         </div>
         <div>
             <label for="opretBrugerNavn">Navn: </label>
@@ -18,7 +18,7 @@
         <div>
             <label for="opretInitialer">Initialer: </label>
             <input type="text" id="opretInitialer" name="initialer" onkeypress=" return (event.charCode > 64 &&
-            event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" maxlength="4" placeholder="mindst to">
+            event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" maxlength="4" placeholder="XX">
 
         </div>
         <div>
@@ -36,7 +36,7 @@
         <div>
             <label for="opretCPR">CPR: </label>
             <input type="text" id="opretCPR" name="cpr" maxlength="10" onkeypress="return(event.charCode > 47 && event.charCode < 58)"
-            placeholder="uden bindestreg">
+            placeholder="CPR">
         </div>
         <div>
             <label for="aktiv">Aktiv: </label>
@@ -44,7 +44,7 @@
             <label for="inaktiv">Inaktiv: </label>
             <input type="radio" id="inaktiv" name="aktiv" value=0>
         </div>
-        <button onclick="createBruger();">Gem Bruger</button>
+        <button onclick="createBruger(); return false;">Gem Bruger</button>
     </form>
 </div>
 
@@ -93,7 +93,7 @@
             <label for="inaktiv2">Inaktiv: </label>
             <input type="radio" id="inaktiv2" name="aktiv" value=0>
         </div>
-        <button onclick="updateBruger();return false;">Gem Ændringer</button>
+        <button onclick="validateUpdateBrugerInput();return false;">Gem Ændringer</button>
 
     </form>
 </div>
