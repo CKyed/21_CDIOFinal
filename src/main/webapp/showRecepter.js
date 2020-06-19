@@ -1,8 +1,8 @@
 $(document).ready(function () {
     console.log("Loader dokumentet");
     loadProduktBatches();
-
 });
+
 var produktBatches;
 
 function loadProduktBatches() {
