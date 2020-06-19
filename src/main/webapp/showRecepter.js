@@ -20,7 +20,7 @@ function loadRecepter() {
         $.each(data, function (i, elt) {
             $('#receptTable').append(generateReceptHTML(elt));
         });
-        document.getElementById("loadMSG").innerText = "Viser alle recepter og ID på deres tilhørende produktbatches."
+        document.getElementById("loadMSG").innerText = "Viser alle recepter samt produktbatch ID på deres tilhørende produktbatches."
     });
 }
 
@@ -44,7 +44,12 @@ function getPbIdsForRecept(receptId) {
     for (let i = 0; i < produktBatches.length; i++) {
         if (produktBatches[i].receptId === receptId){
             status = produktBatches[i].status;
-            produktBatchIds[status] += produktBatches[i].pbId + ", \n";
+            if (produktBatchIds[status].length===0){
+                produktBatchIds[status] += produktBatches[i].pbId;
+            } else{
+                produktBatchIds[status] += ", "+produktBatches[i].pbId;
+            }
+
         }
     }
     return produktBatchIds;
