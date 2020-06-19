@@ -9,6 +9,11 @@ th, td {
     text-align: left;
     padding: 8px;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
 #container{
     padding-top: 20px;

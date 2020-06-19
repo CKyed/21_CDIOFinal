@@ -102,7 +102,7 @@ function loadSpecificRaavare() {
             document.getElementById("updateLeverandoer").value = data.leverandoer;
         },
         error: function () {
-            errormessage.innerHTML="Kunne ikke finder råvarer med det ID, prøv igen";
+            errormessage.innerHTML="Kunne ikke finde råvarer med det ID, prøv igen";
         }
     })
 }
