@@ -250,7 +250,7 @@ function validateAfvejningInput() {
                 //Succes - raavareBatchID matches raavare of receptKomp
                 saveAfvejningToDatabase();
             } else{
-                alert("Den angivne råvarebatch findes, men svarer ikke til den aktuelle råvare.")
+                alert("Den angivne råvarebatch ID findes i databasen, men svarer ikke til den råvare, du er ved at afveje.\n Tjek Råvarebatch ID't.")
             }
         },
         error: function () {
