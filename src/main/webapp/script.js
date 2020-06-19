@@ -2,9 +2,19 @@ var brugertype;
 var brugerID;
 var brugerNavn;
 var user;
+$(function () {
+    $('#topnav').hide();
+});
 
 function switchPage(page){
     $("#container").load(page);
+}
+
+function resetBruger(){
+    for (let i = 0; i <=3 ; i++) {
+        $('#topnavForwardng'+i).show();
+        $('#topnav').hide();
+    }
 }
 
 function checkLogin() {
@@ -45,9 +55,11 @@ function checkLogin() {
     })
 }
 
-function brugerRettigheder() {
-    for (let i = 0; i < brugertype; i++) {
+function brugerRettigheder(){
+    $('#topnav').show();
+    for (let i = 0; i < brugertype; i++){
         var x=document.getElementById("brugerforwarding"+i);
         x.style.display = "none";
+        $('#topnavForwardng'+i).hide();
     }
 }
