@@ -2,12 +2,15 @@
 
 <button class="btn" onclick="switchPage('produktionsleder/produktionsleder.html');">Tilbage til produktionsleder-forsiden</button>
 
+<p id = "loadMSG">Loader alle recepter og produktbatches. Det kan godt tage noget tid...</p>
 <DIV class="container" id="showRecepter">
+
     <table>
         <thead>
         <tr>
-            <td>Recept ID</td>
-            <td>Receptnavn</td>
+            <th>Recept ID</th>
+            <th>Receptnavn</th>
+            <th>Produktbatch ID'er</th>
         </tr>
         </thead>
         <tbody id="receptTable">
