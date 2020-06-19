@@ -66,6 +66,25 @@ function createRaavare() {
     })
 }
 
+function validateOpdateInputs() {
+    //Input validation
+    if (!document.getElementById('opretRaavareID').value) {
+        alert("Venligst angiv et gyldigt Råvare ID.")
+        return
+    } else if (!document.getElementById('opretRaavareNavn').value) {
+        alert("Venligst skriv navnet på det råvare du gerne vil oprette.")
+    } else if (!document.getElementById('opretLeverandoer').value) {
+        alert("Skriv venligt nanvet på leverandøren")
+    } else {
+        createRaavare()
+        return;
+        //check if ID vacant in separate function to avoid async errors
+        //rbIdVacant(document.getElementById('opretRaavareBatchID').value);
+
+    }
+}
+
+
 function updateRaavare() {
     event.preventDefault();
     var data =$('#raavareUdateForm').serializeJSON();
