@@ -25,16 +25,26 @@ function loadRecepter() {
 }
 
 function generateReceptHTML(elt) {
+    var pbIds = getPbIdsForRecept(elt.receptId);
     return '<tr ><td>' + elt.receptId + '</td>' +
         '<td>' + elt.receptNavn + '</td>+' +
-        '<td >' + getPbIdsForRecept(elt.receptId) + '</td></tr> ';
+        '<td>' + pbIds[0] + '</td>+' +
+        '<td>' + pbIds[1] + '</td>+' +
+        '<td >' + pbIds[2] + '</td></tr> ';
 }
 
 function getPbIdsForRecept(receptId) {
-    var produktBatchIds="";
+    var produktBatchIds= [];
+    var status0 = "";
+    var status1= "";
+    var status2= "";
+    produktBatchIds.push(status0); produktBatchIds.push(status1); produktBatchIds.push(status2);
+
+    var status;
     for (let i = 0; i < produktBatches.length; i++) {
         if (produktBatches[i].receptId === receptId){
-            produktBatchIds += produktBatches[i].pbId + ", \n";
+            status = produktBatches[i].status;
+            produktBatchIds[status] += produktBatches[i].pbId + ", \n";
         }
     }
     return produktBatchIds;
