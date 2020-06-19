@@ -73,10 +73,9 @@ function validateRaavareBatchInputs() {
         return;
     }
 
-    if (!rbIdVacant(document.getElementById('opretRaavareBatchID').value)){
-        alert("Råvarebatch ID'et er allerede i brug.")
-        return;
-    }
+    //check if ID vacant in separate function to avoid async errors
+    rbIdVacant(document.getElementById('opretRaavareBatchID').value);
+
 
 
 
@@ -153,20 +152,16 @@ function validateIdInput() {
 }
 
 function rbIdVacant(proposedId){
-    var vacant;
     $.ajax({
         method: 'GET',
         url:'rest/raavarebatch/'+proposedId+'/',
         success: function () {
-            vacant = false;
             console.log("Get-kaldet var en succes. Det betyder at ID'et er optaget.");
-            return false;
+            alert("Råvarebatch ID'et er allerede i brug.")
         },
         error: function () {
-            vacant = true;
             console.log("Get-kaldet var en fiasko. Det betyder at ID'et er ledigt.");
             createRaavareBatch();
-            return true;
         }
     })
 }
