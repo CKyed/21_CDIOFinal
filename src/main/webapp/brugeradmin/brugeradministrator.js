@@ -21,7 +21,72 @@ function generateBrugerTable(bruger){
         '<td>' + bruger.aktiv + '</td>'
 }
 
+String.prototype.trim = function () {
+    return this.replace(/^\s*/, "").replace(/\s*$/, "");
+}
+
+function validateBrugerInput(brugerID, brugerNavn, ini, CPR) {
+    //Validate BrugerID
+    if (!brugerID){
+        alert("Du skal angive et bruger ID");
+        return false;
+    } else if (brugerID > 999){
+        alert("Bruger ID'et er for langt. Det må maks være 3 cifre.");
+        return false;
+    } else if (brugerID < 0){
+        alert("Bruger ID'et skal være et helt tal.");
+        return false;
+    }
+
+    //Validate BrugerNavn
+    if (!brugerNavn){
+        alert("Du skal angive et brugernavn");
+        return false;
+    } else if (brugerNavn.length > 20){
+        alert("Brugernavnet er for langt. Det må maks være 20 tegn.");
+        return false;
+    } else if (brugerNavn.trim().length===0){
+        alert("Brugernavnet må ikke udelukkende indeholde whitespace.");
+        return false;
+    }
+
+    //Validate initialer
+    if (!ini){
+        alert("Du skal angive initialer.");
+        return false;
+    } else if (ini.length > 4){
+        alert("Initialerne må maks være 4 tegn.");
+        return false;
+    } else if (!/^[A-Z]+$/.test(ini)) {
+        //If there are other chars than uppercase letters
+        alert("Initialerne udelukkende indeholde store bogstaver fra A til Z");
+        return false;
+    } else if (ini.length < 2) {
+        alert("Initialerne skal være af minimum 2 tegn.");
+        return false;
+    }
+
+    //Validate CPR
+    if (!CPR){
+        alert("Du skal angive CPR-nummer.");
+        return false;
+    } else if (CPR.length != 10){
+        alert("CPR-nummeret skal være præcis 10 cifre.");
+        return false;
+    }
+
+    return true;
+}
+
 function createBruger() {
+    var brugerID = document.getElementById("opretBrugerID").value;
+    var brugerNavn = document.getElementById("opretBrugerNavn").value;
+    var ini = document.getElementById("opretInitialer").value;
+    var CPR = document.getElementById("opretCPR").value;
+
+    if (!validateBrugerInput(brugerID,brugerNavn,ini,CPR)){
+        return;
+    }
 
     event.preventDefault();
         var data =$('#brugerform').serializeJSON();
@@ -90,9 +155,25 @@ function loadSpecificBruger() {
 }
 
 
+function validateUpdateBrugerInput() {
+
+
+
+    updateBruger();
+}
+
 
 
 function updateBruger() {
+    var brugerID = document.getElementById("BrugerId").value;
+    var brugerNavn = document.getElementById("updateBrugerNavn").value;
+    var ini = document.getElementById("updateInitialer").value;
+    var CPR = document.getElementById("updateCPR").value;
+
+    if (!validateBrugerInput(brugerID,brugerNavn,ini,CPR)){
+        return;
+    }
+
     event.preventDefault();
     var data =$('#brugerformUpdate').serializeJSON();
     console.log(data);
