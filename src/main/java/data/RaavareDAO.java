@@ -27,7 +27,7 @@ public class RaavareDAO implements iRaavareDAO{
 
         }catch (SQLException e){
             e.printStackTrace();
-            throw new DALException("kunne ikke finde råvare");
+            throw new DALException("Råvaren med det angivne ID kan ikke findes!");
         }
 
         dBconnector.closeConnection();
