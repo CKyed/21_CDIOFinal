@@ -3,12 +3,20 @@
 <button class="btn" onclick="switchPage('farmaceut/farmaceut.html');"><i class="fas fa-arrow-circle-left"></i>
     Tilbage til farmaceut-forsiden</button>
 
+<p id = "loadMSG">Loader alle recepter og produktbatches. Det kan godt tage noget tid...</p>
 <DIV class="container" id="showRecepter">
+
     <table>
         <thead>
         <tr>
-            <th>Recept ID</th>
-            <th>Receptnavn</th>
+            <th rowspan="2">Recept ID</th>
+            <th rowspan="2">Receptnavn</th>
+            <th colspan="3">Produktbatches</th>
+        </tr>
+        <tr>
+            <th>Oprettet</th>
+            <th>Under produktion</th>
+            <th>Afsluttet</th>
         </tr>
         </thead>
         <tbody id="receptTable">
