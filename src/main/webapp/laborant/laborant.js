@@ -43,19 +43,39 @@ function initializeFinishedRaaIDs() {
         finishedRaaIDs.push(produktBatch.produktBatchKomponenter[i].raavareBatchDTO.raavare.raavareID);
     }
 }
+
+function generatePBinfoView() {
+    $('#produktBatchInfo').empty();
+
+    var table = document.getElementById("produktBatchInfo");
+    var row = table.insertRow(-1);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    var cell4 = row.insertCell(3);
+    cell1.innerHTML = recept.receptId;
+    cell2.innerHTML = recept.receptNavn;
+    cell3.innerHTML = produktBatch.pbId;
+    if (produktBatch.status===0){
+        cell4.innerHTML = "Oprettet";
+    } else if (produktBatch.status===1){
+        cell4.innerHTML = "Under produktion";
+    } else if (produktBatch.status === 2){
+        cell4.innerHTML = "Afsluttet";
+    } else{
+        cell4.innerHTML = "Ukendt status";
+    }
+
+}
+
 function createProduktionsBatchView(data) {
     console.log(recept);
     console.log(produktBatch);
-    $('#receptInfo').empty();
-    $('#receptInfo').append(generateReceptView());
-    generateRaavareView();
 
-    if (produktBatch.status ===0){
-        updatePbStatus(1);
-    } else if (produktBatch.status === 3){
-        alert("Den angivne produktbatch er allerede afsluttet.")
-        return;
-    }
+    generatePBinfoView(); //Header with PbId, status and so on...
+    generateRaavareView(); //Rows in the PB
+
+
     $('#afvejningsInfo').show();
     document.getElementById("afvejningButton").disabled = false;
 }
@@ -129,12 +149,7 @@ function generateRaavareView() {
  */
 }
 
-function generateReceptView() {
-    return '<tr><td>' + recept.receptId + '</td>' +
-        '<td>' + recept.receptNavn + '</td>' +
-        '<td>' + produktBatch.pbId  + '</td>'
 
-}
 
 function updatePbStatus(status) {
     produktBatch.status = status;
@@ -150,9 +165,15 @@ function updatePbStatus(status) {
         success: function () {
             console.log(data);
             console.log("Put lykkedes: status opdateret");
-            if (status==2){
+            if (status ===0) {
+                document.getElementById("produktBatchInfo").rows[0].cells[3].innerHTML = "Oprettet";
+            } else if (status === 1) {
+                document.getElementById("produktBatchInfo").rows[0].cells[3].innerHTML = "Under produktion";
+            } else if (status===2){
                 alert("Produktbatchen er nu afsluttet.");
                 switchPage('laborant/laborant.html');
+                document.getElementById("produktBatchInfo").rows[0].cells[3].innerHTML = "Afsluttet";
+
             }
         },
         error(jqXHR){
@@ -164,6 +185,15 @@ function updatePbStatus(status) {
 }
 
 function startAfvejning() {
+    //Change status of PB
+    if (produktBatch.status ===0){
+        updatePbStatus(1);
+    } else if (produktBatch.status === 2){
+        alert("Den angivne produktbatch er allerede afsluttet.")
+        return;
+    }
+
+
     $('#afvejningsDiv').show();
     document.getElementById("afvejningButton").disabled = true;
 
@@ -333,11 +363,6 @@ function nextAfvejning() {
     //Update råvare-text
     document.getElementById("currentRaavare").innerText = "Afvejning af: " + raavare.raavareNavn + ", " + raavare.raavareID;
 
-    //disable næste-afvejning-knap
-    //document.getElementById("nextAfvejningButton").disabled = true;
-
-    //enable save-afvejning-knap
-    //document.getElementById("saveAfvejningButton").disabled = false;
 
     //empty input fields
     document.getElementById("tara").value = "";
