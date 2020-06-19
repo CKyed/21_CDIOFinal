@@ -63,9 +63,11 @@ function generateRaavareBatchTable() {
 function validateRaavareBatchInputs() {
     //Input validation
     var maengde = document.getElementById('RaavareBatchMaengde').value;
-    if ( maengde< 0.0001 || maengde > 999.9999){
+    if ( !maengde){
         alert("Angiv en mængde først.");
         return
+    } else if (maengde< 0.0001 || maengde > 999.9999){
+        alert("Mængden skal ligge i intervallet fra 0.0001 kg til 999.9999 kg");
     }
 
     if (!document.getElementById('opretRaavareBatchID').value){
@@ -75,9 +77,6 @@ function validateRaavareBatchInputs() {
 
     //check if ID vacant in separate function to avoid async errors
     rbIdVacant(document.getElementById('opretRaavareBatchID').value);
-
-
-
 
 }
 
@@ -133,6 +132,24 @@ function loadSpecificRaavare() {
     })
 }
 
+
+
+function rbIdVacant(proposedId){
+    $.ajax({
+        method: 'GET',
+        url:'rest/raavarebatch/'+proposedId+'/',
+        success: function () {
+            console.log("Get-kaldet var en succes. Det betyder at ID'et er optaget.");
+            alert("Råvarebatch ID'et er allerede i brug.")
+        },
+        error: function () {
+            console.log("Get-kaldet var en fiasko. Det betyder at ID'et er ledigt.");
+            createRaavareBatch();
+        }
+    })
+}
+
+/*
 function validateMaengdeInput() {
     var value = document.getElementById("RaavareBatchMaengde").value;
     if (value > 999.9999) {
@@ -150,20 +167,6 @@ function validateIdInput() {
         document.getElementById("opretRaavareBatchID").value = 0;
     }
 }
-
-function rbIdVacant(proposedId){
-    $.ajax({
-        method: 'GET',
-        url:'rest/raavarebatch/'+proposedId+'/',
-        success: function () {
-            console.log("Get-kaldet var en succes. Det betyder at ID'et er optaget.");
-            alert("Råvarebatch ID'et er allerede i brug.")
-        },
-        error: function () {
-            console.log("Get-kaldet var en fiasko. Det betyder at ID'et er ledigt.");
-            createRaavareBatch();
-        }
-    })
-}
+ */
 
 
