@@ -30,6 +30,7 @@ function checkLogin() {
             user = data;
             brugerID=data.brugerID;
             brugerNavn=data.brugerNavn;
+            if(data.aktiv==1){
             switch (data.rolle) {
                 case "Administrator":
                     brugertype=0;
@@ -48,8 +49,12 @@ function checkLogin() {
                     switchPage('laborant/laborant.html');
                     break;
             }
+            }
+            else if(data.aktiv==0){
+                errorMessage.innerHTML = "Denne bruger er inaktiv og du kan derfor ikke logge ind med denne"
+            }
         },
-        error: function (jqXHR) {
+        error: function (   jqXHR) {
             errorMessage.innerHTML= jqXHR.responseText;
         }
     })
