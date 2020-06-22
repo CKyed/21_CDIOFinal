@@ -25,6 +25,17 @@ function getProduktBatch() {
     var errorMessage;
     errorMessage = document.getElementById("errorMessage");
     errorMessage.innerHTML="";
+
+    if (!id){
+        alert("Angiv et produktbatch ID");
+        return;
+    } else if (id<0 || id >99999999){
+        alert("Produktbatch ID'et skal være et positivt heltal mindre end 99999999.");
+        return;
+    }
+
+
+
     $.ajax({
         method: 'GET',
         url:'rest/produktbatch/'+id,
