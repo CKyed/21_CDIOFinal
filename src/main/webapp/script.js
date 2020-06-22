@@ -17,6 +17,8 @@ function resetBruger(){
     }
 }
 
+
+
 function checkLogin() {
     var id =document.getElementById("loginBrugerID").value;
     var errorMessage;
@@ -63,8 +65,6 @@ function checkLogin() {
 function brugerRettigheder(){
     $('#topnav').show();
     for (let i = 0; i < brugertype; i++){
-        var x=document.getElementById("brugerforwarding"+i);
-        x.style.display = "none";
         $('#topnavForwardng'+i).hide();
     }
 }
