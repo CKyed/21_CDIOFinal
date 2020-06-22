@@ -87,7 +87,6 @@ function createBruger() {
     if (!validateBrugerInput(brugerID,brugerNavn,ini,CPR)){
         return;
     }
-
     event.preventDefault();
         var data =$('#brugerform').serializeJSON();
         console.log(data);
@@ -105,7 +104,7 @@ function createBruger() {
                 alert(jqXHR.responseText);
             }
         })
-    }
+}
 
 
 
@@ -160,11 +159,9 @@ function updateBruger() {
     var brugerNavn = document.getElementById("updateBrugerNavn").value;
     var ini = document.getElementById("updateInitialer").value;
     var CPR = document.getElementById("updateCPR").value;
-
     if (!validateBrugerInput(brugerID,brugerNavn,ini,CPR)){
         return;
     }
-
     event.preventDefault();
     var data =$('#brugerformUpdate').serializeJSON();
     console.log(data);
