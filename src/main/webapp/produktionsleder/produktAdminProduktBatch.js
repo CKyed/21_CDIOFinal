@@ -107,7 +107,6 @@ function savePBtoDatabase() {
         data: data,
         success: function (data) {
             alert(JSON.stringify(data));
-            printToPDF();
         },
         error: function (jqXHR) {
             alert(jqXHR.responseText);
@@ -115,12 +114,4 @@ function savePBtoDatabase() {
     })
 
 
-}
-
-function printToPDF() {
-
-    //TODO print
-    var print = document.getElementById("ProduktBatchPrintable");
-    print.contentWindow.focus();
-    print.contentWindow.print();
 }
