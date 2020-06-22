@@ -143,24 +143,7 @@ function generateRaavareView() {
         }
 
     }
-
-
-/*
-    for(i in recept.receptKomponenter){
-        x += '<tr><td>' + recept.receptKomponenter[i].raavare.raavareNavn + '</td>' +
-        '<td>' + recept.receptKomponenter[i].raavare.raavareID + '</td>' +
-        '<td>' + recept.receptKomponenter[i].nonNetto  + '</td>' +
-        '<td>' + recept.receptKomponenter[i].tolerance + '</td></tr>';
-        console.log(recept.receptKomponenter[i].nonNetto);
-        console.log(recept.receptKomponenter[i].tolerance);
-
-    }
-    return x;
-
- */
 }
-
-
 
 function updatePbStatus(status) {
     produktBatch.status = status;
@@ -287,6 +270,16 @@ function validateAfvejningInput() {
             //Check that it contains the correct raavare and continue
             if (data.raavare.raavareID === currentReceptKomp.raavare.raavareID){
                 currentRaavareBatch = data;
+                //If the batch's mængde is too small
+                if (currentRaavareBatch.maengde< netto){
+                    alert("Den angivne nettovægt er større end den resterende mængde af den angivne råvarebatch.\n" +
+                        "Der må være sket en fejl.");
+                    return;
+                }
+                //Update the used råvarebatch - now the mængde is smaller
+                console.log("currentRaavareBatch:" + currentRaavareBatch.rbId);
+                console.log("Netto:" + netto);
+                updateRvbMaengde(currentRaavareBatch,netto);
 
                 //Succes - raavareBatchID matches raavare of receptKomp
                 saveAfvejningToDatabase();
@@ -413,44 +406,30 @@ function getProduktBatchKompFromRaaID(raavareID) {
 }
 
 
-/*
-function createProduktBatchKomp() {
-    event.preventDefault();
-    //var data skal være = et produktBatchDTO på JSON format
-    var data;
+function updateRvbMaengde(raavareBatch,maengde) {
+
+    console.log("rbId:" + raavareBatch.rbId);
+    //subtract used maengde
+    var newRaavareBatch = {
+        "rbId": raavareBatch.rbId,
+        "raavare": raavareBatch.raavare,
+        "maengde": raavareBatch.maengde-maengde
+    }
+
+    var data =JSON.stringify(newRaavareBatch);
+    //REST PUT call
+    console.log(data);
     $.ajax({
-        URL: 'rest/produktbatchkomp',
-        method: 'POST',
-        contentType: 'application/json',
+        url: 'rest/raavarebatch',
+        method: 'PUT',
+        contentType: "application/json",
         data: data,
         success: function (data) {
-            alert(JSON.stringify(data));
+            //alert(JSON.stringify(data));
+            //No need to alert that it has been updated here.
         },
         error: function (jqXHR) {
             alert(jqXHR.responseText);
         }
-
-    })
-
-}
-
-
-
-function loadProduktBatches() {
-    //empty existing list
-    produktBatchList = new Array();
-    //Load via GET-call to database
-    $.get(rest/produktbatch, function (data) {
-        $("#produktBatch").empty();
-        $.each(data, function (i, elt) {
-            produktBatchList.push(elt);
-            $('produktBatch').append()
-        })
-
-
     })
 }
-
-function generateProduktBatchOption(id, ) {
-    
-}*/

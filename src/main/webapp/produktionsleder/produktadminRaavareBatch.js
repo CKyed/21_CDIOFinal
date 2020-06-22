@@ -149,24 +149,5 @@ function rbIdVacant(proposedId){
     })
 }
 
-/*
-function validateMaengdeInput() {
-    var value = document.getElementById("RaavareBatchMaengde").value;
-    if (value > 999.9999) {
-        document.getElementById("RaavareBatchMaengde").value = 999.9999;
-    } else if (value < 0.0001){
-        document.getElementById("RaavareBatchMaengde").value = 0.0001;
-    }
-}
-
-function validateIdInput() {
-    var value = document.getElementById("opretRaavareBatchID").value;
-    if (value > 99999999) {
-        document.getElementById("opretRaavareBatchID").value = 99999999;
-    } else if (value < 0){
-        document.getElementById("opretRaavareBatchID").value = 0;
-    }
-}
- */
 
 
