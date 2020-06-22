@@ -25,20 +25,20 @@ input::-webkit-inner-spin-button {
 
 .createBruger {
     display: none;
-    background-color: blueviolet;
+    background-color: #bad7e2;
     width: 80%;
     max-width: 1000px;
-    border: 2px solid black;
+    border: 2px solid rgba(0, 0, 0, 0.67);
     padding: 5px;
     margin: auto;
 }
 
 .updateBruger {
     display: none;
-    background-color: blueviolet;
+    background-color: #b0e2b2;
     width: 80%;
     max-width: 1000px;
-    border: 2px solid black;
+    border: 2px solid rgba(0, 0, 0, 0.67);
     padding: 5px;
     margin: auto;
 }
@@ -46,7 +46,7 @@ input::-webkit-inner-spin-button {
 .container{
 
     width: 500px;
-    border: 2px solid black;
+    border: 2px solid #535353;
     padding: 5px;
     margin:auto;
 }
@@ -58,13 +58,13 @@ input::-webkit-inner-spin-button {
 
 h1{
     font-family: Verdana;
-    color: deeppink;
+    color: #ffa9e8;
 
 }
 
 /* Add a black background color to the top navigation */
 .topnav {
-    background-color: #333;
+    background-color: #535353;
     overflow: hidden;
 }
 
@@ -81,12 +81,12 @@ h1{
 /* Change the color of links on hover */
 .topnav a:hover {
     background-color: #ddd;
-    color: black;
+    color: #535353;
 }
 
 /* Add a color to the active/current link */
 .topnav a.active {
-    background-color: #6500f6;
+    background-color: #b3aff6;
     color: white;
 }
 .my-form label{
@@ -100,7 +100,7 @@ h1{
     width: 50%;
 }
 .btn{
-    background: coral;
+    background: #ffbd7e;
     color: #fff;
     border: none;
     outline: none;
@@ -117,7 +117,7 @@ h1{
     border:none;
 }
 .button:hover{
-    background: red;
+    background: #b3aff6;
     color: #fff;
 }
 
