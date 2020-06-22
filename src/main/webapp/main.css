@@ -23,19 +23,9 @@ input::-webkit-inner-spin-button {
     padding-top: 20px;
 }
 
-.createBruger {
+.brugerform {
     display: none;
     background-color: #bad7e2;
-    width: 80%;
-    max-width: 1000px;
-    border: 2px solid rgba(0, 0, 0, 0.67);
-    padding: 5px;
-    margin: auto;
-}
-
-.updateBruger {
-    display: none;
-    background-color: #b0e2b2;
     width: 80%;
     max-width: 1000px;
     border: 2px solid rgba(0, 0, 0, 0.67);
