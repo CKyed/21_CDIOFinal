@@ -108,13 +108,7 @@ function createBruger() {
     }
 
 
-function validateBrugerInitialer() {
-    var letters = /^[A-Za-z]+$/;
-    var id = document.getElementById("opretInitialer").value;
-    if(id.match(letters)){
-        return true;
-    }
-}
+
 
 function loadSpecificBruger() {
     var id = document.getElementById("BrugerId").value;
@@ -156,9 +150,6 @@ function loadSpecificBruger() {
 
 
 function validateUpdateBrugerInput() {
-
-
-
     updateBruger();
 }
 
@@ -195,39 +186,6 @@ function updateBruger() {
     })
 }
 
-
-
-function updateRaavare() {
-    event.preventDefault();
-    var data =$('#raavareUdateForm').serializeJSON();
-    console.log(data);
-    $.ajax({
-        url: 'rest/raavare',
-        method: 'PUT',
-        contentType: "application/json",
-        data: data,
-        success: function (data) {
-            alert(JSON.stringify(data));
-            loadRaavarer();
-        },
-        error: function (jqXHR) {
-            alert(jqXHR.responseText);
-
-        }
-
-    })
-}
-
-
-function showBrugerForm(id) {
-    var x = document.getElementById(id);
-    if (x.style.display === "block") {
-        x.style.display = "none";
-
-    } else {
-        x.style.display = "block";
-    }
-}
 
 
 function showCreateBruger() {
