@@ -23,7 +23,8 @@ public class BrugerDAO implements iBrugerDAO{
                  bruger.setAktiv(resultSet.getInt(6));
          }catch (SQLException e){
              e.printStackTrace();
-             throw new DALException("Kunne ikke finde bruger med det ID");
+
+             throw new DALException("Kunne ikke finde bruger med det ID",e.getMessage());
          }
 
         dBconnector.closeConnection();
