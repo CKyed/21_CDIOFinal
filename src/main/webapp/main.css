@@ -33,6 +33,16 @@ input::-webkit-inner-spin-button {
     margin: auto;
 }
 
+.updateBruger {
+    display: none;
+    background-color: blueviolet;
+    width: 80%;
+    max-width: 1000px;
+    border: 2px solid black;
+    padding: 5px;
+    margin: auto;
+}
+
 .container{
 
     width: 500px;

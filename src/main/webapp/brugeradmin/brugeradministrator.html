@@ -1,7 +1,11 @@
 <script src="brugeradmin/brugeradministrator.js"></script>
 
 <h1>Brugeradministration</h1>
-<div class="createBruger" id="createBruger" style="display: block">
+<button onclick="showCreateBruger()">Opret Bruger</button>
+<button onclick="showUpdateBruger()"> redigér bruger</button>
+
+
+<div class="createBruger" id="createBruger">
     <h1>Opret bruger</h1>
     <form id="brugerform">
         <div>
@@ -47,9 +51,7 @@
     </form>
 </div>
 
-<!--
-<button onclick="showUpdateBruger()"> redigér bruger</button>
--->
+
 
 
 <div class="updateBruger" id="updateBruger">
@@ -111,7 +113,4 @@
     <tbody id="brugertable">
     </tbody>
 </table>
-<!--
-    <button onclick="showCreateBruger()">Opret Bruger</button>
--->
 
