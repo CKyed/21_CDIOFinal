@@ -116,7 +116,9 @@ function checkIfReceptIdValid() {
     if (receptID> maxReceptId){
         alert("Receptens ID er for langt.");
         return false;
-    } else if (vacant){
+    }else if(receptID==0){
+        alert("Recept ID skal være større end 0")
+    }else if (vacant){
         if (checkIfReceptNavnValid()){
             var header = document.getElementById("receptnavn").value + ", " + receptID;
             document.getElementById("receptHeadline").innerText = header;
