@@ -48,7 +48,6 @@ function generateRaavareOptionList() {
     $("#raavare").empty();
     raavareOptionList = document.getElementById('raavare');
 
-
     $.each(raavareList, function (i, elt) {
         var raavareOption = document.createElement("OPTION");
         raavareOption.setAttribute("value", i);
@@ -56,13 +55,9 @@ function generateRaavareOptionList() {
         raavareOption.appendChild(t);
         raavareOptionList.appendChild(raavareOption);
     });
-
 }
 
 function addReceptKomp() {
-    // TODO find ud af, hvorfor denne giver fejlen Uncaught TypeError: Cannot read property 'value' of undefined
-    //Men alligevel virker
-
     if (raavareOptionList.length==0){
         return;
     }
@@ -90,7 +85,6 @@ function addReceptKomp() {
             raavareOptionList.removeChild(elt);
         }
     });
-
 }
 
 function deleteRow() {

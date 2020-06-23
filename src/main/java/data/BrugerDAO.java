@@ -23,7 +23,6 @@ public class BrugerDAO implements iBrugerDAO{
                  bruger.setAktiv(resultSet.getInt(6));
          }catch (SQLException e){
              e.printStackTrace();
-
              throw new DALException("Kunne ikke finde bruger med det ID",e.getMessage());
          }
 
@@ -51,7 +50,7 @@ public class BrugerDAO implements iBrugerDAO{
                 brugerList.add(bruger);
             }
 
-        }catch (Exception e){
+        }catch (SQLException e){
             throw new DALException("Kunne ikke hente brugerlisten",e.getMessage());
         }
 
@@ -78,7 +77,7 @@ public class BrugerDAO implements iBrugerDAO{
 
             //Execute the insert statement
             statement.executeUpdate(SQLstatement);
-        }catch (Exception e){
+        }catch (SQLException e){
             throw new DALException("Kunne ikke oprette bruger",e.getMessage());
         }
 
@@ -103,7 +102,7 @@ public class BrugerDAO implements iBrugerDAO{
                     opr.getBrugerID());
             //Execute the insert statement
             statement.executeUpdate(SQLstatement);
-        }catch (Exception e){
+        }catch (SQLException e){
             throw new DALException("Kunne ikke opdatere brugeren",e.getMessage());
         }
 

@@ -17,7 +17,5 @@ public class DALException extends Exception {
     public String getTechnicalMSG() {
         return technicalMSG;
     }
-
-
 }
 
