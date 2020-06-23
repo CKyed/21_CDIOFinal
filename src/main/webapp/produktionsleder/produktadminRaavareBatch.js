@@ -106,7 +106,8 @@ function createRaavareBatch() {
             loadRaavareBatch();
         },
         error: function (jqXHR) {
-            alert(jqXHR.responseText);
+            console.log(jqXHR.responseJSON.technicalMSG);
+            alert(jqXHR.responseJSON.userMSG);
         }
     })
 }

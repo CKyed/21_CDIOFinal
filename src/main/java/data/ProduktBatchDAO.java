@@ -31,7 +31,7 @@ public class ProduktBatchDAO implements iProduktBatchDAO {
 
         }catch (SQLException e){
             e.printStackTrace();
-            throw new DALException("Kunne ikke finde produktbatch med det ID");
+            throw new DALException("Kunne ikke finde produktbatch med det ID",e.getMessage());
         }
         dBconnector.closeConnection();
         return produktBatchDTO;
@@ -60,7 +60,7 @@ public class ProduktBatchDAO implements iProduktBatchDAO {
 
         }catch (SQLException e){
             e.printStackTrace();
-            throw new DALException("Kunne ikke finde listen af produktbatches");
+            throw new DALException("Kunne ikke finde listen af produktbatches",e.getMessage());
         }
         dBconnector.closeConnection();
         return produktBatchDTOList;
@@ -95,7 +95,7 @@ public class ProduktBatchDAO implements iProduktBatchDAO {
 
         }catch (SQLException e){
             e.printStackTrace();
-            throw new DALException("Kunne ikke oprette bruger med det ID");
+            throw new DALException("Kunne ikke oprette bruger med det ID",e.getMessage());
         }
 
         dBconnector.closeConnection();
@@ -129,7 +129,7 @@ public class ProduktBatchDAO implements iProduktBatchDAO {
 
         }catch (SQLException e){
             e.printStackTrace();
-            throw new DALException("Kunne ikke opdatere produktbatchen.");
+            throw new DALException("Kunne ikke opdatere produktbatchen.",e.getMessage());
         }
 
         dBconnector.closeConnection();

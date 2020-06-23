@@ -27,7 +27,7 @@ public class ReceptKompDAO implements iReceptKompDAO {
             receptKompDTO.setRaavare(raavareDAO.getRaavare(raavareId));
         }catch (SQLException e){
             e.printStackTrace();
-            throw new DALException("kunne ikke finde receptkomponenten");
+            throw new DALException("kunne ikke finde receptkomponenten",e.getMessage());
         }
         dBconnector.closeConnection();
         return receptKompDTO;
@@ -55,7 +55,7 @@ public class ReceptKompDAO implements iReceptKompDAO {
 
         }catch (SQLException e){
             e.printStackTrace();
-            throw new DALException("kunne ikke finde receptkomponent");
+            throw new DALException("kunne ikke finde receptkomponent",e.getMessage());
         }
         dBconnector.closeConnection();
         return receptKompDTOList;
@@ -84,7 +84,7 @@ public class ReceptKompDAO implements iReceptKompDAO {
 
         }catch (SQLException e){
             e.printStackTrace();
-            throw new DALException("kunne ikke finde receptkomponent");
+            throw new DALException("kunne ikke finde receptkomponent",e.getMessage());
         }
         dBconnector.closeConnection();
         return receptKompDTOList;
@@ -108,7 +108,7 @@ public class ReceptKompDAO implements iReceptKompDAO {
             statement.executeUpdate(SQLstatement);
         }catch (SQLException e){
             e.printStackTrace();
-            throw new DALException("Kunne ikke oprette den ønskede Receptkompnent");
+            throw new DALException("Kunne ikke oprette den ønskede Receptkompnent",e.getMessage());
         }
 
         dBconnector.closeConnection();
@@ -134,7 +134,7 @@ public class ReceptKompDAO implements iReceptKompDAO {
             statement.executeUpdate(SQLstatement);
         }catch (SQLException e){
             e.printStackTrace();
-            throw new DALException("Kunne ikke oprette den ønskede Receptkompnent");
+            throw new DALException("Kunne ikke oprette den ønskede Receptkompnent",e.getMessage());
         }
 
         dBconnector.closeConnection();

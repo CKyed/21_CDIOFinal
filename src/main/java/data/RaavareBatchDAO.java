@@ -30,7 +30,7 @@ public class RaavareBatchDAO implements iRaavareBatchDAO{
 
         }catch (SQLException e){
             e.printStackTrace();
-            throw new DALException("Kunne ikke finde råvareBatch med det ID");
+            throw new DALException("Kunne ikke finde råvareBatch med det ID",e.getMessage());
         }
 
         dBconnector.closeConnection();
@@ -57,7 +57,7 @@ public class RaavareBatchDAO implements iRaavareBatchDAO{
 
         }catch (SQLException e){
             e.printStackTrace();
-            throw new DALException("kunne ikke finde råvareBatches");
+            throw new DALException("kunne ikke finde råvareBatches",e.getMessage());
         }
 
         dBconnector.closeConnection();
@@ -89,7 +89,7 @@ public class RaavareBatchDAO implements iRaavareBatchDAO{
 
         }catch (SQLException e){
             e.printStackTrace();
-            throw new DALException("kunne ikke finde råvareBatches");
+            throw new DALException("kunne ikke finde råvareBatches",e.getMessage());
         }
 
         dBconnector.closeConnection();
@@ -113,7 +113,7 @@ public class RaavareBatchDAO implements iRaavareBatchDAO{
             statement.executeUpdate(SQLstatement);
         }catch (SQLException e){
             e.printStackTrace();
-            throw new DALException("Kunne ikke oprette den ønskede RaavareBatch");
+            throw new DALException("Kunne ikke oprette den ønskede RaavareBatch",e.getMessage());
         }
         dBconnector.closeConnection();
     }
@@ -135,7 +135,7 @@ public class RaavareBatchDAO implements iRaavareBatchDAO{
             statement.executeUpdate(SQLstatement);
         }catch (SQLException e){
             e.printStackTrace();
-            throw new DALException("Kunne ikke opdatere den ønskede RaavareBatch");
+            throw new DALException("Kunne ikke opdatere den ønskede RaavareBatch",e.getMessage());
         }
         dBconnector.closeConnection();
     }
