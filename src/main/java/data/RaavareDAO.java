@@ -27,7 +27,7 @@ public class RaavareDAO implements iRaavareDAO{
 
         }catch (SQLException e){
             e.printStackTrace();
-            throw new DALException("Råvaren med det angivne ID kan ikke findes!");
+            throw new DALException("Råvaren med det angivne ID kan ikke findes!",e.getMessage());
         }
 
         dBconnector.closeConnection();
@@ -59,7 +59,7 @@ public class RaavareDAO implements iRaavareDAO{
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
-                throw new DALException("Kunne ikke finde raavarelisten");
+                throw new DALException("Kunne ikke finde raavarelisten",e.getMessage());
             }
         }
         return raavareDTOList;
@@ -79,7 +79,7 @@ public class RaavareDAO implements iRaavareDAO{
             statement.executeUpdate(sqlStatement);
         }catch (SQLException e){
             e.printStackTrace();
-            throw new DALException("Kunne ikke oprette råvaren");
+            throw new DALException("Kunne ikke oprette råvaren",e.getMessage());
         }
        dBconnector.closeConnection();
     }
@@ -98,7 +98,7 @@ public class RaavareDAO implements iRaavareDAO{
             statement.executeUpdate(sqlStatement);
         }catch (SQLException e){
             e.printStackTrace();
-            throw new DALException("Kunne ikke opdatere råvaren");
+            throw new DALException("Kunne ikke opdatere råvaren",e.getMessage());
         }
         dBconnector.closeConnection();
     }

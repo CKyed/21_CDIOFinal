@@ -56,8 +56,9 @@ function checkLogin() {
                 errorMessage.innerHTML = "Denne bruger er inaktiv og du kan derfor ikke logge ind med denne"
             }
         },
-        error: function (   jqXHR) {
-            errorMessage.innerHTML= jqXHR.responseText;
+        error: function (jqXHR) {
+            console.log(jqXHR.responseJSON.technicalMSG);
+            errorMessage.innerHTML= jqXHR.responseJSON.userMSG;
         }
     })
 }

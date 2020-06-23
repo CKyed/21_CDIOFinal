@@ -15,7 +15,8 @@ function showProduktBatchFromReceptID() {
             receptIdValid=true;
         },
         error: function (jqXHR) {
-            alert(jqXHR.responseText);
+            console.log(jqXHR.responseJSON.technicalMSG);
+            alert(jqXHR.responseJSON.userMSG);
             receptIdValid=false;
         }
     })
@@ -109,7 +110,8 @@ function savePBtoDatabase() {
             alert(JSON.stringify(data));
         },
         error: function (jqXHR) {
-            alert(jqXHR.responseText);
+            console.log(jqXHR.responseJSON.technicalMSG);
+            alert(jqXHR.responseJSON.userMSG);
         }
     })
 

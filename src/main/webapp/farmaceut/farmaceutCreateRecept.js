@@ -160,7 +160,8 @@ function saveReceptToDatabase() {
             switchPage("farmaceut/farmaceutCreateRecept.html");
         },
         error: function (jqXHR) {
-            alert(jqXHR.responseText);
+            console.log(jqXHR.responseJSON.technicalMSG);
+            alert(jqXHR.responseJSON.userMSG);
         }
     })
 }

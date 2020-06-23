@@ -60,7 +60,8 @@ function createRaavare() {
             loadRaavarer();
         },
         error: function (jqXHR) {
-            alert(jqXHR.responseText);
+            console.log(jqXHR.responseJSON.technicalMSG);
+            alert(jqXHR.responseJSON.userMSG);
 
         }
     })
@@ -98,7 +99,8 @@ function updateRaavare() {
             loadRaavarer();
         },
         error: function (jqXHR) {
-            alert(jqXHR.responseText);
+            console.log(jqXHR.responseJSON.technicalMSG);
+            alert(jqXHR.responseJSON.userMSG);
         }
 
     })
@@ -119,8 +121,9 @@ function loadSpecificRaavare() {
             document.getElementById("updateRaavareNavn").value = data.raavareNavn;
             document.getElementById("updateLeverandoer").value = data.leverandoer;
         },
-        error: function () {
+        error: function (jqXHR) {
             errormessage.innerHTML="Kunne ikke finde råvarer med det ID, prøv igen";
+            console.log(jqXHR.responseJSON.technicalMSG);
         }
     })
 }

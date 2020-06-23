@@ -34,8 +34,6 @@ function getProduktBatch() {
         return;
     }
 
-
-
     $.ajax({
         method: 'GET',
         url:'rest/produktbatch/'+id,
@@ -44,7 +42,8 @@ function getProduktBatch() {
             getRecept(data.receptId);
         },
         error(jqXHR){
-            errorMessage.innerHTML= jqXHR.responseText;
+            console.log(jqXHR.responseJSON.technicalMSG);
+            alert(jqXHR.responseJSON.userMSG);
         }
     })
 }
@@ -172,7 +171,7 @@ function updatePbStatus(status) {
         },
         error(jqXHR){
             console.log(data);
-            console.log("Put fejlede - status ikke opdateret: "+jqXHR);
+            console.log("Put fejlede - status ikke opdateret: "+ jqXHR.responseJSON.technicalMSG);
             alert("Kunne ikke opdatere status af produktbatchen.");
         }
     })
@@ -186,7 +185,6 @@ function startAfvejning() {
         alert("Den angivne produktbatch er allerede afsluttet.")
         return;
     }
-
 
     $('#afvejningsDiv').show();
     document.getElementById("afvejningButton").disabled = true;
@@ -202,8 +200,6 @@ function startAfvejning() {
 
     //Update råvare-text
     document.getElementById("currentRaavare").innerText = "Afvejning af: " + raavare.raavareNavn + ", " + raavare.raavareID;
-
-
 }
 
 function validateAfvejningInput() {
@@ -292,10 +288,6 @@ function validateAfvejningInput() {
             alert("Der kunne ikke findes en raavarebatch i systemet med det angivne ID.")
         }
     })
-
-
-
-
 }
 function saveAfvejningToDatabase() {
 
@@ -321,7 +313,8 @@ function saveAfvejningToDatabase() {
 
         },
         error: function (jqXHR) {
-            alert(jqXHR.responseText);
+            console.log(jqXHR.responseJSON.technicalMSG);
+            alert(jqXHR.responseJSON.userMSG);
         }
     })
 }
@@ -429,7 +422,8 @@ function updateRvbMaengde(raavareBatch,maengde) {
             //No need to alert that it has been updated here.
         },
         error: function (jqXHR) {
-            alert(jqXHR.responseText);
+            console.log(jqXHR.responseJSON.technicalMSG);
+            alert(jqXHR.responseJSON.userMSG);
         }
     })
 }

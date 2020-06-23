@@ -30,7 +30,7 @@ public class ReceptDAO implements iReceptDAO{
 
         }catch (SQLException e){
             e.printStackTrace();
-            throw new DALException("Kunne ikke finde recepten med det ID");
+            throw new DALException("Kunne ikke finde recepten med det ID",e.getMessage());
         }
 
         dBconnector.closeConnection();
@@ -62,7 +62,7 @@ public class ReceptDAO implements iReceptDAO{
 
         }catch (SQLException e){
             e.printStackTrace();
-            throw new DALException("Kunne ikke finde listen af recepter");
+            throw new DALException("Kunne ikke finde listen af recepter",e.getMessage());
         }
 
         dBconnector.closeConnection();
@@ -85,7 +85,7 @@ public class ReceptDAO implements iReceptDAO{
             statement.executeUpdate(SQLstatement);
         }catch (SQLException e){
             e.printStackTrace();
-            throw new DALException("Kunne ikke oprette den ønskede Recept");
+            throw new DALException("Kunne ikke oprette den ønskede Recept",e.getMessage());
         }
 
         if (!recept.getReceptKomponenter().isEmpty()){
@@ -115,7 +115,7 @@ public class ReceptDAO implements iReceptDAO{
             statement.executeUpdate(SQLstatement);
         }catch (SQLException e){
             e.printStackTrace();
-            throw new DALException("Kunne ikke opdatere den ønskede Recept");
+            throw new DALException("Kunne ikke opdatere den ønskede Recept",e.getMessage());
         }
 
         if (!recept.getReceptKomponenter().isEmpty()){

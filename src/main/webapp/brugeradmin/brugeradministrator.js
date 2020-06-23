@@ -101,7 +101,8 @@ function createBruger() {
                 loadBruger();
             },
             error: function (jqXHR) {
-                alert(jqXHR.responseText);
+                console.log(jqXHR.responseJSON.technicalMSG);
+                errorMessage.innerHTML= jqXHR.responseJSON.userMSG;
             }
         })
 }

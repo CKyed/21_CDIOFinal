@@ -23,7 +23,7 @@ public class DBconnector {
             Class.forName(driver);
             connection = DriverManager.getConnection(url, username, password);
         }catch (Exception e){
-            throw new DALException("Fejl med at oprette forbindelse til SQL server");
+            throw new DALException("Fejl med at oprette forbindelse til SQL server",e.getMessage());
         }
     }
 
@@ -32,7 +32,7 @@ public class DBconnector {
             connection.close();
         }catch (SQLException e){
             e.printStackTrace();
-            throw new DALException("Fejl med at lukke forbindelse til SQL server");
+            throw new DALException("Fejl med at lukke forbindelse til SQL server",e.getMessage());
         }
     }
 
