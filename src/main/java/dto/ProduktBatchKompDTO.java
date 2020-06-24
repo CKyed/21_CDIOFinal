@@ -11,13 +11,6 @@ private BrugerDTO laborant;
     public ProduktBatchKompDTO() {
     }
 
-    public ProduktBatchKompDTO(int pbId, RaavareBatchDTO raavareBatchDTO, double tara, double netto, BrugerDTO laborant) {
-        this.pbId = pbId;
-        this.raavareBatchDTO = raavareBatchDTO;
-        this.tara = tara;
-        this.laborant = laborant;
-        this.netto = netto;
-    }
 
     public RaavareBatchDTO getRaavareBatchDTO() {
         return raavareBatchDTO;

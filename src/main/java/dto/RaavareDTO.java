@@ -9,11 +9,6 @@ public class RaavareDTO {
     public RaavareDTO() {
     }
 
-    public RaavareDTO(int raavareID, String raavareNavn, String leverandoer) {
-        this.raavareID = raavareID;
-        this.raavareNavn = raavareNavn;
-        this.leverandoer = leverandoer;
-    }
 
     public int getRaavareID() {
         return raavareID;

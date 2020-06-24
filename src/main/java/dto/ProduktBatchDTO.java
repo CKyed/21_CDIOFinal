@@ -12,12 +12,6 @@ List<ProduktBatchKompDTO> produktBatchKomponenter;
     public ProduktBatchDTO() {
     }
 
-    public ProduktBatchDTO(int pbId, int receptId, int status, ArrayList<ProduktBatchKompDTO> produktBatchKomponenter) {
-        this.pbId = pbId;
-        this.receptId = receptId;
-        this.status = status;
-        this.produktBatchKomponenter = produktBatchKomponenter;
-    }
 
     public int getPbId() {
         return pbId;

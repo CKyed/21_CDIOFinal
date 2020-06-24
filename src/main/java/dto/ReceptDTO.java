@@ -12,12 +12,6 @@ public class ReceptDTO {
     public ReceptDTO() {
     }
 
-    public ReceptDTO(int receptId, String receptNavn, List<ReceptKompDTO> receptKomponenter) {
-        this.receptId = receptId;
-        this.receptNavn = receptNavn;
-        this.receptKomponenter = receptKomponenter;
-    }
-
     public int getReceptId() {
         return receptId;
     }

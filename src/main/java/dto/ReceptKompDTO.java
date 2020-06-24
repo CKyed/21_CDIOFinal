@@ -6,13 +6,6 @@ public class ReceptKompDTO {
     private RaavareDTO raavare;
     private int receptId;
 
-    public ReceptKompDTO(double nonNetto, double tolerance, RaavareDTO raavare, int receptId) {
-        this.nonNetto = nonNetto;
-        this.tolerance = tolerance;
-        this.raavare = raavare;
-        this.receptId = receptId;
-    }
-
     public ReceptKompDTO() {
     }
 
