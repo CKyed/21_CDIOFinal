@@ -102,7 +102,7 @@ function createBruger() {
             },
             error: function (jqXHR) {
                 console.log(jqXHR.responseJSON.technicalMSG);
-                errorMessage.innerHTML= jqXHR.responseJSON.userMSG;
+                alert(jqXHR.responseJSON.userMSG);
             }
         })
 }
@@ -177,6 +177,7 @@ function updateBruger() {
             loadBruger();
         },
         error: function (jqXHR) {
+            console.log(jqXHR.responseJSON.technicalMSG);
             alert(jqXHR.responseText);
 
         }
